@@ -1,9 +1,15 @@
 {
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "deploy": "git subtree push --prefix dist origin gh-pages",
-        "build": "webpack",
-        "watch": "webpack --watch",
-        "start": "webpack serve --open"
-      }
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "git subtree push --prefix dist origin gh-pages",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "start": "webpack serve --open"
+  },
+  "name": "battleship",
+  "description": "<div align='center'>",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Ever Da Costa Silvanus",
+  "license": "ISC"
 }
