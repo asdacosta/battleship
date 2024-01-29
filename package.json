@@ -1,0 +1,9 @@
+{
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "deploy": "git subtree push --prefix dist origin gh-pages",
+        "build": "webpack",
+        "watch": "webpack --watch",
+        "start": "webpack serve --open"
+      }
+}
