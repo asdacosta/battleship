@@ -54,10 +54,19 @@ class Gameboard {
       "Patrol Boat": new Ship(2, 0, false),
     };
   }
+
+  createBoard() {
+    const board = [];
+    for (let m = 0; m < 100; m++) {
+      board.push(null);
+    }
+    return board;
+  }
 }
 
 module.exports = {
   Ship,
+  Gameboard,
 };
 
 // const everShip = new Ship(1, 1, true);
