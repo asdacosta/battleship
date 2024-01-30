@@ -28,7 +28,9 @@ test("board contains 10x10 entries", () => {
   const board = game1.createBoard();
   let entries = 0;
   board.forEach((entry) => {
-    entries += 1;
+    entry.forEach((subEntry) => {
+      entries += 1;
+    });
   });
 
   expect(entries).toBe(100);
