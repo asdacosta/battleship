@@ -1,4 +1,4 @@
-const { Ship } = require("./index");
+const { Ship, Gameboard } = require("./index");
 
 test("what instances of Ship contain", () => {
   const ship1 = new Ship(3, 0, false);
@@ -21,4 +21,15 @@ test("check if ship is sunk", () => {
   expect(sub.isSunk()).toBe(false);
   sub.hit();
   expect(sub.isSunk()).toBe(true);
+});
+
+test("board contains 10x10 entries", () => {
+  const game1 = new Gameboard();
+  const board = game1.createBoard();
+  let entries = 0;
+  board.forEach((entry) => {
+    entries += 1;
+  });
+
+  expect(entries).toBe(100);
 });
