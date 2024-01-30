@@ -57,9 +57,14 @@ class Gameboard {
 
   createBoard() {
     const board = [];
-    for (let m = 0; m < 100; m++) {
-      board.push(null);
+    for (let n = 0; n < 10; n++) {
+      const subBoard = [];
+      for (let m = 0; m < 10; m++) {
+        subBoard.push(null);
+      }
+      board.push(subBoard);
     }
+
     return board;
   }
 }
