@@ -44,6 +44,18 @@ class Ship {
   }
 }
 
+class Gameboard {
+  constructor() {
+    this.ships = {
+      Carrier: new Ship(5, 0, false),
+      Battleship: new Ship(4, 9, false),
+      Destroyer: new Ship(3, 0, false),
+      Submarine: new Ship(3, 0, false),
+      "Patrol Boat": new Ship(2, 0, false),
+    };
+  }
+}
+
 module.exports = {
   Ship,
 };
