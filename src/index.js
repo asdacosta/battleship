@@ -10,30 +10,37 @@
 // })();
 
 class Ship {
-  constructor(length, hits, sunk) {
+  constructor(length, numHits, sunk) {
     this.length = length;
-    this.hits = hits;
+    this.numHits = numHits;
     this.sunk = sunk;
   }
 
-  get shipLength() {
+  get currentLength() {
     return this.length;
   }
 
-  get shipHits() {
-    return this.hits;
+  get currentNumHits() {
+    return this.numHits;
   }
 
-  get shipSunk() {
+  get sunkStatus() {
     return this.sunk;
   }
 
   hit() {
-    if (this.hits < this.length) {
-      this.hits += 1;
+    if (this.numHits < this.length) {
+      this.numHits += 1;
     } else {
       return "Ship already sunk!";
     }
+  }
+
+  isSunk() {
+    if (this.length === this.numHits) {
+      this.sunk = true;
+    }
+    return this.sunk;
   }
 }
 
