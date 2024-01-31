@@ -35,3 +35,55 @@ test("board contains 10x10 entries", () => {
 
   expect(entries).toBe(100);
 });
+
+test("inspect legal moves", () => {
+  const game2 = new Gameboard();
+  const legalMoves = game2.getLegalMoves();
+  const carrierMoves = [
+    [0, 1, 2, 3, 4],
+    [1, 2, 3, 4, 5],
+    [2, 3, 4, 5, 6],
+    [3, 4, 5, 6, 7],
+    [4, 5, 6, 7, 8],
+    [5, 6, 7, 8, 9],
+  ];
+  const battleshipMoves = [
+    [0, 1, 2, 3],
+    [1, 2, 3, 4],
+    [2, 3, 4, 5],
+    [3, 4, 5, 6],
+    [4, 5, 6, 7],
+    [5, 6, 7, 8],
+    [6, 7, 8, 9],
+  ];
+  const destroyerMoves = [
+    [0, 1, 2],
+    [1, 2, 3],
+    [2, 3, 4],
+    [3, 4, 5],
+    [4, 5, 6],
+    [5, 6, 7],
+    [6, 7, 8],
+    [7, 8, 9],
+  ];
+  const submarineMoves = destroyerMoves;
+  const patrolMoves = [
+    [0, 1],
+    [1, 2],
+    [2, 3],
+    [3, 4],
+    [4, 5],
+    [5, 6],
+    [6, 7],
+    [7, 8],
+    [8, 9],
+  ];
+
+  expect(legalMoves).toEqual([
+    carrierMoves,
+    battleshipMoves,
+    destroyerMoves,
+    submarineMoves,
+    patrolMoves,
+  ]);
+});
