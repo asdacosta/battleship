@@ -48,7 +48,7 @@ class Gameboard {
   constructor() {
     this.ships = {
       Carrier: new Ship(5, 0, false),
-      Battleship: new Ship(4, 9, false),
+      Battleship: new Ship(4, 0, false),
       Destroyer: new Ship(3, 0, false),
       Submarine: new Ship(3, 0, false),
       "Patrol Boat": new Ship(2, 0, false),
@@ -67,12 +67,52 @@ class Gameboard {
 
     return board;
   }
+
+  getLegalMoves() {
+    const generateMoves = function (length) {
+      let firstMove = [];
+      const shipMoves = [];
+      for (let m = 0; m < length; m++) {
+        firstMove.push(m);
+      }
+      switch (length) {
+        case 4:
+          length += 2;
+          break;
+        case 3:
+          length += 4;
+          break;
+        case 2:
+          length += 6;
+          break;
+      }
+      for (let n = 0; n <= length; n++) {
+        shipMoves.push(firstMove);
+        firstMove = firstMove.map((index) => index + 1);
+      }
+
+      return shipMoves;
+    };
+
+    const carrierMoves = generateMoves(5);
+    const battleshipMoves = generateMoves(4);
+    const destroyerMoves = generateMoves(3);
+    const submarineMoves = generateMoves(3);
+    const patrolMoves = generateMoves(2);
+
+    const legalMoves = [
+      carrierMoves,
+      battleshipMoves,
+      destroyerMoves,
+      submarineMoves,
+      patrolMoves,
+    ];
+
+    return legalMoves;
+  }
 }
 
 module.exports = {
   Ship,
   Gameboard,
 };
-
-// const everShip = new Ship(1, 1, true);
-// console.log(everShip);
