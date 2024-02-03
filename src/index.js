@@ -253,14 +253,34 @@ class Gameboard {
 
     console.log(board);
     return board;
-    //TODO: Left over board and available moves
+  }
+
+  receiveAttack(XY) {
+    const generateKeys = (function () {
+      // Alphabets A-J
+      const alphabets = [];
+      for (let n = 65; n <= 74; n++) {
+        alphabets.push(String.fromCharCode(n));
+      }
+
+      const keys = [];
+      for (let m = 1; m <= 10; m++) {
+        const subKeys = [];
+        for (const letter of alphabets) {
+          subKeys.push(`${m}` + letter);
+        }
+        keys.push(subKeys);
+      }
+
+      return keys;
+    })();
   }
 }
 
-module.exports = {
-  Ship,
-  Gameboard,
-};
+// module.exports = {
+//   Ship,
+//   Gameboard,
+// };
 
-// const everBoard = new Gameboard();
-// everBoard.displaceShips();
+const everBoard = new Gameboard();
+everBoard.receiveAttack("1A");
