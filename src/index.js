@@ -274,6 +274,17 @@ class Gameboard {
 
       return keys;
     })();
+
+    const assignKeysToBoardIndices = (function () {
+      const KeysBox = {};
+      const keys = generateKeys;
+
+      for (let subKeys = 0; subKeys < 10; subKeys++) {
+        for (let index = 0; index < 10; index++) {
+          KeysBox[`${keys[subKeys][index]}`] = index;
+        }
+      }
+    })();
   }
 }
 
