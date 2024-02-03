@@ -112,4 +112,9 @@ describe("Populate board", () => {
       .filter((entry) => entry === 3).length;
     expect(destroyerAndSubmarineOccurences).toBe(6);
   });
+
+  test("__with Patrol Boat of length 2", () => {
+    const patrolOccurences = board.flat().filter((entry) => entry === 2).length;
+    expect(patrolOccurences).toBe(2);
+  });
 });
