@@ -95,4 +95,9 @@ describe("Populate board", () => {
   test("__with all ships", () => {
     expect(board.flat()).toEqual(expect.arrayContaining([5, 4, 3, 2]));
   });
+
+  test("__with Carrier of length 5", () => {
+    const carrierOccurences = board.flat().filter((entry) => entry === 5).length;
+    expect(carrierOccurences).toBe(5);
+  });
 });
