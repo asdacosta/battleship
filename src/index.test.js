@@ -87,3 +87,12 @@ test("inspect legal moves", () => {
     patrolMoves,
   ]);
 });
+
+describe("Populate board", () => {
+  const game2 = new Gameboard();
+  const board = game2.displaceShips();
+
+  test("__with all ships", () => {
+    expect(board.flat()).toEqual(expect.arrayContaining([5, 4, 3, 2]));
+  });
+});
