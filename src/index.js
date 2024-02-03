@@ -247,6 +247,8 @@ class Gameboard {
       _withSpecifiedShip("Carrier", 0);
       _withSpecifiedShip("Battleship", 1);
       _withSpecifiedShip("Destroyer", 2);
+      _withSpecifiedShip("Submarine", 3);
+      _withSpecifiedShip("Patrol Boat", 4);
     })();
 
     console.log(board);
