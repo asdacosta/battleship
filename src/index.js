@@ -46,6 +46,7 @@ class Ship {
 
 class Gameboard {
   constructor() {
+    this.board = [];
     this.ships = {
       Carrier: new Ship(5, 0, false),
       Battleship: new Ship(4, 0, false),
@@ -56,7 +57,7 @@ class Gameboard {
   }
 
   createBoard() {
-    const board = [];
+    const board = this.board;
     for (let n = 0; n < 10; n++) {
       const subBoard = [];
       for (let m = 0; m < 10; m++) {
@@ -251,7 +252,7 @@ class Gameboard {
       _withSpecifiedShip("Patrol Boat", 4);
     })();
 
-    console.log(board);
+    // console.log(this.board);
     return board;
   }
 
@@ -279,19 +280,51 @@ class Gameboard {
       const KeysBox = {};
       const keys = generateKeys;
 
-      for (let subKeys = 0; subKeys < 10; subKeys++) {
+      for (let rowIndex = 0; rowIndex < 10; rowIndex++) {
         for (let index = 0; index < 10; index++) {
-          KeysBox[`${keys[subKeys][index]}`] = index;
+          KeysBox[`${keys[rowIndex][index]}`] = [index, rowIndex];
         }
       }
+
+      return KeysBox;
+    })();
+
+    const occupyChosenSpot = (() => {
+      const board = this.board;
+      const KeysBox = assignKeysToBoardIndices;
+      const keyIndex = KeysBox[XY][0];
+      const rowIndex = KeysBox[XY][1];
+      let hitEntry = board[rowIndex][keyIndex];
+
+      if (hitEntry === null || hitEntry === "O") {
+        board[rowIndex][keyIndex] = "X";
+      } else if (
+        hitEntry === this.ships.Carrier.length ||
+        hitEntry === this.ships.Battleship.length ||
+        hitEntry === this.ships.Destroyer.length ||
+        hitEntry === this.ships.Submarine.length ||
+        hitEntry === this.ships["Patrol Boat"].length
+      ) {
+        board[rowIndex][keyIndex] = "X";
+        // TODO: User to choose again
+      } else if (hitEntry === "X") {
+        console.log("Already chosen!");
+        // TODO: Enable user to choose new spot
+      }
+
+      console.log(board);
     })();
   }
 }
 
-// module.exports = {
-//   Ship,
-//   Gameboard,
-// };
+module.exports = {
+  Ship,
+  Gameboard,
+};
 
-const everBoard = new Gameboard();
-everBoard.receiveAttack("1A");
+// const everBoard = new Gameboard();
+// everBoard.displaceShips();
+// everBoard.receiveAttack("1B");
+// everBoard.receiveAttack("1A");
+// everBoard.receiveAttack("1C");
+// everBoard.receiveAttack("1B");
