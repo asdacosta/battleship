@@ -106,11 +106,14 @@ describe("Populate board", () => {
     expect(battleshipOccurences).toBe(4);
   });
 
-  test("__with Destroyer & Submarine of length 3", () => {
-    const destroyerAndSubmarineOccurences = board
-      .flat()
-      .filter((entry) => entry === 3).length;
-    expect(destroyerAndSubmarineOccurences).toBe(6);
+  test("__with Destroyer of length 3.5", () => {
+    const destroyerOccurences = board.flat().filter((entry) => entry === 3.5).length;
+    expect(destroyerOccurences).toBe(3);
+  });
+
+  test("__with Submarine of length 3", () => {
+    const submarineOccurences = board.flat().filter((entry) => entry === 3).length;
+    expect(submarineOccurences).toBe(3);
   });
 
   test("__with Patrol Boat of length 2", () => {
@@ -118,3 +121,9 @@ describe("Populate board", () => {
     expect(patrolOccurences).toBe(2);
   });
 });
+
+// describe("Put receiveAttack() to the test", () => {
+//   const game3 = new Gameboard();
+//   game3.displaceShips();
+//   const alphabets = game3.receiveAttack("1A");
+// });
