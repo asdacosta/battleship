@@ -138,4 +138,11 @@ describe("Put receiveAttack() to the test", () => {
     const xOccurences = board1.flat().filter((entry) => entry === "X").length;
     expect(xOccurences).toBe(1);
   });
+
+  test("Populate different spots", () => {
+    const attacks = ["1A", "1B", "2A", "2B", "9J"];
+    const boards = attacks.map((coordinate) => game3.receiveAttack(coordinate));
+    const xOccurences = boards[4].flat().filter((entry) => entry === "X").length;
+    expect(xOccurences).toBe(5);
+  });
 });
