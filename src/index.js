@@ -329,29 +329,25 @@ class Gameboard {
       };
 
       const updateSunkStatus = (shipLength) => {
-        const changeStatus = (ship) => {
-          if (ship.numHits === Math.floor(shipLength)) {
-            ship.sunk = true;
-          }
-        };
         switch (shipLength) {
           case 5:
-            changeStatus(this.ships.Carrier);
+            this.ships.Carrier.isSunk();
             break;
           case 4:
-            changeStatus(this.ships.Battleship);
+            this.ships.Battleship.isSunk();
             break;
           case 3.5:
-            changeStatus(this.ships.Destroyer);
+            this.ships.Destroyer.isSunk();
             break;
           case 3:
-            changeStatus(this.ships.Submarine);
+            this.ships.Submarine.isSunk();
             break;
           case 2:
-            changeStatus(this.ships["Patrol Boat"]);
+            this.ships["Patrol Boat"].isSunk();
             break;
         }
       };
+
       // const checkSunkStatusOfAllShips = () => {
       //   if (this.ships.Carrier.)
       // }
@@ -366,9 +362,9 @@ class Gameboard {
         hitEntry === this.ships.Submarine.length ||
         hitEntry === this.ships["Patrol Boat"].length
       ) {
-        updateSunkStatus(hitEntry);
         board[rowIndex][keyIndex] = "X";
         updateShipLife(hitEntry);
+        updateSunkStatus(hitEntry);
         // TODO: User to choose again
       } else if (hitEntry === "X") {
         return "Already chosen!";
