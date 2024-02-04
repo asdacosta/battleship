@@ -1,4 +1,4 @@
-const { Ship, Gameboard } = require("./index");
+const { Ship, Gameboard, Player } = require("./index");
 
 test("what instances of Ship contain", () => {
   const ship1 = new Ship(3, 0, false);
@@ -181,5 +181,17 @@ describe("Put receiveAttack() to the test", () => {
     });
 
     expect(shipLives).not.toEqual([0, 0, 0, 0, 0]);
+  });
+});
+
+describe("Check Player class methods", () => {
+  const game = new Player();
+
+  test("User indeed picks a spot", () => {
+    game.userTurn("9A");
+    const computerBoard = game.computerBoard;
+    const containsChosenSpot = computerBoard.flat().includes("X");
+
+    expect(containsChosenSpot).toBe(true);
   });
 });
