@@ -398,6 +398,10 @@ class Player {
     this.computer.displaceShips();
   }
 
+  userTurn(XY) {
+    this.computer.receiveAttack(XY);
+  }
+
   computerTurn() {
     const generateRandomKey = function () {
       const alphabets = [];
