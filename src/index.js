@@ -316,10 +316,39 @@ class Gameboard {
         }
       };
 
-      const trackMissedAttacks = (coordinate) => {
+      const trackMissedAttacks = function (coordinate) {
         const missedAttacks = [];
         missedAttacks.push(coordinate);
       };
+
+      const updateSunkStatus = (shipLength) => {
+        const changeStatus = (ship) => {
+          if (ship.numHits === Math.floor(shipLength)) {
+            ship.sunk = true;
+          }
+        };
+
+        switch (shipLength) {
+          case 5:
+            changeStatus(this.ships.Carrier);
+            break;
+          case 4:
+            changeStatus(this.ships.Battleship);
+            break;
+          case 3.5:
+            changeStatus(this.ships.Destroyer);
+            break;
+          case 3:
+            changeStatus(this.ships.Submarine);
+            break;
+          case 2:
+            changeStatus(this.ships["Patrol Boat"]);
+            break;
+        }
+      };
+      // const checkSunkStatusOfAllShips = () => {
+      //   if (this.ships.Carrier.)
+      // }
 
       if (hitEntry === null || hitEntry === "O") {
         board[rowIndex][keyIndex] = "X";
@@ -331,6 +360,7 @@ class Gameboard {
         hitEntry === this.ships.Submarine.length ||
         hitEntry === this.ships["Patrol Boat"].length
       ) {
+        updateSunkStatus(hitEntry);
         board[rowIndex][keyIndex] = "X";
         updateShipLife(hitEntry);
         // TODO: User to choose again
