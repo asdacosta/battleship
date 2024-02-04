@@ -316,8 +316,14 @@ class Gameboard {
         }
       };
 
+      const trackMissedAttacks = (coordinate) => {
+        const missedAttacks = [];
+        missedAttacks.push(coordinate);
+      };
+
       if (hitEntry === null || hitEntry === "O") {
         board[rowIndex][keyIndex] = "X";
+        trackMissedAttacks(XY);
       } else if (
         hitEntry === this.ships.Carrier.length ||
         hitEntry === this.ships.Battleship.length ||
@@ -329,7 +335,7 @@ class Gameboard {
         updateShipLife(hitEntry);
         // TODO: User to choose again
       } else if (hitEntry === "X") {
-        console.log("Already chosen!");
+        return "Already chosen!";
         // TODO: Enable user to choose new spot
       }
 
@@ -340,13 +346,13 @@ class Gameboard {
   }
 }
 
-// module.exports = {
-//   Ship,
-//   Gameboard,
-// };
+module.exports = {
+  Ship,
+  Gameboard,
+};
 
-const everBoard = new Gameboard();
-everBoard.displaceShips();
+// const everBoard = new Gameboard();
+// everBoard.displaceShips();
 // everBoard.receiveAttack("1B");
 // everBoard.receiveAttack("1A");
 // everBoard.receiveAttack("1C");
