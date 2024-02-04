@@ -131,4 +131,11 @@ describe("Put receiveAttack() to the test", () => {
     const populatedWithX = board.flat().includes("X");
     expect(populatedWithX).toBe(true);
   });
+
+  test("Maintain chosen spot even when populated again", () => {
+    const board = game3.receiveAttack("1A");
+    const board1 = game3.receiveAttack("1A");
+    const xOccurences = board1.flat().filter((entry) => entry === "X").length;
+    expect(xOccurences).toBe(1);
+  });
 });
