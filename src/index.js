@@ -389,6 +389,13 @@ class Gameboard {
   }
 }
 
+class Player {
+  constructor() {
+    this.user = new Gameboard();
+    this.computer = new Gameboard();
+  }
+}
+
 module.exports = {
   Ship,
   Gameboard,
