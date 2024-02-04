@@ -348,9 +348,19 @@ class Gameboard {
         }
       };
 
-      // const checkSunkStatusOfAllShips = () => {
-      //   if (this.ships.Carrier.)
-      // }
+      const checkSunkStatusOfAllShips = () => {
+        if (
+          this.ships.Carrier.sunkStatus &&
+          this.ships.Battleship.sunkStatus &&
+          this.ships.Destroyer.sunkStatus &&
+          this.ships.Submarine.sunkStatus &&
+          this.ships["Patrol Boat"].sunkStatus
+        ) {
+          return "All ships sunk :(";
+        } else {
+          return "Some ships still stand!";
+        }
+      };
 
       if (hitEntry === null || hitEntry === "O") {
         board[rowIndex][keyIndex] = "X";
@@ -365,6 +375,7 @@ class Gameboard {
         board[rowIndex][keyIndex] = "X";
         updateShipLife(hitEntry);
         updateSunkStatus(hitEntry);
+        checkSunkStatusOfAllShips();
         // TODO: User to choose again
       } else if (hitEntry === "X") {
         return "Already chosen!";
