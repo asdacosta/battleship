@@ -194,4 +194,12 @@ describe("Check Player class methods", () => {
 
     expect(containsChosenSpot).toBe(true);
   });
+
+  test("Computer indeed picks a spot", () => {
+    game.computerTurn();
+    const userBoard = game.userBoard;
+    const containsChosenSpot = userBoard.flat().includes("X");
+
+    expect(containsChosenSpot).toBe(true);
+  });
 });
