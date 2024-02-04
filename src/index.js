@@ -406,17 +406,15 @@ class Player {
     const generateRandomKey = function () {
       const alphabets = [];
       const keys = [];
-      const randomKeyIndex = Math.floor(Math.random * 100);
+      const randomKeyIndex = Math.floor(Math.random() * 100);
 
       for (let n = 65; n <= 74; n++) {
         alphabets.push(String.fromCharCode(n));
       }
       for (let m = 1; m <= 10; m++) {
-        const subKeys = [];
         for (const letter of alphabets) {
-          subKeys.push(`${m}` + letter);
+          keys.push(`${m}` + letter);
         }
-        keys.push(subKeys);
       }
       const randomKey = keys[randomKeyIndex];
       return randomKey;
@@ -437,6 +435,7 @@ class Player {
 module.exports = {
   Ship,
   Gameboard,
+  Player,
 };
 
 // const everBoard = new Gameboard();
