@@ -348,7 +348,7 @@ class Gameboard {
         }
       };
 
-      const checkSunkStatusOfAllShips = () => {
+      const allShipsSunk = () => {
         if (
           this.ships.Carrier.sunkStatus &&
           this.ships.Battleship.sunkStatus &&
@@ -356,9 +356,9 @@ class Gameboard {
           this.ships.Submarine.sunkStatus &&
           this.ships["Patrol Boat"].sunkStatus
         ) {
-          return "All ships sunk :(";
+          return true;
         } else {
-          return "Some ships still stand!";
+          return false;
         }
       };
 
@@ -375,7 +375,7 @@ class Gameboard {
         board[rowIndex][keyIndex] = "X";
         updateShipLife(hitEntry);
         updateSunkStatus(hitEntry);
-        checkSunkStatusOfAllShips();
+        allShipsSunk();
         // TODO: User to choose again
       } else if (hitEntry === "X") {
         return "Already chosen!";
