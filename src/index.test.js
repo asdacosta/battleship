@@ -145,4 +145,37 @@ describe("Put receiveAttack() to the test", () => {
     const xOccurences = boards[4].flat().filter((entry) => entry === "X").length;
     expect(xOccurences).toBe(5);
   });
+
+  test("Hit ship should lose life", () => {
+    const attacks = [
+      "1A",
+      "1B",
+      "1C",
+      "1D",
+      "1E",
+      "1F",
+      "1G",
+      "1H",
+      "1I",
+      "1J",
+      "2A",
+      "2B",
+      "2C",
+      "2D",
+      "2E",
+      "2F",
+      "2G",
+      "2H",
+      "2I",
+      "2J",
+    ];
+    const boards = attacks.map((coordinate) => game3.receiveAttack(coordinate));
+    const ships = ["Carrier", "Battleship", "Destroyer", "Submarine", "Patrol Boat"];
+    const shipLives = [];
+    ships.forEach((ship) => {
+      shipLives.push(game3.ships[ship].numHits);
+    });
+
+    expect(shipLives).not.toEqual([0, 0, 0, 0, 0]);
+  });
 });
