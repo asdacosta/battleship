@@ -392,7 +392,36 @@ class Gameboard {
 class Player {
   constructor() {
     this.user = new Gameboard();
+    this.userBoard = this.user.createBoard();
+    this.user.displaceShips();
+
     this.computer = new Gameboard();
+    this.computerBoard = this.computer.createBoard();
+    this.computer.displaceShips();
+  }
+
+  computerTurn() {
+    const generateRandomKey = function () {
+      const alphabets = [];
+      const keys = [];
+      const randomKeyIndex = Math.floor(Math.random * 100);
+
+      for (let n = 65; n <= 74; n++) {
+        alphabets.push(String.fromCharCode(n));
+      }
+      for (let m = 1; m <= 10; m++) {
+        const subKeys = [];
+        for (const letter of alphabets) {
+          subKeys.push(`${m}` + letter);
+        }
+        keys.push(subKeys);
+      }
+      const randomKey = keys[randomKeyIndex];
+      return randomKey;
+    };
+
+    const randomKey = generateRandomKey();
+    this.user.receiveAttack(randomKey);
   }
 }
 
