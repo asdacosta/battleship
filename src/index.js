@@ -297,21 +297,28 @@ class Gameboard {
       let hitEntry = board[rowIndex][keyIndex];
 
       const updateShipLife = (shipLength) => {
+        const updateUntilFull = (ship) => {
+          if (ship.numHits === shipLength) {
+            return;
+          }
+          ship.hit();
+        };
+
         switch (shipLength) {
           case 5:
-            this.ships.Carrier.hit();
+            updateUntilFull(this.ships.Carrier);
             break;
           case 4:
-            this.ships.Battleship.hit();
+            updateUntilFull(this.ships.Battleship);
             break;
           case 3.5:
-            this.ships.Destroyer.hit();
+            updateUntilFull(this.ships.Destroyer);
             break;
           case 3:
-            this.ships.Submarine.hit();
+            updateUntilFull(this.ships.Submarine);
             break;
           case 2:
-            this.ships["Patrol Boat"].hit();
+            updateUntilFull(this.ships["Patrol Boat"]);
             break;
         }
       };
@@ -327,7 +334,6 @@ class Gameboard {
             ship.sunk = true;
           }
         };
-
         switch (shipLength) {
           case 5:
             changeStatus(this.ships.Carrier);
