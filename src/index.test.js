@@ -122,8 +122,13 @@ describe("Populate board", () => {
   });
 });
 
-// describe("Put receiveAttack() to the test", () => {
-//   const game3 = new Gameboard();
-//   game3.displaceShips();
-//   const alphabets = game3.receiveAttack("1A");
-// });
+describe("Put receiveAttack() to the test", () => {
+  const game3 = new Gameboard();
+  game3.displaceShips();
+
+  test("Populate chosen spot with X", () => {
+    const board = game3.receiveAttack("1A");
+    const populatedWithX = board.flat().includes("X");
+    expect(populatedWithX).toBe(true);
+  });
+});
