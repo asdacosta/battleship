@@ -365,6 +365,7 @@ class Gameboard {
       if (hitEntry === null || hitEntry === "O") {
         board[rowIndex][keyIndex] = "X";
         trackMissedAttacks(XY);
+        return "Fail";
       } else if (
         hitEntry === this.ships.Carrier.length ||
         hitEntry === this.ships.Battleship.length ||
@@ -376,16 +377,13 @@ class Gameboard {
         updateShipLife(hitEntry);
         updateSunkStatus(hitEntry);
         allShipsSunk();
+        return "Success";
         // TODO: User to choose again
       } else if (hitEntry === "X") {
-        return "Already chosen!";
+        return "Occupied";
         // TODO: Enable user to choose new spot
       }
-
-      console.log(board);
     })();
-
-    return this.board;
   }
 }
 
@@ -420,8 +418,15 @@ class Player {
       return randomKey;
     };
 
-    const randomKey = generateRandomKey();
-    this.user.receiveAttack(randomKey);
+    const pickLegalMove = (() => {
+      const board = this.userBoard;
+      const randomKey = generateRandomKey();
+      const response = this.user.receiveAttack(randomKey);
+      const isAllEntriesOccupied = board.flat().every((entry) => entry === "X");
+      if (response === "Occupied" && !isAllEntriesOccupied) {
+        this.computerTurn();
+      }
+    })();
   }
 }
 
