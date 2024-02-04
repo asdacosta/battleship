@@ -127,22 +127,25 @@ describe("Put receiveAttack() to the test", () => {
   game3.displaceShips();
 
   test("Populate chosen spot with X", () => {
-    const board = game3.receiveAttack("1A");
+    game3.receiveAttack("1A");
+    const board = game3.board;
     const populatedWithX = board.flat().includes("X");
     expect(populatedWithX).toBe(true);
   });
 
   test("Maintain chosen spot even when populated again", () => {
-    const board = game3.receiveAttack("1A");
-    const board1 = game3.receiveAttack("1A");
+    game3.receiveAttack("1A");
+    game3.receiveAttack("1A");
+    const board1 = game3.board;
     const xOccurences = board1.flat().filter((entry) => entry === "X").length;
     expect(xOccurences).toBe(1);
   });
 
   test("Populate different spots", () => {
     const attacks = ["1A", "1B", "2A", "2B", "9J"];
-    const boards = attacks.map((coordinate) => game3.receiveAttack(coordinate));
-    const xOccurences = boards[4].flat().filter((entry) => entry === "X").length;
+    attacks.map((coordinate) => game3.receiveAttack(coordinate));
+    const boards = game3.board;
+    const xOccurences = boards.flat().filter((entry) => entry === "X").length;
     expect(xOccurences).toBe(5);
   });
 
@@ -169,7 +172,8 @@ describe("Put receiveAttack() to the test", () => {
       "2I",
       "2J",
     ];
-    const boards = attacks.map((coordinate) => game3.receiveAttack(coordinate));
+    attacks.map((coordinate) => game3.receiveAttack(coordinate));
+    const boards = game3.board;
     const ships = ["Carrier", "Battleship", "Destroyer", "Submarine", "Patrol Boat"];
     const shipLives = [];
     ships.forEach((ship) => {
