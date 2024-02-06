@@ -6,9 +6,12 @@ module.exports = {
   devtool: "inline-source-map",
   // mode: 'production',
   // devtool: 'source-map',
-  entry: "./src/index.js",
+  entry: {
+    index: "./src/index.js",
+    battleground: "./src/battleground.js",
+  },
   output: {
-    filename: "main.js",
+    filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },
@@ -48,6 +51,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./src/index.html",
       filename: "index.html",
+      chunks: ["index"],
+      inject: "head",
+      scriptLoading: "defer",
+    }),
+    new HtmlWebpackPlugin({
+      template: "./src/battleground.html",
+      filename: "battleground.html",
+      chunks: ["battleground"],
       inject: "head",
       scriptLoading: "defer",
     }),
