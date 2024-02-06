@@ -1,3 +1,5 @@
+// To run the tests, comment out all the imports in ./index.js
+
 const { Ship, Gameboard, Player } = require("./index");
 
 test("what instances of Ship contain", () => {
