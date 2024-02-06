@@ -1,0 +1,55 @@
+* {
+  /* border: 2px solid teal; */
+}
+
+body {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  font-size: 1.2rem;
+  height: 100vh;
+  background-image: url(./assets/admiral-edit.jpg);
+  background-size: cover;
+  background-position: center center;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 20rem;
+  width: 35rem;
+  gap: 3rem;
+  border-radius: 1rem;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1;
+}
+
+input[type="text"] {
+  background: none;
+  border: none;
+  border-bottom: 2px solid white;
+  font-size: 1.3rem;
+  color: white;
+  text-align: center;
+  width: 12rem;
+}
+
+h1 {
+  font-size: 15rem;
+  color: white;
+}
+
+button {
+  background: black;
+  font-size: 1.7rem;
+  font-weight: 600;
+  padding: 0.5rem 1.2rem;
+  border-radius: 2rem;
+  border-color: white;
+  border-width: 0.2rem;
+  color: white;
+}
