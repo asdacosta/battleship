@@ -1,13 +1,13 @@
 * {
-  /* border: 2px solid teal; */
+  letter-spacing: 0.1rem;
 }
 
 body {
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   flex-direction: column;
   position: relative;
+  font-family: "Raleway", sans-serif;
   font-size: 1.2rem;
   padding: 2rem;
   gap: 2rem;
