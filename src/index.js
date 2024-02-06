@@ -432,6 +432,20 @@ class Player {
   }
 }
 
+const transitionHeaderColor = (function () {
+  function changeColor() {
+    let red = Math.floor(Math.random() * 256);
+    let green = Math.floor(Math.random() * 256);
+    let blue = Math.floor(Math.random() * 256);
+
+    let color = `rgba(${red}, ${green}, ${blue}, 0.7)`;
+    const header = document.querySelector("h1");
+    header.style.background = color;
+  }
+
+  setInterval(changeColor, 2000);
+})();
+
 module.exports = {
   Ship,
   Gameboard,
