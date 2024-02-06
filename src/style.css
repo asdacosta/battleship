@@ -46,6 +46,13 @@ input[type="text"] {
   width: 12rem;
 }
 
+input[type="text"]:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 0.5rem;
+
+  color: black;
+}
+
 h1 {
   font-family: "Sixtyfour", sans-serif;
   font-optical-sizing: auto;
