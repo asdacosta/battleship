@@ -1,6 +1,6 @@
-body * {
+/* body * {
   border: 2px solid tomato;
-}
+} */
 
 body {
   display: grid;
@@ -243,6 +243,7 @@ body > div:first-child {
   body {
     gap: 0.3rem;
     padding: 8rem 0.2rem;
+    background-image: url(./assets/verticalship.jpg);
   }
 
   body > section {
