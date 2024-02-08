@@ -85,7 +85,7 @@ h1 {
   font-family: "Sixtyfour", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
-  font-size: 10rem;
+  font-size: 8rem;
   border-radius: 5rem;
   padding: 1rem 1rem 0 1rem;
   cursor: context-menu;
@@ -134,4 +134,98 @@ body > div:first-child {
 
 a {
   color: white;
+}
+
+@media (max-width: 1500px) {
+  h1 {
+    font-size: 7rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  h1 {
+    font-size: 6rem;
+  }
+  section {
+    height: 20rem;
+    width: 30rem;
+  }
+}
+
+@media (max-width: 1050px) {
+  body {
+    gap: 4rem;
+    padding: 4rem;
+  }
+  h1 {
+    font-size: 5rem;
+  }
+  section {
+    height: 18rem;
+    width: 28rem;
+  }
+  button {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 850px) {
+  h1 {
+    font-size: 4rem;
+  }
+  button {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 750px) {
+  h1 {
+    font-size: 3rem;
+  }
+  section {
+    height: 15rem;
+    width: 25rem;
+  }
+}
+
+@media (max-width: 550px) {
+  h1 {
+    font-size: 1.7rem;
+  }
+  section {
+    height: 12rem;
+    width: 20rem;
+  }
+  button {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 340px) {
+  h1 {
+    font-size: 1.3rem;
+  }
+  section {
+    height: 10rem;
+    width: 16.5rem;
+  }
+  button {
+    font-size: 0.9rem;
+  }
+  input {
+    width: 9rem;
+  }
+}
+
+@media (max-width: 270px) {
+  h1 {
+    font-size: 1.05rem;
+  }
+  section {
+    height: 8rem;
+    width: 12rem;
+  }
+  button {
+    font-size: 0.8rem;
+  }
 }
