@@ -1,0 +1,136 @@
+body * {
+  border: 2px solid tomato;
+}
+
+body {
+  display: grid;
+  grid-template: 4fr 1fr / 1fr 1fr;
+  gap: 8rem;
+  padding: 4rem 8rem;
+  position: relative;
+
+  font-family: "Raleway", sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.1rem;
+  height: 100vh;
+  background-image: url(./assets/ship-edit.jpg);
+  background-size: cover;
+  background-position: center center;
+}
+
+body > section {
+  display: grid;
+  grid-template: 1fr 1fr 10fr/ 2fr 8fr;
+  gap: 0.3rem;
+  padding: 0.5rem 7rem 0.5rem 1rem;
+  z-index: 1;
+}
+
+h2 {
+  grid-row: span 1;
+  grid-column: 2 / -1;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  padding: 0.25rem 1rem 0 1rem;
+  /* border-radius: 1rem; */
+  justify-self: center;
+  background: rgba(255, 255, 255, 0.4);
+  border-top: 0.3rem solid rgb(0, 0, 0);
+  border-bottom: 0.3rem solid rgb(0, 0, 0);
+  cursor: context-menu;
+}
+
+.head,
+.tail {
+  display: flex;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 1rem;
+  cursor: context-menu;
+}
+
+.head {
+  align-self: flex-end;
+  grid-row: 2 / 3;
+  grid-column: 2 / 3;
+}
+
+.tail {
+  flex-direction: column;
+  justify-self: flex-end;
+  grid-row: 3 / -1;
+}
+
+.head > div,
+.tail > div {
+  flex: 1 1 auto;
+  padding-top: 0.5rem;
+  text-align: center;
+  font-weight: 600;
+  min-width: 2rem;
+  min-height: 2rem;
+}
+
+.admiral-grounds,
+.ai-grounds {
+  grid-row: 3 / -1;
+  grid-column: 2 / -1;
+  display: grid;
+  grid-template: repeat(10, 1fr) / repeat(10, 1fr);
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 1rem;
+}
+
+.admiral-grounds > div,
+.ai-grounds > div {
+  grid-column: span 1;
+  grid-row: span 1;
+  min-width: 2rem;
+  min-height: 2rem;
+  border: 2px solid rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.admiral-grounds > div:first-child,
+.ai-grounds > div:first-child {
+  border-top-left-radius: 1rem;
+}
+
+.admiral-grounds > div:nth-child(10),
+.ai-grounds > div:nth-child(10) {
+  border-top-right-radius: 1rem;
+}
+
+.admiral-grounds > div:nth-last-child(10),
+.ai-grounds > div:nth-last-child(10) {
+  border-bottom-left-radius: 1rem;
+}
+
+.admiral-grounds > div:nth-last-child(1),
+.ai-grounds > div:nth-last-child(1) {
+  border-bottom-right-radius: 1rem;
+}
+
+body > div:last-child {
+  grid-column: 1 / -1;
+  align-self: flex-start;
+  justify-self: center;
+  text-align: center;
+  font-weight: 600;
+  padding-top: 0.5rem;
+  border-top: 0.2rem solid rgba(255, 255, 255, 0.8);
+  border-bottom: 0.2rem solid rgba(255, 255, 255, 0.8);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  height: 3rem;
+  width: 40rem;
+  cursor: context-menu;
+  z-index: 1;
+}
+
+body > div:first-child {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+}
