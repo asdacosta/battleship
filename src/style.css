@@ -28,10 +28,24 @@ section {
   height: 20rem;
   width: 35rem;
   gap: 3rem;
+  border: 0.3rem solid white;
   border-radius: 1rem;
   background-color: rgba(0, 0, 0, 0.75);
   z-index: 1;
   transition: transform 0.3s ease-in-out;
+  animation: borderTransition 7s infinite alternate;
+}
+
+@keyframes borderTransition {
+  0% {
+    border-color: rgba(152, 199, 230, 0.6);
+  }
+  50% {
+    border-color: rgba(152, 199, 230, 0.15);
+  }
+  100% {
+    border-color: rgba(152, 199, 230, 0.6);
+  }
 }
 
 section:hover {
@@ -41,17 +55,29 @@ section:hover {
 input[type="text"] {
   background: none;
   border: none;
-  border-bottom: 2px solid white;
+  border-bottom: 0.2rem solid white;
   font-size: 1.3rem;
   color: white;
   text-align: center;
   width: 12rem;
+  animation: borderBottomTransition 7s infinite alternate;
+}
+
+@keyframes borderBottomTransition {
+  0% {
+    border-color: rgba(152, 199, 230, 0.8);
+  }
+  50% {
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+  100% {
+    border-color: rgba(152, 199, 230, 0.8);
+  }
 }
 
 input[type="text"]:hover {
   background: rgba(255, 255, 255, 0.9);
   border-radius: 0.5rem;
-
   color: black;
 }
 
@@ -62,10 +88,23 @@ h1 {
   font-size: 10rem;
   border-radius: 5rem;
   padding: 1rem 1rem 0 1rem;
-  background: rgb(255, 255, 255, 0.4);
+  /* background: rgb(255, 255, 255, 0.4); */
   cursor: context-menu;
   z-index: 1;
-  transition: background 5s ease;
+  /* transition: background 5s ease; */
+  animation: colorTransition 7s infinite alternate;
+}
+
+@keyframes colorTransition {
+  0% {
+    background: rgba(152, 199, 230, 0.6);
+  }
+  50% {
+    background: rgba(152, 199, 230, 0.15);
+  }
+  100% {
+    background: rgba(152, 199, 230, 0.6);
+  }
 }
 
 button {
