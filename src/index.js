@@ -446,15 +446,24 @@ const makeInputWritePlaceholder = (function () {
   setInterval(async () => {
     if (direction === 1) {
       // Adds text (Forward direction: 1)
+      getNodes.nameInput.placeholder = getNodes.nameInput.placeholder.slice(0, -1); // To clear '|'
       getNodes.nameInput.placeholder += placeholder[index];
+      getNodes.nameInput.placeholder += "|";
       index += 1;
+      // Change direction to backwards
       if (index === placeholder.length) {
         direction = -1;
       }
     } else {
       // Clears text (Backward direction: -1)
+      await new Promise((resolve) => {
+        setTimeout(resolve, 1000);
+      });
+      getNodes.nameInput.placeholder = getNodes.nameInput.placeholder.slice(0, -1); // To clear '|'
       getNodes.nameInput.placeholder = getNodes.nameInput.placeholder.slice(0, -1);
+      getNodes.nameInput.placeholder += "|";
       index -= 1;
+      // Change direction to forwards
       if (index === 0) {
         direction = 1;
       }
