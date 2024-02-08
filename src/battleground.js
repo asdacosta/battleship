@@ -73,19 +73,15 @@ const displayHeadAndTailHoveringEffect = (function () {
   addHoverToHead(getNodes.aiHeadDivs, getNodes.aiGroundsDivs);
   addHoverToTail(getNodes.aiTailDivs, getNodes.aiGroundsDivs);
 
-  const addHoverToHeaders = function () {
-    getNodes.headers[0].addEventListener("mouseover", () => {
-      getNodes.admiralGrounds.classList.add("scaleDivs");
+  const addHoverToHeaders = function (header, grounds) {
+    header.addEventListener("mouseover", () => {
+      grounds.classList.add("scaleDivs");
     });
-    getNodes.headers[0].addEventListener("mouseout", () => {
-      getNodes.admiralGrounds.classList.remove("scaleDivs");
-    });
-    getNodes.headers[1].addEventListener("mouseover", () => {
-      getNodes.aiGrounds.classList.add("scaleDivs");
-    });
-    getNodes.headers[1].addEventListener("mouseout", () => {
-      getNodes.aiGrounds.classList.remove("scaleDivs");
+    header.addEventListener("mouseout", () => {
+      grounds.classList.remove("scaleDivs");
     });
   };
-  addHoverToHeaders();
+
+  addHoverToHeaders(getNodes.headers[0], getNodes.admiralGrounds);
+  addHoverToHeaders(getNodes.headers[1], getNodes.aiGrounds);
 })();
