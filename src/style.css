@@ -88,10 +88,8 @@ h1 {
   font-size: 10rem;
   border-radius: 5rem;
   padding: 1rem 1rem 0 1rem;
-  /* background: rgb(255, 255, 255, 0.4); */
   cursor: context-menu;
   z-index: 1;
-  /* transition: background 5s ease; */
   animation: colorTransition 7s infinite alternate;
 }
 
