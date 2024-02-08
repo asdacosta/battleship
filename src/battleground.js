@@ -20,6 +20,9 @@ const getNodes = (function () {
   const aiTailDivs = document.querySelectorAll("body > section:nth-child(3) .tail > div");
   const admiralGroundsDivs = document.querySelectorAll(".admiral-grounds > div");
   const aiGroundsDivs = document.querySelectorAll(".ai-grounds > div");
+  const headers = document.querySelectorAll("h2");
+  const admiralGrounds = document.querySelector(".admiral-grounds");
+  const aiGrounds = document.querySelector(".ai-grounds");
 
   return {
     admiralHeadDivs,
@@ -28,6 +31,9 @@ const getNodes = (function () {
     aiTailDivs,
     admiralGroundsDivs,
     aiGroundsDivs,
+    headers,
+    admiralGrounds,
+    aiGrounds,
   };
 })();
 
@@ -64,7 +70,22 @@ const displayHeadAndTailHoveringEffect = (function () {
 
   addHoverToHead(getNodes.admiralHeadDivs, getNodes.admiralGroundsDivs);
   addHoverToTail(getNodes.admiralTailDivs, getNodes.admiralGroundsDivs);
-
   addHoverToHead(getNodes.aiHeadDivs, getNodes.aiGroundsDivs);
   addHoverToTail(getNodes.aiTailDivs, getNodes.aiGroundsDivs);
+
+  const addHoverToHeaders = function () {
+    getNodes.headers[0].addEventListener("mouseover", () => {
+      getNodes.admiralGrounds.style.transform = "scale(1.02)";
+    });
+    getNodes.headers[0].addEventListener("mouseout", () => {
+      getNodes.admiralGrounds.style.transform = "scale(1)";
+    });
+    getNodes.headers[1].addEventListener("mouseover", () => {
+      getNodes.aiGrounds.style.transform = "scale(1.02)";
+    });
+    getNodes.headers[1].addEventListener("mouseout", () => {
+      getNodes.aiGrounds.style.transform = "scale(1)";
+    });
+  };
+  addHoverToHeaders();
 })();
