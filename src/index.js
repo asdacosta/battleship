@@ -432,6 +432,36 @@ class Player {
   }
 }
 
+const getNodes = (function () {
+  const nameInput = document.querySelector("input");
+
+  return { nameInput };
+})();
+
+const makeInputWritePlaceholder = (function () {
+  const placeholder = "Admiral Name";
+  let index = 0;
+  let direction = 1;
+
+  setInterval(async () => {
+    if (direction === 1) {
+      // Adds text (Forward direction: 1)
+      getNodes.nameInput.placeholder += placeholder[index];
+      index += 1;
+      if (index === placeholder.length) {
+        direction = -1;
+      }
+    } else {
+      // Clears text (Backward direction: -1)
+      getNodes.nameInput.placeholder = getNodes.nameInput.placeholder.slice(0, -1);
+      index -= 1;
+      if (index === 0) {
+        direction = 1;
+      }
+    }
+  }, 100);
+})();
+
 module.exports = {
   Ship,
   Gameboard,
