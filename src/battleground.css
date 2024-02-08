@@ -134,3 +134,72 @@ body > div:first-child {
   height: 100%;
   background: rgba(0, 0, 0, 0.55);
 }
+
+@media (max-width: 1570px) {
+  body {
+    gap: 6rem;
+    padding: 6rem 6rem;
+  }
+
+  body > div:last-child {
+    width: 35rem;
+  }
+  .admiral-grounds,
+  .ai-grounds {
+    align-self: flex-start;
+  }
+  .tail,
+  .head {
+    font-size: 1.1rem;
+  }
+  .tail {
+    align-self: flex-start;
+  }
+  .head > div,
+  .tail > div {
+    padding-top: 0.2rem;
+  }
+}
+
+@media (max-width: 1270px) {
+  body {
+    gap: 3rem;
+    padding: 8rem 4rem;
+  }
+  body > div:last-child {
+    width: 30rem;
+    align-self: center;
+  }
+  body > section {
+    padding: 0.5rem 5rem 0.5rem 0.5rem;
+  }
+}
+
+@media (max-width: 1110px) {
+  body {
+    gap: 1rem;
+    padding: 8rem 1rem;
+  }
+  body > section {
+    padding: 0.5rem 3rem 0.5rem 0.5rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 900px) {
+  body {
+    gap: 0.2rem;
+    padding: 8rem 0.2rem;
+  }
+  body > section {
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 800px) {
+  h2 {
+    color: brown;
+  }
+}
