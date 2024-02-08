@@ -96,6 +96,10 @@ h2:hover {
   transition: transform 0.25s ease-in-out;
 }
 
+.scaleDivs {
+  transform: scale(1.02);
+}
+
 .admiral-grounds:hover,
 .ai-grounds:hover {
   transform: scale(1.02);
@@ -114,7 +118,7 @@ h2:hover {
 
 .admiral-grounds > div:hover,
 .ai-grounds > div:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.3);
   transform: scale(1.1);
 }
 
@@ -148,8 +152,8 @@ body > div:last-child {
   text-align: center;
 
   font-weight: 600;
-  border-top: 0.2rem solid rgba(255, 255, 255, 0.8);
-  border-bottom: 0.2rem solid rgba(255, 255, 255, 0.8);
+  border: 0.2rem solid rgba(255, 255, 255, 0.8);
+  border-radius: 1rem;
   background: rgba(0, 0, 0, 0.5);
   color: white;
   height: 3rem;
@@ -161,8 +165,7 @@ body > div:last-child {
 
 body > div:last-child:hover {
   transform: scale(1.05);
-  border-top: 0.2rem solid rgb(255, 255, 255);
-  border-bottom: 0.2rem solid rgb(255, 255, 255);
+  border: 0.2rem solid rgb(255, 255, 255);
   background: rgba(0, 0, 0, 0.7);
 }
 
@@ -251,10 +254,6 @@ body > div:first-child {
 }
 
 @media (max-width: 800px) {
-  h2 {
-    color: brown;
-  }
-
   body {
     grid-template: repeat(2, 4fr) 1fr / 1fr;
     gap: 0;
