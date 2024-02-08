@@ -82,3 +82,7 @@ button:hover {
   color: rgb(204, 202, 202);
   cursor: pointer;
 }
+
+a {
+  color: white;
+}
