@@ -32,33 +32,39 @@ const getNodes = (function () {
 })();
 
 const displayHeadAndTailHoveringEffect = (function () {
-  getNodes.admiralHeadDivs.forEach((div, index) => {
-    div.addEventListener("mouseover", () => {
-      for (let m = 0; m < 10; m++) {
-        getNodes.admiralGroundsDivs[10 * m + index].style.border =
-          "2px solid rgba(255, 255, 255, 0.4)";
-      }
+  const addHoverToHead = function (headDivs, groundDivs) {
+    headDivs.forEach((div, index) => {
+      div.addEventListener("mouseover", () => {
+        for (let m = 0; m < 10; m++) {
+          groundDivs[10 * m + index].style.border = "2px solid rgba(255, 255, 255, 0.4)";
+        }
+      });
+      div.addEventListener("mouseout", () => {
+        for (let m = 0; m < 10; m++) {
+          groundDivs[10 * m + index].style.border = "2px solid rgb(255, 255, 255)";
+        }
+      });
     });
-    div.addEventListener("mouseout", () => {
-      for (let m = 0; m < 10; m++) {
-        getNodes.admiralGroundsDivs[10 * m + index].style.border =
-          "2px solid rgb(255, 255, 255)";
-      }
-    });
-  });
+  };
 
-  getNodes.admiralTailDivs.forEach((div, index) => {
-    div.addEventListener("mouseover", () => {
-      for (let n = 0; n < 10; n++) {
-        getNodes.admiralGroundsDivs[n + index * 10].style.border =
-          "2px solid rgba(255, 255, 255, 0.4)";
-      }
+  const addHoverToTail = function (tailDivs, groundDivs) {
+    tailDivs.forEach((div, index) => {
+      div.addEventListener("mouseover", () => {
+        for (let n = 0; n < 10; n++) {
+          groundDivs[n + index * 10].style.border = "2px solid rgba(255, 255, 255, 0.4)";
+        }
+      });
+      div.addEventListener("mouseout", () => {
+        for (let n = 0; n < 10; n++) {
+          groundDivs[n + index * 10].style.border = "2px solid rgb(255, 255, 255)";
+        }
+      });
     });
-    div.addEventListener("mouseout", () => {
-      for (let n = 0; n < 10; n++) {
-        getNodes.admiralGroundsDivs[n + index * 10].style.border =
-          "2px solid rgb(255, 255, 255)";
-      }
-    });
-  });
+  };
+
+  addHoverToHead(getNodes.admiralHeadDivs, getNodes.admiralGroundsDivs);
+  addHoverToTail(getNodes.admiralTailDivs, getNodes.admiralGroundsDivs);
+
+  addHoverToHead(getNodes.aiHeadDivs, getNodes.aiGroundsDivs);
+  addHoverToTail(getNodes.aiTailDivs, getNodes.aiGroundsDivs);
 })();
