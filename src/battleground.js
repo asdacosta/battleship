@@ -75,16 +75,16 @@ const displayHeadAndTailHoveringEffect = (function () {
 
   const addHoverToHeaders = function () {
     getNodes.headers[0].addEventListener("mouseover", () => {
-      getNodes.admiralGrounds.style.transform = "scale(1.02)";
+      getNodes.admiralGrounds.classList.add("scaleDivs");
     });
     getNodes.headers[0].addEventListener("mouseout", () => {
-      getNodes.admiralGrounds.style.transform = "scale(1)";
+      getNodes.admiralGrounds.classList.remove("scaleDivs");
     });
     getNodes.headers[1].addEventListener("mouseover", () => {
-      getNodes.aiGrounds.style.transform = "scale(1.02)";
+      getNodes.aiGrounds.classList.add("scaleDivs");
     });
     getNodes.headers[1].addEventListener("mouseout", () => {
-      getNodes.aiGrounds.style.transform = "scale(1)";
+      getNodes.aiGrounds.classList.remove("scaleDivs");
     });
   };
   addHoverToHeaders();
