@@ -1,5 +1,5 @@
 body * {
-  border: 2px solid tomato;
+  /* border: 2px solid tomato; */
 }
 
 body {
@@ -7,6 +7,7 @@ body {
   grid-template: 4fr 1fr / 1fr 1fr;
   gap: 8rem;
   padding: 4rem 8rem;
+  margin: 0;
   position: relative;
 
   font-family: "Raleway", sans-serif;
@@ -39,6 +40,12 @@ h2 {
   border-top: 0.3rem solid rgb(0, 0, 0);
   border-bottom: 0.3rem solid rgb(0, 0, 0);
   cursor: context-menu;
+  transition: transform 0.3s ease-in-out;
+}
+
+h2:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.1);
 }
 
 .head,
@@ -69,6 +76,13 @@ h2 {
   font-weight: 600;
   min-width: 2rem;
   min-height: 2rem;
+  transition: transform 0.1s ease-in;
+}
+
+.head > div:hover,
+.tail > div:hover {
+  font-weight: 800;
+  transform: scale(1.2);
 }
 
 .admiral-grounds,
@@ -79,6 +93,12 @@ h2 {
   grid-template: repeat(10, 1fr) / repeat(10, 1fr);
   border: 2px solid rgb(255, 255, 255);
   border-radius: 1rem;
+  transition: transform 0.25s ease-in-out;
+}
+
+.admiral-grounds:hover,
+.ai-grounds:hover {
+  transform: scale(1.02);
 }
 
 .admiral-grounds > div,
@@ -89,6 +109,13 @@ h2 {
   min-height: 2rem;
   border: 2px solid rgb(255, 255, 255);
   cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.admiral-grounds > div:hover,
+.ai-grounds > div:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
 }
 
 .admiral-grounds > div:first-child,
@@ -115,9 +142,12 @@ body > div:last-child {
   grid-column: 1 / -1;
   align-self: flex-start;
   justify-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+
   font-weight: 600;
-  padding-top: 0.5rem;
   border-top: 0.2rem solid rgba(255, 255, 255, 0.8);
   border-bottom: 0.2rem solid rgba(255, 255, 255, 0.8);
   background: rgba(0, 0, 0, 0.5);
@@ -126,10 +156,18 @@ body > div:last-child {
   width: 40rem;
   cursor: context-menu;
   z-index: 1;
+  transition: transform 0.3s ease-in-out;
+}
+
+body > div:last-child:hover {
+  transform: scale(1.05);
+  border-top: 0.2rem solid rgb(255, 255, 255);
+  border-bottom: 0.2rem solid rgb(255, 255, 255);
+  background: rgba(0, 0, 0, 0.7);
 }
 
 body > div:first-child {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.55);
@@ -166,10 +204,12 @@ body > div:first-child {
     gap: 3rem;
     padding: 8rem 4rem;
   }
+
   body > div:last-child {
     width: 30rem;
     align-self: center;
   }
+
   body > section {
     padding: 0.5rem 5rem 0.5rem 0.5rem;
   }
@@ -180,11 +220,18 @@ body > div:first-child {
     gap: 1rem;
     padding: 8rem 1rem;
   }
+
   body > section {
     padding: 0.5rem 3rem 0.5rem 0.5rem;
   }
+
   h2 {
     font-size: 1.5rem;
+  }
+
+  body > div:last-child {
+    width: 28rem;
+    font-size: 1rem;
   }
 }
 
@@ -193,13 +240,29 @@ body > div:first-child {
     gap: 0.2rem;
     padding: 8rem 0.2rem;
   }
+
   body > section {
     padding: 0.5rem;
+  }
+
+  body > div:last-child {
+    width: 25rem;
   }
 }
 
 @media (max-width: 800px) {
   h2 {
     color: brown;
+  }
+
+  body {
+    grid-template: repeat(2, 4fr) 1fr / 1fr;
+    gap: 0;
+    padding: 0;
+  }
+
+  body > section {
+    grid-template: 1fr 1fr 10fr/ 1fr 8fr;
+    padding-right: 1.5rem;
   }
 }
