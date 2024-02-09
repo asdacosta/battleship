@@ -434,8 +434,10 @@ class Player {
 
 const getNodes = (function () {
   const nameInput = document.querySelector("input");
+  const battleButton = document.querySelector("button");
+  const buttonLink = document.querySelector("button > a");
 
-  return { nameInput };
+  return { nameInput, battleButton, buttonLink };
 })();
 
 const makeInputWritePlaceholder = (function () {
@@ -469,6 +471,20 @@ const makeInputWritePlaceholder = (function () {
       }
     }
   }, 100);
+})();
+
+const goToBattleGroundsIfInputIsNotEmpty = (function () {
+  const setPointerEvents = function () {
+    if (getNodes.nameInput.value === "") {
+      getNodes.battleButton.style.pointerEvents = "none";
+      getNodes.buttonLink.style.color = "rgba(255, 255, 255, 0.6)";
+    } else {
+      getNodes.battleButton.style.pointerEvents = "auto";
+      getNodes.buttonLink.style.color = "rgb(255, 255, 255)";
+    }
+  };
+  setPointerEvents();
+  getNodes.nameInput.addEventListener("input", setPointerEvents);
 })();
 
 module.exports = {
