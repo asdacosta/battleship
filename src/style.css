@@ -118,8 +118,7 @@ button {
 }
 
 button:hover {
-  transform: scale(1.02);
-  color: rgb(192, 191, 191);
+  transform: scale(1.03);
   cursor: pointer;
 }
 
