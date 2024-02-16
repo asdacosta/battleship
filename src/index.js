@@ -197,21 +197,19 @@ class Gameboard {
         occupy(true, true, 1, 2);
       }
 
-      // To check max call stack error for some displacements
       const restartShipDisplacementIfBoardHasAdjacentOccupiedRows = (() => {
         board.forEach((row, rowIndex) => {
           if (rowIndex === 0 || rowIndex === 9 || isReDisplaced) {
             return;
           }
 
-          // const moveToNextIterationIfRowIsEmpty = (function () {
+          // Move to next iteration if row is empty
           const rowIsEmpty = row.every((entry) => entry === null);
           if (rowIsEmpty) {
             return;
           }
-          // })();
 
-          // const displaceForAdjacentOccupiedRows = (() => {
+          // Displace for adjacent occupied rows
           const rowIsOccupied = row.every((entry) => entry === "O" || entry === null);
           if (rowIsOccupied) {
             const nextRowIsEmpty = board[rowIndex + 1].every((entry) => entry === null);
@@ -222,28 +220,26 @@ class Gameboard {
               (entry) => entry === "O" || entry === null,
             );
             if (nextRowIsOccupied) {
-              // console.log(board[rowIndex]);
-              // console.log(board[rowIndex + 1]);
               isReDisplaced = true;
               this.displaceShips();
             }
           }
-          // })();
         });
       })();
     };
 
     if (isReDisplaced) {
-      console.log("Stop!");
       isReDisplaced = false;
       return;
     }
 
     const populateBoard = (() => {
+      // Stop if board's full
       const isBoardFull = board.every((row) => row.includes("O"));
       if (isBoardFull) {
         return;
       }
+
       const legalMoves = this.getLegalMoves();
 
       const _withSpecifiedShip = (ship, index) => {
@@ -278,10 +274,12 @@ class Gameboard {
           if (rowIndex === randomRowIndex) {
             // Always occupy empty row
             while (row.includes("O")) {
+              // Stop loop if board is full
               const isBoardFull = board.every((row) => row.includes("O"));
               if (isBoardFull) {
                 return;
               }
+
               _withSpecifiedShip(ship, index);
               return;
             }
