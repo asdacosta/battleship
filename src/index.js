@@ -1,13 +1,13 @@
-// import "./reset.css";
-// import "./style.css";
+import "./reset.css";
+import "./style.css";
 
-// const importAllAssets = (function () {
-//   function importAll(r) {
-//     return r.keys().map(r);
-//   }
+const importAllAssets = (function () {
+  function importAll(r) {
+    return r.keys().map(r);
+  }
 
-//   const assets = importAll(require.context("./assets", false, /\.(png|jpe?g|svg)$/));
-// })();
+  const assets = importAll(require.context("./assets", false, /\.(png|jpe?g|svg)$/));
+})();
 
 class Ship {
   constructor(length, numHits, sunk) {
@@ -480,70 +480,67 @@ class Player {
   }
 }
 
-// const getNodes = (function () {
-//   const nameInput = document.querySelector("input");
-//   const battleButton = document.querySelector("button");
-//   const buttonLink = document.querySelector("button > a");
+const getNodes = (function () {
+  const nameInput = document.querySelector("input");
+  const battleButton = document.querySelector("button");
+  const buttonLink = document.querySelector("button > a");
 
-//   return { nameInput, battleButton, buttonLink };
-// })();
+  return { nameInput, battleButton, buttonLink };
+})();
 
-// const makeInputWritePlaceholder = (function () {
-//   const placeholder = "Admiral Name";
-//   let index = 0;
-//   let direction = 1;
+const makeInputWritePlaceholder = (function () {
+  const placeholder = "Admiral Name";
+  let index = 0;
+  let direction = 1;
 
-//   setInterval(async () => {
-//     if (direction === 1) {
-//       // Adds text (Forward direction: 1)
-//       getNodes.nameInput.placeholder = getNodes.nameInput.placeholder.slice(0, -1); // To clear '|'
-//       getNodes.nameInput.placeholder += placeholder[index];
-//       getNodes.nameInput.placeholder += "|";
-//       index += 1;
-//       // Change direction to backwards
-//       if (index === placeholder.length) {
-//         direction = -1;
-//       }
-//     } else {
-//       // Clears text (Backward direction: -1)
-//       await new Promise((resolve) => {
-//         setTimeout(resolve, 1000);
-//       });
-//       getNodes.nameInput.placeholder = getNodes.nameInput.placeholder.slice(0, -1); // To clear '|'
-//       getNodes.nameInput.placeholder = getNodes.nameInput.placeholder.slice(0, -1);
-//       getNodes.nameInput.placeholder += "|";
-//       index -= 1;
-//       // Change direction to forwards
-//       if (index === 0) {
-//         direction = 1;
-//       }
-//     }
-//   }, 100);
-// })();
+  setInterval(async () => {
+    if (direction === 1) {
+      // Adds text (Forward direction: 1)
+      getNodes.nameInput.placeholder = getNodes.nameInput.placeholder.slice(0, -1); // To clear '|'
+      getNodes.nameInput.placeholder += placeholder[index];
+      getNodes.nameInput.placeholder += "|";
+      index += 1;
+      // Change direction to backwards
+      if (index === placeholder.length) {
+        direction = -1;
+      }
+    } else {
+      // Clears text (Backward direction: -1)
+      await new Promise((resolve) => {
+        setTimeout(resolve, 1000);
+      });
+      getNodes.nameInput.placeholder = getNodes.nameInput.placeholder.slice(0, -1); // To clear '|'
+      getNodes.nameInput.placeholder = getNodes.nameInput.placeholder.slice(0, -1);
+      getNodes.nameInput.placeholder += "|";
+      index -= 1;
+      // Change direction to forwards
+      if (index === 0) {
+        direction = 1;
+      }
+    }
+  }, 100);
+})();
 
-// const goToBattleGroundsIfInputIsNotEmpty = (function () {
-//   const setPointerEvents = function () {
-//     console.log(getNodes.nameInput);
-//     if (getNodes.nameInput.value === "") {
-//       getNodes.battleButton.style.pointerEvents = "none";
-//       getNodes.buttonLink.style.color = "rgba(255, 255, 255, 0.6)";
-//     } else {
-//       getNodes.battleButton.style.pointerEvents = "auto";
-//       getNodes.buttonLink.style.color = "rgb(255, 255, 255)";
-//     }
-//   };
-//   setPointerEvents();
-//   getNodes.nameInput.addEventListener("input", setPointerEvents);
-// })();
+const goToBattleGroundsIfInputIsNotEmpty = (function () {
+  const setPointerEvents = function () {
+    console.log(getNodes.nameInput);
+    if (getNodes.nameInput.value === "") {
+      getNodes.battleButton.style.pointerEvents = "none";
+      getNodes.buttonLink.style.color = "rgba(255, 255, 255, 0.6)";
+    } else {
+      getNodes.battleButton.style.pointerEvents = "auto";
+      getNodes.buttonLink.style.color = "rgb(255, 255, 255)";
+    }
+  };
+  setPointerEvents();
+  getNodes.nameInput.addEventListener("input", setPointerEvents);
+})();
 
-// module.exports = {
-//   Ship,
-//   Gameboard,
-//   Player,
-// };
-
-// TODO: To solve max call stack, use a fxn to check if there ever occurs two adjacent
-// rows containing only 0's and nulls, add another row to board
+module.exports = {
+  Ship,
+  Gameboard,
+  Player,
+};
 
 // TODO: Stick to either Node.js / ES modules
 
