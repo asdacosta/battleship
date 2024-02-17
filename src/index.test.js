@@ -2,6 +2,18 @@
 
 const { Ship, Gameboard, Player } = require("./index");
 
+beforeAll(async () => {
+  await new Promise((resolve) => {
+    if (document.readyState === "complete" || document.readyState === "interactive") {
+      resolve();
+    } else {
+      document.addEventListener("DOMContentLoaded", () => {
+        resolve();
+      });
+    }
+  });
+});
+
 test("what instances of Ship contain", () => {
   const ship1 = new Ship(3, 0, false);
 
