@@ -47,6 +47,7 @@ class Ship {
 class Gameboard {
   constructor() {
     this.board = [];
+    this.boardDisplaced = false;
     this.ships = {
       Carrier: new Ship(5, 0, false),
       Battleship: new Ship(4, 0, false),
@@ -296,8 +297,11 @@ class Gameboard {
       _withSpecifiedShip("Patrol Boat", 4);
     })();
 
-    console.log(this.board);
-    return board;
+    if (!this.boardDisplaced) {
+      this.boardDisplaced = true;
+      console.log(this.board);
+      return board;
+    }
   }
 
   receiveAttack(XY) {
