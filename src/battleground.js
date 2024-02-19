@@ -23,6 +23,7 @@ const getNodes = (function () {
   const headers = document.querySelectorAll("h2");
   const admiralGrounds = document.querySelector(".admiral-grounds");
   const aiGrounds = document.querySelector(".ai-grounds");
+  const admiralName = document.querySelector(".admiral-name");
 
   return {
     admiralHeadDivs,
@@ -34,6 +35,7 @@ const getNodes = (function () {
     headers,
     admiralGrounds,
     aiGrounds,
+    admiralName,
   };
 })();
 
@@ -84,4 +86,11 @@ const displayHeadAndTailHoveringEffect = (function () {
 
   addHoverToHeaders(getNodes.headers[0], getNodes.admiralGrounds);
   addHoverToHeaders(getNodes.headers[1], getNodes.aiGrounds);
+})();
+
+const retrieveAdmiralNameFromStorageAndSet = (function () {
+  const admiralName = localStorage.getItem("admiralName");
+  if (admiralName) {
+    getNodes.admiralName.textContent = admiralName;
+  }
 })();
