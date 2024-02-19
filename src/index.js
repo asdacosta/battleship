@@ -544,7 +544,7 @@ const sendAdmiralNameToBattleGround = (async function () {
   });
 
   const setNameInLocalStorage = (function () {
-    localStorage.setItem("name", admiralName);
+    localStorage.setItem("admiralName", admiralName);
   })();
 })();
 
