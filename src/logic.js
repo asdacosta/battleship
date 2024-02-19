@@ -36,7 +36,7 @@ class Ship {
 class Gameboard {
   constructor() {
     this.board = [];
-    this.boardDisplaced = false;
+    this.displaceShipsRecursionCount = 0;
     this.ships = {
       Carrier: new Ship(5, 0, false),
       Battleship: new Ship(4, 0, false),
@@ -211,7 +211,9 @@ class Gameboard {
             );
             if (nextRowIsOccupied) {
               isReDisplaced = true;
+              this.displaceShipsRecursionCount += 1;
               this.displaceShips();
+              this.displaceShipsRecursionCount -= 1;
             }
           }
         });
@@ -286,11 +288,12 @@ class Gameboard {
       _withSpecifiedShip("Patrol Boat", 4);
     })();
 
-    if (!this.boardDisplaced) {
-      this.boardDisplaced = true;
-      // console.log(this.board);
-      return board;
+    if (this.displaceShipsRecursionCount === 0) {
+      console.log(this.board);
+      return this.board;
     }
+    // Issue: One of the recursion definitely outputs the board but the
+    // last recursion outputs undefined
   }
 
   receiveAttack(XY) {
@@ -469,8 +472,11 @@ class Player {
   }
 }
 
-module.exports = {
-  Ship,
-  Gameboard,
-  Player,
-};
+// module.exports = {
+//   Ship,
+//   Gameboard,
+//   Player,
+// };
+
+const everBoard = new Gameboard();
+everBoard.displaceShips();
