@@ -91,6 +91,6 @@ const displayHeadAndTailHoveringEffect = (function () {
 const retrieveAdmiralNameFromStorageAndSet = (function () {
   const admiralName = localStorage.getItem("admiralName");
   if (admiralName) {
-    getNodes.admiralName.textContent = admiralName;
+    getNodes.admiralName.textContent = "⚓ " + admiralName;
   }
 })();
