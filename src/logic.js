@@ -289,11 +289,8 @@ class Gameboard {
     })();
 
     if (this.displaceShipsRecursionCount === 0) {
-      console.log(this.board);
       return this.board;
     }
-    // Issue: One of the recursion definitely outputs the board but the
-    // last recursion outputs undefined
   }
 
   receiveAttack(XY) {
@@ -472,11 +469,8 @@ class Player {
   }
 }
 
-// module.exports = {
-//   Ship,
-//   Gameboard,
-//   Player,
-// };
-
-const everBoard = new Gameboard();
-everBoard.displaceShips();
+module.exports = {
+  Ship,
+  Gameboard,
+  Player,
+};
