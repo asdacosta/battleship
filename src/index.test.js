@@ -1,18 +1,18 @@
-// To run the tests, comment out all the imports in ./index.js
+// To run the tests, comment out all the ES module imports in ./logic.js
 
-const { Ship, Gameboard, Player } = require("./index");
+const { Ship, Gameboard, Player } = require("./logic");
 
-beforeAll(async () => {
-  await new Promise((resolve) => {
-    if (document.readyState === "complete" || document.readyState === "interactive") {
-      resolve();
-    } else {
-      document.addEventListener("DOMContentLoaded", () => {
-        resolve();
-      });
-    }
-  });
-});
+// beforeAll(async () => {
+//   await new Promise((resolve) => {
+//     if (document.readyState === "complete" || document.readyState === "interactive") {
+//       resolve();
+//     } else {
+//       document.addEventListener("DOMContentLoaded", () => {
+//         resolve();
+//       });
+//     }
+//   });
+// });
 
 test("what instances of Ship contain", () => {
   const ship1 = new Ship(3, 0, false);
@@ -203,15 +203,16 @@ describe("Check Player class methods", () => {
 
   test("User indeed picks a spot", () => {
     game.userTurn("9A");
-    const computerBoard = game.computerBoard;
+    const computerBoard = game.computer.board;
     const containsChosenSpot = computerBoard.flat().includes("X");
 
+    console.log(computerBoard);
     expect(containsChosenSpot).toBe(true);
   });
 
   test("Computer indeed picks a spot", () => {
     game.computerTurn();
-    const userBoard = game.userBoard;
+    const userBoard = game.user.board;
     const containsChosenSpot = userBoard.flat().includes("X");
 
     expect(containsChosenSpot).toBe(true);
