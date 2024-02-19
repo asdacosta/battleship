@@ -1,4 +1,7 @@
-// To run the tests, comment out all the ES module imports in ./logic.js
+/*
+ To run the tests, comment out all the ES module import syntax and 
+ uncomment all Node.js module import syntax in ./logic.js
+*/
 
 const { Ship, Gameboard, Player } = require("./logic");
 
