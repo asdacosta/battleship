@@ -1,5 +1,6 @@
 import "./reset.css";
 import "./battleground.css";
+import { Player } from "./logic";
 
 const importAllAssets = (function () {
   function importAll(r) {
@@ -93,4 +94,28 @@ const retrieveAdmiralNameFromStorageAndSet = (function () {
   if (admiralName) {
     getNodes.admiralName.textContent = "⚓ " + admiralName;
   }
+})();
+
+const populateBoards = (function () {
+  const game = new Player();
+  const board = game.user.board.flat();
+
+  const getRandomColor = function () {
+    const red = Math.floor(Math.random() * 256);
+    const green = Math.floor(Math.random() * 256);
+    const blue = Math.floor(Math.random() * 256);
+    const color = `rgb(${red}, ${green}, ${blue})`;
+
+    return color;
+  };
+
+  getNodes.admiralGroundsDivs.forEach((div, divIndex) => {
+    board.forEach((entry, entryIndex) => {
+      if (divIndex === entryIndex) {
+        if (entry !== null && entry !== "O") {
+          div.style.backgroundColor = getRandomColor();
+        }
+      }
+    });
+  });
 })();
