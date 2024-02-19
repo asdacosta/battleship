@@ -523,7 +523,6 @@ const makeInputWritePlaceholder = (function () {
 
 const goToBattleGroundsIfInputIsNotEmpty = (function () {
   const setPointerEvents = function () {
-    console.log(getNodes.nameInput);
     if (getNodes.nameInput.value === "") {
       getNodes.battleButton.style.pointerEvents = "none";
       getNodes.buttonLink.style.color = "rgba(255, 255, 255, 0.6)";
@@ -536,11 +535,24 @@ const goToBattleGroundsIfInputIsNotEmpty = (function () {
   getNodes.nameInput.addEventListener("input", setPointerEvents);
 })();
 
-module.exports = {
-  Ship,
-  Gameboard,
-  Player,
-};
+const sendAdmiralNameToBattleGround = (async function () {
+  const admiralName = await new Promise((resolve) => {
+    getNodes.battleButton.addEventListener("click", () => {
+      const name = getNodes.nameInput.value;
+      resolve(name);
+    });
+  });
+
+  const setNameInLocalStorage = (function () {
+    localStorage.setItem("name", admiralName);
+  })();
+})();
+
+// module.exports = {
+//   Ship,
+//   Gameboard,
+//   Player,
+// };
 
 // TODO: Stick to either Node.js / ES modules
 
