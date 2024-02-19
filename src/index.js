@@ -76,10 +76,3 @@ const sendAdmiralNameToBattleGround = (async function () {
     localStorage.setItem("admiralName", admiralName);
   })();
 })();
-
-// const everBoard = new Gameboard();
-// everBoard.displaceShips();
-// everBoard.receiveAttack("1B");
-// everBoard.receiveAttack("1A");
-// everBoard.receiveAttack("1C");
-// everBoard.receiveAttack("1B");
