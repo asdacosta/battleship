@@ -108,12 +108,39 @@ const populateBoards = (function () {
 
     return color;
   };
+  const randomColors = [
+    getRandomColor(),
+    getRandomColor(),
+    getRandomColor(),
+    getRandomColor(),
+    getRandomColor(),
+  ];
+
+  const setRandomColors = function (element, ship) {
+    switch (ship) {
+      case 5:
+        element.style.backgroundColor = randomColors[0];
+        break;
+      case 4:
+        element.style.backgroundColor = randomColors[1];
+        break;
+      case 3.5:
+        element.style.backgroundColor = randomColors[2];
+        break;
+      case 3:
+        element.style.backgroundColor = randomColors[3];
+        break;
+      case 2:
+        element.style.backgroundColor = randomColors[4];
+        break;
+    }
+  };
 
   getNodes.admiralGroundsDivs.forEach((div, divIndex) => {
     board.forEach((entry, entryIndex) => {
       if (divIndex === entryIndex) {
         if (entry !== null && entry !== "O") {
-          div.style.backgroundColor = getRandomColor();
+          setRandomColors(div, entry);
         }
       }
     });
