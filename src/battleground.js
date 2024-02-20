@@ -98,7 +98,8 @@ const retrieveAdmiralNameFromStorageAndSet = (function () {
 
 const populateBoards = (function () {
   const game = new Player();
-  const board = game.user.board.flat();
+  const userBoard = game.user.board.flat();
+  const computerBoard = game.computer.board.flat();
 
   const getRandomColor = function () {
     const red = Math.floor(Math.random() * (257 - 100) + 50);
@@ -136,13 +137,27 @@ const populateBoards = (function () {
     }
   };
 
-  getNodes.admiralGroundsDivs.forEach((div, divIndex) => {
-    board.forEach((entry, entryIndex) => {
-      if (divIndex === entryIndex) {
-        if (entry !== null && entry !== "O") {
-          setRandomColors(div, entry);
+  const populateUserBoard = (function () {
+    getNodes.admiralGroundsDivs.forEach((div, divIndex) => {
+      userBoard.forEach((entry, entryIndex) => {
+        if (divIndex === entryIndex) {
+          if (entry !== null && entry !== "O") {
+            setRandomColors(div, entry);
+          }
         }
-      }
+      });
     });
-  });
+  })();
+
+  const populateComputerBoard = (function () {
+    getNodes.aiGroundsDivs.forEach((div, divIndex) => {
+      computerBoard.forEach((entry, entryIndex) => {
+        if (divIndex === entryIndex) {
+          if (entry !== null && entry !== "O") {
+            setRandomColors(div, entry);
+          }
+        }
+      });
+    });
+  })();
 })();
