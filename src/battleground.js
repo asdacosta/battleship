@@ -149,7 +149,7 @@ const populateBoards = (function () {
     });
   })();
 
-  const populateComputerBoard = (function () {
+  const populateAiBoard = (function () {
     getNodes.aiGroundsDivs.forEach((div, divIndex) => {
       computerBoard.forEach((entry, entryIndex) => {
         if (divIndex === entryIndex) {
