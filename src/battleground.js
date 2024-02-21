@@ -137,12 +137,33 @@ const populateBoards = (function () {
     }
   };
 
+  const setClass = function (element, ship) {
+    switch (ship) {
+      case 5:
+        element.setAttribute("data-ship", "5");
+        break;
+      case 4:
+        element.setAttribute("data-ship", "4");
+        break;
+      case 3.5:
+        element.setAttribute("data-ship", "3.5");
+        break;
+      case 3:
+        element.setAttribute("data-ship", "3");
+        break;
+      case 2:
+        element.setAttribute("data-ship", "2");
+        break;
+    }
+  };
+
   const populateUserBoard = (function () {
     getNodes.admiralGroundsDivs.forEach((div, divIndex) => {
       userBoard.forEach((entry, entryIndex) => {
         if (divIndex === entryIndex) {
           if (entry !== null && entry !== "O") {
             setRandomColors(div, entry);
+            setClass(div, entry);
           }
         }
       });
@@ -155,9 +176,12 @@ const populateBoards = (function () {
         if (divIndex === entryIndex) {
           if (entry !== null && entry !== "O") {
             setRandomColors(div, entry);
+            setClass(div, entry);
           }
         }
       });
     });
   })();
 })();
+
+const loopGame = (function () {})();
