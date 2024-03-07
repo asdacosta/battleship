@@ -202,9 +202,7 @@ const displayTarget = (function () {
   __forEachGrounds(getNodes.aiGroundsDivs);
 })();
 
-const loopGame = (function () {
-  const player = new Player();
-
+const setDefaultAttributesInCoordinates = (function () {
   const setCoordinatesToUnAttacked = (function () {
     getNodes.aiGroundsDivs.forEach((div) => {
       div.setAttribute("data-attacked", "No");
@@ -239,6 +237,10 @@ const loopGame = (function () {
       alpIndex += 1;
     });
   })();
+})();
+
+const loopGame = (function () {
+  const player = new Player();
 
   const triggerUserTurn = function () {
     getNodes.aiGrounds.style.pointerEvents = "auto";
