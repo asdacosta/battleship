@@ -203,6 +203,8 @@ const displayTarget = (function () {
 })();
 
 const loopGame = (function () {
+  const player = new Player();
+
   const setCoordinatesToUnAttacked = (function () {
     getNodes.aiGroundsDivs.forEach((div) => {
       div.setAttribute("data-attacked", "No");
@@ -212,14 +214,40 @@ const loopGame = (function () {
     });
   })();
 
+  const addIndexToCoordinates = (function () {
+    let index = 1;
+    let alpIndex = 0;
+    const alps = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+
+    getNodes.aiGroundsDivs.forEach((div, divIndex) => {
+      if (divIndex === 10 * index) {
+        index += 1;
+        alpIndex = 0;
+      }
+      div.setAttribute("data-index", `${index}${alps[alpIndex]}`);
+      alpIndex += 1;
+    });
+
+    index = 1;
+    alpIndex = 0;
+    getNodes.admiralGroundsDivs.forEach((div, divIndex) => {
+      if (divIndex === 10 * index) {
+        index += 1;
+        alpIndex = 0;
+      }
+      div.setAttribute("data-index", `${index}${alps[alpIndex]}`);
+      alpIndex += 1;
+    });
+  })();
+
   const triggerUserTurn = function () {
     getNodes.aiGrounds.style.pointerEvents = "auto";
 
     getNodes.aiGroundsDivs.forEach((div) => {
       div.addEventListener("click", () => {
-        console.log("#");
         // IF already attacked
         if (div.dataset.attacked === "Yes") {
+          player.userTurn();
         }
         // IF empty
         if (div.dataset.attacked === "No" && !div.hasAttribute("data-ship")) {
@@ -243,7 +271,10 @@ const loopGame = (function () {
   };
   triggerUserTurn();
 
-  const triggerAiTurn = function () {
+  const triggerAiTurn = async function () {
     getNodes.aiGrounds.style.pointerEvents = "none";
+    await new Promise((resolve) => {
+      setTimeout(resolve, 3000);
+    });
   };
 })();
