@@ -110,11 +110,11 @@ h2:hover {
   grid-row: span 1;
   min-width: 2rem;
   min-height: 2rem;
-  color: rgb(228, 73, 73);
 
   display: flex;
   justify-content: center;
   align-items: center;
+  font-weight: 800;
   border: 2px solid rgb(255, 255, 255);
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
