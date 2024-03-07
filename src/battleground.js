@@ -217,9 +217,9 @@ const loopGame = (function () {
 
     getNodes.aiGroundsDivs.forEach((div) => {
       div.addEventListener("click", () => {
+        console.log("#");
         // IF already attacked
         if (div.dataset.attacked === "Yes") {
-          triggerUserTurn();
         }
         // IF empty
         if (div.dataset.attacked === "No" && !div.hasAttribute("data-ship")) {
@@ -228,6 +228,7 @@ const loopGame = (function () {
           div.style.pointerEvents = "none";
           div.setAttribute("data-attacked", "Yes");
           triggerAiTurn();
+          return;
         }
         // IF ship
         if (div.dataset.attacked === "No" && div.hasAttribute("data-ship")) {
@@ -235,7 +236,7 @@ const loopGame = (function () {
           div.textContent = "💥";
           div.style.pointerEvents = "none";
           div.setAttribute("data-attacked", "Yes");
-          triggerUserTurn();
+          return;
         }
       });
     });
