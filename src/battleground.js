@@ -188,12 +188,10 @@ const displayTarget = (function () {
   const __forEachGrounds = function (grounds) {
     grounds.forEach((div) => {
       div.addEventListener("mouseover", () => {
-        div.style.color = "white";
         div.textContent = "💢";
       });
       div.addEventListener("mouseout", () => {
-        div.style.color = "rgb(228, 73, 73)";
-        if (div.textContent !== "𝗫") {
+        if (div.textContent !== "X" && div.textContent !== "💥") {
           div.textContent = "";
         }
       });
@@ -225,13 +223,17 @@ const loopGame = (function () {
         }
         // IF empty
         if (div.dataset.attacked === "No" && !div.hasAttribute("data-ship")) {
-          div.textContent = "𝗫";
+          div.style.color = "rgb(228, 73, 73)";
+          div.textContent = "X";
+          div.style.pointerEvents = "none";
           div.setAttribute("data-attacked", "Yes");
           triggerAiTurn();
         }
         // IF ship
         if (div.dataset.attacked === "No" && div.hasAttribute("data-ship")) {
-          div.textContent = "💠";
+          div.style.color = "black";
+          div.textContent = "💥";
+          div.style.pointerEvents = "none";
           div.setAttribute("data-attacked", "Yes");
           triggerUserTurn();
         }
