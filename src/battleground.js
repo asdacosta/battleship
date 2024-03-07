@@ -184,4 +184,63 @@ const populateBoards = (function () {
   })();
 })();
 
-const loopGame = (function () {})();
+const displayTarget = (function () {
+  const __forEachGrounds = function (grounds) {
+    grounds.forEach((div) => {
+      div.addEventListener("mouseover", () => {
+        div.style.color = "white";
+        div.textContent = "💢";
+      });
+      div.addEventListener("mouseout", () => {
+        div.style.color = "rgb(228, 73, 73)";
+        if (div.textContent !== "𝗫") {
+          div.textContent = "";
+        }
+      });
+    });
+  };
+
+  __forEachGrounds(getNodes.admiralGroundsDivs);
+  __forEachGrounds(getNodes.aiGroundsDivs);
+})();
+
+const loopGame = (function () {
+  const setCoordinatesToUnAttacked = (function () {
+    getNodes.aiGroundsDivs.forEach((div) => {
+      div.setAttribute("data-attacked", "No");
+    });
+    getNodes.admiralGroundsDivs.forEach((div) => {
+      div.setAttribute("data-attacked", "No");
+    });
+  })();
+
+  const triggerUserTurn = function () {
+    getNodes.aiGrounds.style.pointerEvents = "auto";
+
+    getNodes.aiGroundsDivs.forEach((div) => {
+      div.addEventListener("click", () => {
+        // IF already attacked
+        if (div.dataset.attacked === "Yes") {
+          triggerUserTurn();
+        }
+        // IF empty
+        if (div.dataset.attacked === "No" && !div.hasAttribute("data-ship")) {
+          div.textContent = "𝗫";
+          div.setAttribute("data-attacked", "Yes");
+          triggerAiTurn();
+        }
+        // IF ship
+        if (div.dataset.attacked === "No" && div.hasAttribute("data-ship")) {
+          div.textContent = "💠";
+          div.setAttribute("data-attacked", "Yes");
+          triggerUserTurn();
+        }
+      });
+    });
+  };
+  triggerUserTurn();
+
+  const triggerAiTurn = function () {
+    getNodes.aiGrounds.style.pointerEvents = "none";
+  };
+})();
