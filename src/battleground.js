@@ -244,6 +244,13 @@ const setDefaultAttributesInCoordinates = (function () {
 const loopGame = (function () {
   const game = populateBoards.game;
 
+  const displayAttack = function (spot, inputValue, fontColor) {
+    spot.style.color = fontColor;
+    spot.textContent = inputValue;
+    spot.style.pointerEvents = "none";
+    spot.setAttribute("data-attacked", "Yes");
+  };
+
   const triggerUserTurn = function () {
     getNodes.aiGrounds.style.pointerEvents = "auto";
 
@@ -255,21 +262,15 @@ const loopGame = (function () {
         }
         // IF empty
         if (div.dataset.attacked === "No" && !div.hasAttribute("data-ship")) {
-          div.style.color = "rgb(228, 73, 73)";
-          div.textContent = "X";
-          div.style.pointerEvents = "none";
-          div.setAttribute("data-attacked", "Yes");
           game.userTurn(div.dataset.index);
+          displayAttack(div, "X", "rgb(228, 73, 73)");
           triggerAiTurn();
           return;
         }
-        // IF ship
+        // IF hits a ship
         if (div.dataset.attacked === "No" && div.hasAttribute("data-ship")) {
-          div.style.color = "black";
-          div.textContent = "💥";
-          div.style.pointerEvents = "none";
-          div.setAttribute("data-attacked", "Yes");
           game.userTurn(div.dataset.index);
+          displayAttack(div, "💥", "black");
           return;
         }
       });
@@ -286,17 +287,13 @@ const loopGame = (function () {
 
     getNodes.admiralGroundsDivs.forEach((div) => {
       if (div.dataset.index === randomKey) {
+        // IF empty
         if (div.dataset.attacked === "No" && !div.hasAttribute("data-ship")) {
-          div.style.color = "rgb(228, 73, 73)";
-          div.textContent = "X";
-          div.style.pointerEvents = "none";
-          div.setAttribute("data-attacked", "Yes");
+          displayAttack(div, "X", "rgb(228, 73, 73)");
         }
+        // IF hits a ship
         if (div.dataset.attacked === "No" && div.hasAttribute("data-ship")) {
-          div.style.color = "black";
-          div.textContent = "💥";
-          div.style.pointerEvents = "none";
-          div.setAttribute("data-attacked", "Yes");
+          displayAttack(div, "💥", "black");
           triggerAiTurn();
         }
       }
