@@ -456,16 +456,18 @@ class Player {
       const randomKey = keys[randomKeyIndex];
       return randomKey;
     };
+    const randomKey = generateRandomKey();
 
     const pickLegalMove = (() => {
       const board = this.userBoard;
-      const randomKey = generateRandomKey();
       const response = this.user.receiveAttack(randomKey);
       const isAllEntriesOccupied = board.flat().every((entry) => entry === "X");
       if (response === "Occupied" && !isAllEntriesOccupied) {
         this.computerTurn();
       }
     })();
+
+    return randomKey;
   }
 }
 
