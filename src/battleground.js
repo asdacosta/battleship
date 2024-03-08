@@ -278,6 +278,7 @@ const loopGame = (function () {
   };
   triggerUserTurn();
 
+  let recursionCount = 0;
   const triggerAiTurn = async function () {
     getNodes.aiGrounds.style.pointerEvents = "none";
     await new Promise((resolve) => {
@@ -294,10 +295,15 @@ const loopGame = (function () {
         // IF hits a ship
         if (div.dataset.attacked === "No" && div.hasAttribute("data-ship")) {
           displayAttack(div, "💥", "black");
+          recursionCount += 1;
           triggerAiTurn();
+          recursionCount -= 1;
         }
       }
     });
-    getNodes.aiGrounds.style.pointerEvents = "auto";
+    // IF on last recursion
+    if (recursionCount === 0) {
+      getNodes.aiGrounds.style.pointerEvents = "auto";
+    }
   };
 })();
