@@ -182,6 +182,8 @@ const populateBoards = (function () {
       });
     });
   })();
+
+  return { game };
 })();
 
 const displayTarget = (function () {
@@ -240,7 +242,7 @@ const setDefaultAttributesInCoordinates = (function () {
 })();
 
 const loopGame = (function () {
-  const player = new Player();
+  const game = populateBoards.game;
 
   const triggerUserTurn = function () {
     getNodes.aiGrounds.style.pointerEvents = "auto";
@@ -249,7 +251,7 @@ const loopGame = (function () {
       div.addEventListener("click", () => {
         // IF already attacked
         if (div.dataset.attacked === "Yes") {
-          player.userTurn();
+          game.userTurn(div.dataset.index);
         }
         // IF empty
         if (div.dataset.attacked === "No" && !div.hasAttribute("data-ship")) {
@@ -257,6 +259,7 @@ const loopGame = (function () {
           div.textContent = "X";
           div.style.pointerEvents = "none";
           div.setAttribute("data-attacked", "Yes");
+          game.userTurn(div.dataset.index);
           triggerAiTurn();
           return;
         }
@@ -266,6 +269,7 @@ const loopGame = (function () {
           div.textContent = "💥";
           div.style.pointerEvents = "none";
           div.setAttribute("data-attacked", "Yes");
+          game.userTurn(div.dataset.index);
           return;
         }
       });
@@ -278,5 +282,25 @@ const loopGame = (function () {
     await new Promise((resolve) => {
       setTimeout(resolve, 3000);
     });
+    const randomKey = game.computerTurn();
+
+    getNodes.admiralGroundsDivs.forEach((div) => {
+      if (div.dataset.index === randomKey) {
+        if (div.dataset.attacked === "No" && !div.hasAttribute("data-ship")) {
+          div.style.color = "rgb(228, 73, 73)";
+          div.textContent = "X";
+          div.style.pointerEvents = "none";
+          div.setAttribute("data-attacked", "Yes");
+        }
+        if (div.dataset.attacked === "No" && div.hasAttribute("data-ship")) {
+          div.style.color = "black";
+          div.textContent = "💥";
+          div.style.pointerEvents = "none";
+          div.setAttribute("data-attacked", "Yes");
+          triggerAiTurn();
+        }
+      }
+    });
+    getNodes.aiGrounds.style.pointerEvents = "auto";
   };
 })();
