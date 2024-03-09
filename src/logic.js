@@ -433,13 +433,10 @@ class Gameboard {
 class Player {
   constructor() {
     this.user = new Gameboard();
-    this.userBoard = this.user.board;
     this.user.displaceShips();
 
     this.computer = new Gameboard();
-    this.computerBoard = this.computer.board;
     this.computer.displaceShips();
-
     this.computerTurnCurrentRecursion = false;
   }
 
