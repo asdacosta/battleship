@@ -281,7 +281,7 @@ const loopGame = (function () {
   const triggerAiTurn = async function () {
     getNodes.aiGrounds.style.pointerEvents = "none";
     await new Promise((resolve) => {
-      setTimeout(resolve, 1000);
+      setTimeout(resolve, 3000);
     });
     const randomKey = game.computerTurn();
 
@@ -294,6 +294,7 @@ const loopGame = (function () {
         // IF empty
         if (div.dataset.attacked === "No" && !div.hasAttribute("data-ship")) {
           displayAttack(div, "X", "rgb(228, 73, 73)");
+          getNodes.aiGrounds.style.pointerEvents = "auto";
         }
         // IF hits a ship
         if (div.dataset.attacked === "No" && div.hasAttribute("data-ship")) {
@@ -303,6 +304,5 @@ const loopGame = (function () {
       }
     });
     // IF on last recursion
-    getNodes.aiGrounds.style.pointerEvents = "auto";
   };
 })();
