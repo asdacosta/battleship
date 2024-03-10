@@ -28,18 +28,21 @@ body > section {
 }
 
 .config-dialog {
-  display: none;
+  display: flex;
   flex-direction: column;
-  width: 17rem;
+  width: 20rem;
   padding: 1rem;
   gap: 1rem;
-  background: rgba(34, 100, 175, 0.7);
+  background: rgba(34, 100, 175, 0.8);
   border: 0.2rem solid rgb(17, 50, 87);
   border-radius: 2rem;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
   z-index: 2;
 }
 
@@ -77,6 +80,7 @@ span:hover {
 
 .config-dialog fieldset {
   display: flex;
+  justify-content: center;
   gap: 0.2rem;
   padding: 0.2rem;
   border-radius: 0.5rem;
@@ -356,6 +360,30 @@ body > div:first-child {
     width: 25rem;
     align-self: flex-start;
   }
+
+  .config-dialog {
+    background: rgba(46, 46, 46, 0.8);
+    border: 0.2rem solid rgb(143, 109, 61);
+  }
+
+  .config-dialog button,
+  .config-dialog select {
+    background: rgb(143, 109, 61);
+  }
+
+  .config-dialog fieldset {
+    background: rgba(95, 73, 43, 0.4);
+    border-left: 0.2rem solid rgb(143, 109, 61);
+    border-right: 0.2rem solid rgb(143, 109, 61);
+  }
+
+  .config-box > button {
+    background: linear-gradient(to right, rgba(5, 6, 8, 0.8), rgba(221, 166, 88, 0.8));
+  }
+
+  .config-box > button:hover {
+    background: rgb(185, 139, 74);
+  }
 }
 
 @media (max-width: 765px) {
@@ -368,5 +396,23 @@ body > div:first-child {
     grid-template: 1fr 1fr 10fr/ 1fr 8fr;
     padding-right: 1.5rem;
     height: 27rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .config-dialog {
+    left: 53%;
+  }
+}
+
+@media (max-width: 390px) {
+  .config-dialog {
+    left: 57%;
+  }
+}
+
+@media (max-width: 290px) {
+  .config-dialog {
+    left: 78%;
   }
 }
