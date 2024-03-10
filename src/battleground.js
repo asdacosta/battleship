@@ -278,16 +278,19 @@ const loopGame = (function () {
   };
   triggerUserTurn();
 
-  let recursionCount = 0;
   const triggerAiTurn = async function () {
     getNodes.aiGrounds.style.pointerEvents = "none";
     await new Promise((resolve) => {
-      setTimeout(resolve, 3000);
+      setTimeout(resolve, 1000);
     });
     const randomKey = game.computerTurn();
 
     getNodes.admiralGroundsDivs.forEach((div) => {
       if (div.dataset.index === randomKey) {
+        // IF already attacked
+        if (div.dataset.attacked === "Yes") {
+          triggerAiTurn();
+        }
         // IF empty
         if (div.dataset.attacked === "No" && !div.hasAttribute("data-ship")) {
           displayAttack(div, "X", "rgb(228, 73, 73)");
@@ -295,15 +298,11 @@ const loopGame = (function () {
         // IF hits a ship
         if (div.dataset.attacked === "No" && div.hasAttribute("data-ship")) {
           displayAttack(div, "💥", "black");
-          recursionCount += 1;
           triggerAiTurn();
-          recursionCount -= 1;
         }
       }
     });
     // IF on last recursion
-    if (recursionCount === 0) {
-      getNodes.aiGrounds.style.pointerEvents = "auto";
-    }
+    getNodes.aiGrounds.style.pointerEvents = "auto";
   };
 })();
