@@ -353,6 +353,9 @@ const loopGame = (function () {
   const triggerAiTurn = async function () {
     getNodes.aiGrounds.style.pointerEvents = "none";
     await new Promise((resolve) => {
+      setTimeout(() => {
+        getNodes.feedback.textContent = `AI: Targeting...`;
+      }, 1500);
       setTimeout(resolve, 3000);
     });
     const randomKey = game.computerTurn();
