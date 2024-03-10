@@ -26,6 +26,9 @@ const getNodes = (function () {
   const aiGrounds = document.querySelector(".ai-grounds");
   const admiralName = document.querySelector(".admiral-name");
   const feedback = document.querySelector("body > div:last-child");
+  const configButton = document.querySelector(".config-box > button");
+  const configDialog = document.querySelector(".config-dialog");
+  const cover = document.querySelector("body > div:first-child");
 
   return {
     admiralHeadDivs,
@@ -39,6 +42,9 @@ const getNodes = (function () {
     aiGrounds,
     admiralName,
     feedback,
+    configButton,
+    configDialog,
+    cover,
   };
 })();
 
@@ -404,4 +410,13 @@ const loopGame = (function () {
       }
     });
   };
+})();
+
+const configuration = (function () {
+  getNodes.configButton.addEventListener("click", () => {
+    console.log(getNodes.cover);
+    getNodes.cover.style.zIndex = "2";
+    getNodes.configDialog.style.display = "flex";
+    getNodes.configDialog.style.zIndex = "3";
+  });
 })();
