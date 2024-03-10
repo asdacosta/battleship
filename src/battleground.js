@@ -12,13 +12,13 @@ const importAllAssets = (function () {
 
 const getNodes = (function () {
   const admiralHeadDivs = document.querySelectorAll(
-    "body > section:nth-child(2) .head > div",
+    "body > section:nth-child(3) .head > div",
   );
   const admiralTailDivs = document.querySelectorAll(
-    "body > section:nth-child(2) .tail > div",
+    "body > section:nth-child(3) .tail > div",
   );
-  const aiHeadDivs = document.querySelectorAll("body > section:nth-child(3) .head > div");
-  const aiTailDivs = document.querySelectorAll("body > section:nth-child(3) .tail > div");
+  const aiHeadDivs = document.querySelectorAll("body > section:nth-child(4) .head > div");
+  const aiTailDivs = document.querySelectorAll("body > section:nth-child(4) .tail > div");
   const admiralGroundsDivs = document.querySelectorAll(".admiral-grounds > div");
   const aiGroundsDivs = document.querySelectorAll(".ai-grounds > div");
   const headers = document.querySelectorAll("h2");
@@ -29,6 +29,7 @@ const getNodes = (function () {
   const configButton = document.querySelector(".config-box > button");
   const configDialog = document.querySelector(".config-dialog");
   const cover = document.querySelector("body > div:first-child");
+  const closeDialog = document.querySelector("span");
 
   return {
     admiralHeadDivs,
@@ -45,6 +46,7 @@ const getNodes = (function () {
     configButton,
     configDialog,
     cover,
+    closeDialog,
   };
 })();
 
@@ -413,10 +415,16 @@ const loopGame = (function () {
 })();
 
 const configuration = (function () {
-  getNodes.configButton.addEventListener("click", () => {
-    console.log(getNodes.cover);
-    getNodes.cover.style.zIndex = "2";
-    getNodes.configDialog.style.display = "flex";
-    getNodes.configDialog.style.zIndex = "3";
-  });
+  const displayDialog = (function () {
+    getNodes.configButton.addEventListener("click", () => {
+      getNodes.cover.style.zIndex = "2";
+      getNodes.configDialog.style.display = "flex";
+    });
+  })();
+  const exitDialog = (function () {
+    getNodes.closeDialog.addEventListener("click", () => {
+      getNodes.cover.style.zIndex = "0";
+      getNodes.configDialog.style.display = "none";
+    });
+  })();
 })();
