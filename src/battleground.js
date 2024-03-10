@@ -25,6 +25,7 @@ const getNodes = (function () {
   const admiralGrounds = document.querySelector(".admiral-grounds");
   const aiGrounds = document.querySelector(".ai-grounds");
   const admiralName = document.querySelector(".admiral-name");
+  const feedback = document.querySelector("body > div:last-child");
 
   return {
     admiralHeadDivs,
@@ -37,6 +38,7 @@ const getNodes = (function () {
     admiralGrounds,
     aiGrounds,
     admiralName,
+    feedback,
   };
 })();
 
@@ -93,6 +95,7 @@ const retrieveAdmiralNameFromStorageAndSet = (function () {
   const admiralName = localStorage.getItem("admiralName");
   if (admiralName) {
     getNodes.admiralName.textContent = "⚓ " + admiralName;
+    return { admiralName };
   }
 })();
 
@@ -251,6 +254,73 @@ const loopGame = (function () {
     spot.setAttribute("data-attacked", "Yes");
   };
 
+  const setFeedback = function (aiOrUser, missedOrHit, shipDataset) {
+    const getFeedbackMessage = function (aiOrUser2) {
+      let turn = null;
+      if (aiOrUser2 === "ai") {
+        turn = game.user;
+      } else if (aiOrUser2 === "user") {
+        turn = game.computer;
+      }
+
+      let feedbackMessage = "";
+      switch (shipDataset) {
+        case "5":
+          feedbackMessage = "Hit the Carrier 🎯";
+          if (turn.ships.Carrier.currentNumHits === 5) {
+            feedbackMessage = "Sunk the Carrier! 🌟";
+          }
+          break;
+        case "4":
+          feedbackMessage = "Hit the Battleship 🎯";
+          if (turn.ships.Battleship.currentNumHits === 4) {
+            feedbackMessage = "Sunk the Battleship! 🌟";
+          }
+          break;
+        case "3.5":
+          feedbackMessage = "Hit the Destroyer 🎯";
+          if (turn.ships.Destroyer.currentNumHits === 3) {
+            feedbackMessage = "Sunk the Destroyer! 🌟";
+          }
+          break;
+        case "3":
+          feedbackMessage = "Hit the Submarine 🎯";
+          if (turn.ships.Submarine.currentNumHits === 3) {
+            feedbackMessage = "Sunk the Submarine! 🌟";
+          }
+          break;
+        case "2":
+          feedbackMessage = "Hit the Patrol Boat 🎯";
+          if (turn.ships["Patrol Boat"].currentNumHits === 2) {
+            feedbackMessage = "Sunk the Patrol Boat! 🌟";
+          }
+          break;
+      }
+
+      return feedbackMessage;
+    };
+
+    if (aiOrUser === "ai") {
+      if (missedOrHit === "missed") {
+        getNodes.feedback.textContent = `AI: Missed ✗`;
+      }
+      if (missedOrHit === "hit") {
+        const feedbackMessage = getFeedbackMessage("ai");
+        getNodes.feedback.textContent = `AI: ${feedbackMessage}`;
+      }
+    }
+
+    if (aiOrUser === "user") {
+      if (missedOrHit === "missed") {
+        getNodes.feedback.textContent = `Admiral ${retrieveAdmiralNameFromStorageAndSet.admiralName}: Missed ✗`;
+      }
+      if (missedOrHit === "hit") {
+        const feedbackMessage = getFeedbackMessage("user");
+        getNodes.feedback.textContent = `Admiral ${retrieveAdmiralNameFromStorageAndSet.admiralName}: ${feedbackMessage}`;
+      }
+    }
+  };
+
   const triggerUserTurn = function () {
     getNodes.aiGrounds.style.pointerEvents = "auto";
 
@@ -264,6 +334,7 @@ const loopGame = (function () {
         if (div.dataset.attacked === "No" && !div.hasAttribute("data-ship")) {
           game.userTurn(div.dataset.index);
           displayAttack(div, "X", "rgb(228, 73, 73)");
+          setFeedback("user", "missed");
           triggerAiTurn();
           return;
         }
@@ -271,6 +342,7 @@ const loopGame = (function () {
         if (div.dataset.attacked === "No" && div.hasAttribute("data-ship")) {
           game.userTurn(div.dataset.index);
           displayAttack(div, "💥", "black");
+          setFeedback("user", "hit", div.dataset.ship);
           return;
         }
       });
@@ -294,15 +366,16 @@ const loopGame = (function () {
         // IF empty
         if (div.dataset.attacked === "No" && !div.hasAttribute("data-ship")) {
           displayAttack(div, "X", "rgb(228, 73, 73)");
+          setFeedback("ai", "missed");
           getNodes.aiGrounds.style.pointerEvents = "auto";
         }
         // IF hits a ship
         if (div.dataset.attacked === "No" && div.hasAttribute("data-ship")) {
           displayAttack(div, "💥", "black");
+          setFeedback("ai", "hit", div.dataset.ship);
           triggerAiTurn();
         }
       }
     });
-    // IF on last recursion
   };
 })();
