@@ -30,6 +30,7 @@ const getNodes = (function () {
   const configDialog = document.querySelector(".config-dialog");
   const cover = document.querySelector("body > div:first-child");
   const closeDialog = document.querySelector("span");
+  const kickStartButton = document.querySelector(".kick-start");
 
   return {
     admiralHeadDivs,
@@ -47,6 +48,7 @@ const getNodes = (function () {
     configDialog,
     cover,
     closeDialog,
+    kickStartButton,
   };
 })();
 
@@ -422,6 +424,7 @@ const configuration = (function () {
       getNodes.configDialog.style.opacity = "1";
     });
   })();
+
   const exitDialog = (function () {
     getNodes.closeDialog.addEventListener("click", async () => {
       getNodes.cover.style.zIndex = "0";
@@ -432,6 +435,12 @@ const configuration = (function () {
           getNodes.configDialog.style.visibility = "hidden";
         }, 400);
       });
+    });
+  })();
+
+  const restartGame = (function () {
+    getNodes.kickStartButton.addEventListener("click", () => {
+      window.location.href = "index.html";
     });
   })();
 })();
