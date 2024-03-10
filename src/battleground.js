@@ -31,6 +31,7 @@ const getNodes = (function () {
   const cover = document.querySelector("body > div:first-child");
   const closeDialog = document.querySelector("span");
   const kickStartButton = document.querySelector(".kick-start");
+  const shuffleButton = document.querySelector(".shuffle");
 
   return {
     admiralHeadDivs,
@@ -49,6 +50,7 @@ const getNodes = (function () {
     cover,
     closeDialog,
     kickStartButton,
+    shuffleButton,
   };
 })();
 
@@ -440,7 +442,13 @@ const configuration = (function () {
 
   const restartGame = (function () {
     getNodes.kickStartButton.addEventListener("click", () => {
-      window.location.href = "index.html";
+      window.location.href = "./index.html";
+    });
+  })();
+
+  const shuffleGame = (function () {
+    getNodes.shuffleButton.addEventListener("click", () => {
+      window.location.reload();
     });
   })();
 })();
