@@ -418,13 +418,20 @@ const configuration = (function () {
   const displayDialog = (function () {
     getNodes.configButton.addEventListener("click", () => {
       getNodes.cover.style.zIndex = "2";
-      getNodes.configDialog.style.display = "flex";
+      getNodes.configDialog.style.visibility = "visible";
+      getNodes.configDialog.style.opacity = "1";
     });
   })();
   const exitDialog = (function () {
-    getNodes.closeDialog.addEventListener("click", () => {
+    getNodes.closeDialog.addEventListener("click", async () => {
       getNodes.cover.style.zIndex = "0";
-      getNodes.configDialog.style.display = "none";
+      getNodes.configDialog.style.opacity = "0";
+      getNodes.configDialog.style.transition = "opacity 0.5s ease-in-out";
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          getNodes.configDialog.style.visibility = "hidden";
+        }, 400);
+      });
     });
   })();
 })();
