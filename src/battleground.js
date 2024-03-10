@@ -256,42 +256,42 @@ const loopGame = (function () {
 
   const setFeedback = function (aiOrUser, missedOrHit, shipDataset) {
     const getFeedbackMessage = function (aiOrUser2) {
-      let turn = null;
+      let feedbackMessage = "";
+      let victim = null;
       if (aiOrUser2 === "ai") {
-        turn = game.user;
+        victim = game.user;
       } else if (aiOrUser2 === "user") {
-        turn = game.computer;
+        victim = game.computer;
       }
 
-      let feedbackMessage = "";
       switch (shipDataset) {
         case "5":
           feedbackMessage = "Hit the Carrier 🎯";
-          if (turn.ships.Carrier.currentNumHits === 5) {
+          if (victim.ships.Carrier.currentNumHits === 5) {
             feedbackMessage = "Sunk the Carrier! 🌟";
           }
           break;
         case "4":
           feedbackMessage = "Hit the Battleship 🎯";
-          if (turn.ships.Battleship.currentNumHits === 4) {
+          if (victim.ships.Battleship.currentNumHits === 4) {
             feedbackMessage = "Sunk the Battleship! 🌟";
           }
           break;
         case "3.5":
           feedbackMessage = "Hit the Destroyer 🎯";
-          if (turn.ships.Destroyer.currentNumHits === 3) {
+          if (victim.ships.Destroyer.currentNumHits === 3) {
             feedbackMessage = "Sunk the Destroyer! 🌟";
           }
           break;
         case "3":
           feedbackMessage = "Hit the Submarine 🎯";
-          if (turn.ships.Submarine.currentNumHits === 3) {
+          if (victim.ships.Submarine.currentNumHits === 3) {
             feedbackMessage = "Sunk the Submarine! 🌟";
           }
           break;
         case "2":
           feedbackMessage = "Hit the Patrol Boat 🎯";
-          if (turn.ships["Patrol Boat"].currentNumHits === 2) {
+          if (victim.ships["Patrol Boat"].currentNumHits === 2) {
             feedbackMessage = "Sunk the Patrol Boat! 🌟";
           }
           break;
