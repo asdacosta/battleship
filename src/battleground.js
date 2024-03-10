@@ -32,6 +32,7 @@ const getNodes = (function () {
   const closeDialog = document.querySelector("span");
   const kickStartButton = document.querySelector(".kick-start");
   const shuffleButton = document.querySelector(".shuffle");
+  const peekButton = document.querySelector(".peek");
 
   return {
     admiralHeadDivs,
@@ -51,6 +52,7 @@ const getNodes = (function () {
     closeDialog,
     kickStartButton,
     shuffleButton,
+    peekButton,
   };
 })();
 
@@ -190,8 +192,35 @@ const populateBoards = (function () {
       computerBoard.forEach((entry, entryIndex) => {
         if (divIndex === entryIndex) {
           if (entry !== null && entry !== "O") {
-            setRandomColors(div, entry);
             setClass(div, entry);
+
+            const peekAiBoard = (function () {
+              getNodes.peekButton.addEventListener("click", () => {
+                const exitDialog = (async function () {
+                  getNodes.cover.style.zIndex = "0";
+                  getNodes.configDialog.style.opacity = "0";
+                  getNodes.configDialog.style.transition = "opacity 0.5s ease-in-out";
+                  await new Promise((resolve) => {
+                    setTimeout(() => {
+                      getNodes.configDialog.style.visibility = "hidden";
+                    }, 400);
+                  });
+                })();
+
+                // Show colors
+                setRandomColors(div, entry);
+
+                const hideAiBoard = (async function () {
+                  await new Promise((resolve) => {
+                    setTimeout(() => {
+                      getNodes.aiGroundsDivs.forEach((div) => {
+                        div.style.backgroundColor = "initial";
+                      });
+                    }, 1000);
+                  });
+                })();
+              });
+            })();
           }
         }
       });
