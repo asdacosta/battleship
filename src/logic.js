@@ -294,6 +294,8 @@ class Gameboard {
   }
 
   receiveAttack(XY) {
+    let hitStatus = "";
+
     const generateKeys = (function () {
       // Alphabets A-J
       const alphabets = [];
@@ -322,7 +324,6 @@ class Gameboard {
           KeysBox[`${keys[rowIndex][index]}`] = [index, rowIndex];
         }
       }
-
       return KeysBox;
     })();
 
@@ -402,6 +403,7 @@ class Gameboard {
       if (hitEntry === null || hitEntry === "O") {
         board[rowIndex][keyIndex] = "X";
         trackMissedAttacks(XY);
+        hitStatus = "Fail";
         return "Fail";
       } else if (
         hitEntry === this.ships.Carrier.length ||
@@ -414,13 +416,17 @@ class Gameboard {
         updateShipLife(hitEntry);
         updateSunkStatus(hitEntry);
         allShipsSunk();
+        hitStatus = "Success";
         return "Success";
         // TODO: User to choose again
       } else if (hitEntry === "X") {
+        hitStatus = "Occupied";
         return "Occupied";
         // TODO: Enable user to choose new spot
       }
     })();
+
+    return hitStatus;
   }
 }
 
@@ -433,6 +439,8 @@ class Player {
     this.computer = new Gameboard();
     this.computerBoard = this.computer.board;
     this.computer.displaceShips();
+
+    this.computerTurnCurrentRecursion = false;
   }
 
   userTurn(XY) {
@@ -440,6 +448,8 @@ class Player {
   }
 
   computerTurn() {
+    this.computerTurnCurrentRecursion = false;
+
     const generateRandomKey = function () {
       const alphabets = [];
       const keys = [];
@@ -459,15 +469,18 @@ class Player {
     const randomKey = generateRandomKey();
 
     const pickLegalMove = (() => {
-      const board = this.userBoard;
+      const board = this.user.board;
       const response = this.user.receiveAttack(randomKey);
       const isAllEntriesOccupied = board.flat().every((entry) => entry === "X");
       if (response === "Occupied" && !isAllEntriesOccupied) {
+        this.computerTurnCurrentRecursion = true;
         this.computerTurn();
       }
     })();
 
-    return randomKey;
+    if (this.computerTurnCurrentRecursion === false) {
+      return randomKey;
+    }
   }
 }
 
