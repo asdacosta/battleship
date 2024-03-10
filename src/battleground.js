@@ -258,6 +258,7 @@ const loopGame = (function () {
     const getFeedbackMessage = function (aiOrUser2) {
       let feedbackMessage = "";
       let victim = null;
+
       if (aiOrUser2 === "ai") {
         victim = game.user;
       } else if (aiOrUser2 === "user") {
@@ -295,6 +296,28 @@ const loopGame = (function () {
             feedbackMessage = "Sunk the Patrol Boat! 🌟";
           }
           break;
+      }
+      // Declare winner
+      if (aiOrUser2 === "ai") {
+        if (
+          victim.ships.Carrier.isSunk() &&
+          victim.ships.Battleship.isSunk() &&
+          victim.ships.Destroyer.isSunk() &&
+          victim.ships.Submarine.isSunk() &&
+          victim.ships["Patrol Boat"].isSunk()
+        ) {
+          feedbackMessage = "Destroyed all your ships. 😞";
+        }
+      } else if (aiOrUser2 === "user") {
+        if (
+          victim.ships.Carrier.isSunk() &&
+          victim.ships.Battleship.isSunk() &&
+          victim.ships.Destroyer.isSunk() &&
+          victim.ships.Submarine.isSunk() &&
+          victim.ships["Patrol Boat"].isSunk()
+        ) {
+          feedbackMessage = "Sunk all ships! 🏆";
+        }
       }
 
       return feedbackMessage;
