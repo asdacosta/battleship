@@ -33,6 +33,7 @@ const getNodes = (function () {
   const kickStartButton = document.querySelector(".kick-start");
   const shuffleButton = document.querySelector(".shuffle");
   const peekButton = document.querySelector(".peek");
+  const difficultyOptions = document.querySelector("#difficulty");
 
   return {
     admiralHeadDivs,
@@ -53,6 +54,7 @@ const getNodes = (function () {
     kickStartButton,
     shuffleButton,
     peekButton,
+    difficultyOptions,
   };
 })();
 
@@ -288,6 +290,31 @@ const setDefaultAttributesInCoordinates = (function () {
 const loopGame = (function () {
   const game = populateBoards.game;
 
+  const getDifficulty = (function () {
+    let difficulty = localStorage.getItem("difficulty");
+    if (!difficulty) {
+      difficulty = "normal";
+    } else {
+      if (difficulty === "impossible") {
+        getNodes.difficultyOptions.options[0].removeAttribute("selected");
+        getNodes.difficultyOptions.options[1].removeAttribute("selected");
+        getNodes.difficultyOptions.options[2].setAttribute("selected", true);
+      }
+      if (difficulty === "normal") {
+        getNodes.difficultyOptions.options[0].removeAttribute("selected");
+        getNodes.difficultyOptions.options[1].setAttribute("selected", true);
+        getNodes.difficultyOptions.options[2].removeAttribute("selected");
+      }
+      if (difficulty === "dummy") {
+        getNodes.difficultyOptions.options[0].setAttribute("selected", true);
+        getNodes.difficultyOptions.options[1].removeAttribute("selected");
+        getNodes.difficultyOptions.options[2].removeAttribute("selected");
+      }
+    }
+
+    return { difficulty };
+  })();
+
   const displayAttack = function (spot, inputValue, fontColor) {
     spot.style.color = fontColor;
     spot.textContent = inputValue;
@@ -432,6 +459,12 @@ const loopGame = (function () {
         }
         // IF empty
         if (div.dataset.attacked === "No" && !div.hasAttribute("data-ship")) {
+          const difficulty = getDifficulty.difficulty;
+          if (difficulty === "impossible") {
+            triggerAiTurn();
+            return;
+          }
+
           displayAttack(div, "X", "rgb(228, 73, 73)");
           setFeedback("ai", "missed");
           getNodes.aiGrounds.style.pointerEvents = "auto";
@@ -480,4 +513,30 @@ const configuration = (function () {
       window.location.reload();
     });
   })();
+})();
+
+const setDifficulty = (function () {
+  getNodes.difficultyOptions.addEventListener("change", (event) => {
+    if (event.target.value === "impossible") {
+      localStorage.setItem("difficulty", "impossible");
+      window.location.reload();
+      // getNodes.difficultyOptions.options[0].removeAttribute("selected");
+      // getNodes.difficultyOptions.options[1].removeAttribute("selected");
+      // getNodes.difficultyOptions.options[2].setAttribute("selected", true);
+    }
+    if (event.target.value === "normal") {
+      localStorage.setItem("difficulty", "normal");
+      window.location.reload();
+      // getNodes.difficultyOptions.options[0].removeAttribute("selected");
+      // getNodes.difficultyOptions.options[1].setAttribute("selected", true);
+      // getNodes.difficultyOptions.options[2].removeAttribute("selected");
+    }
+    if (event.target.value === "dummy") {
+      localStorage.setItem("difficulty", "dummy");
+      window.location.reload();
+      // getNodes.difficultyOptions.options[0].setAttribute("selected", true);
+      // getNodes.difficultyOptions.options[1].removeAttribute("selected");
+      // getNodes.difficultyOptions.options[2].removeAttribute("selected");
+    }
+  });
 })();
