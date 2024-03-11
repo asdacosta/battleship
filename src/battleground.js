@@ -299,19 +299,21 @@ const loopGame = (function () {
         getNodes.difficultyOptions.options[0].removeAttribute("selected");
         getNodes.difficultyOptions.options[1].removeAttribute("selected");
         getNodes.difficultyOptions.options[2].setAttribute("selected", true);
+        getNodes.feedback.textContent = "Don't miss your first attack!";
       }
       if (difficulty === "normal") {
         getNodes.difficultyOptions.options[0].removeAttribute("selected");
         getNodes.difficultyOptions.options[1].setAttribute("selected", true);
         getNodes.difficultyOptions.options[2].removeAttribute("selected");
+        getNodes.feedback.textContent = "Initiate the first attack!";
       }
       if (difficulty === "dummy") {
         getNodes.difficultyOptions.options[0].setAttribute("selected", true);
         getNodes.difficultyOptions.options[1].removeAttribute("selected");
         getNodes.difficultyOptions.options[2].removeAttribute("selected");
+        getNodes.feedback.textContent = "Initiate the first attack!";
       }
     }
-    getNodes.feedback.textContent = "Don't miss your first attack!";
 
     return { difficulty };
   })();
