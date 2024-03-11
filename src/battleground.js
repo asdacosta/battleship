@@ -311,6 +311,7 @@ const loopGame = (function () {
         getNodes.difficultyOptions.options[2].removeAttribute("selected");
       }
     }
+    getNodes.feedback.textContent = "Don't miss your first attack!";
 
     return { difficulty };
   })();
@@ -441,17 +442,21 @@ const loopGame = (function () {
   };
   triggerUserTurn();
 
+  let aiTimer = 3000;
+  let impossibleRecursionCount = 0;
   const triggerAiTurn = async function () {
     getNodes.aiGrounds.style.pointerEvents = "none";
     await new Promise((resolve) => {
       setTimeout(() => {
         getNodes.feedback.textContent = `AI: Targeting...`;
       }, 1500);
-      setTimeout(resolve, 3000);
+      setTimeout(resolve, aiTimer);
     });
     const randomKey = game.computerTurn();
 
     getNodes.admiralGroundsDivs.forEach((div) => {
+      const difficulty = getDifficulty.difficulty;
+
       if (div.dataset.index === randomKey) {
         // IF already attacked
         if (div.dataset.attacked === "Yes") {
@@ -459,8 +464,12 @@ const loopGame = (function () {
         }
         // IF empty
         if (div.dataset.attacked === "No" && !div.hasAttribute("data-ship")) {
-          const difficulty = getDifficulty.difficulty;
+          // Recurse if difficulty is Impossible
+          if (impossibleRecursionCount > 0) {
+            aiTimer = 1;
+          }
           if (difficulty === "impossible") {
+            impossibleRecursionCount += 1;
             triggerAiTurn();
             return;
           }
@@ -471,6 +480,13 @@ const loopGame = (function () {
         }
         // IF hits a ship
         if (div.dataset.attacked === "No" && div.hasAttribute("data-ship")) {
+          const resetImpossibleParameters = (function () {
+            if (difficulty === "impossible") {
+              impossibleRecursionCount = 0;
+              aiTimer = 2000;
+            }
+          })();
+
           displayAttack(div, "💥", "black");
           setFeedback("ai", "hit", div.dataset.ship);
           triggerAiTurn();
