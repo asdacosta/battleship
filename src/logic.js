@@ -437,7 +437,7 @@ class Player {
 
     this.computer = new Gameboard();
     this.computer.displaceShips();
-    this.computerTurnCurrentRecursion = false;
+    // this.computerTurnCurrentRecursion = false;
   }
 
   userTurn(XY) {
@@ -445,7 +445,7 @@ class Player {
   }
 
   computerTurn() {
-    this.computerTurnCurrentRecursion = false;
+    // this.computerTurnCurrentRecursion = false;
 
     const generateRandomKey = function () {
       const alphabets = [];
@@ -469,15 +469,16 @@ class Player {
       const board = this.user.board;
       const response = this.user.receiveAttack(randomKey);
       const isAllEntriesOccupied = board.flat().every((entry) => entry === "X");
-      if (response === "Occupied" && !isAllEntriesOccupied) {
-        this.computerTurnCurrentRecursion = true;
-        this.computerTurn();
-      }
+      // if (response === "Occupied" && !isAllEntriesOccupied) {
+      //   this.computerTurnCurrentRecursion = true;
+      //   this.computerTurn();
+      //   return;
+      // }
     })();
 
-    if (this.computerTurnCurrentRecursion === false) {
-      return randomKey;
-    }
+    // if (this.computerTurnCurrentRecursion === false) {
+    return randomKey;
+    // }
   }
 }
 
