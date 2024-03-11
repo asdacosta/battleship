@@ -456,17 +456,18 @@ const loopGame = (function () {
     });
     const randomKey = game.computerTurn();
 
-    getNodes.admiralGroundsDivs.forEach((div) => {
+    for (const div of getNodes.admiralGroundsDivs) {
       const difficulty = getDifficulty.difficulty;
 
       if (div.dataset.index === randomKey) {
         // IF already attacked
         if (div.dataset.attacked === "Yes") {
           triggerAiTurn();
+          return;
         }
         // IF empty
         if (div.dataset.attacked === "No" && !div.hasAttribute("data-ship")) {
-          // Recurse if difficulty is Impossible
+          // Recurse at faster timeout if difficulty is Impossible
           if (impossibleRecursionCount > 0) {
             aiTimer = 1;
           }
@@ -492,9 +493,10 @@ const loopGame = (function () {
           displayAttack(div, "💥", "black");
           setFeedback("ai", "hit", div.dataset.ship);
           triggerAiTurn();
+          return;
         }
       }
-    });
+    }
   };
 })();
 
