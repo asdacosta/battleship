@@ -480,6 +480,12 @@ const loopGame = (function () {
             triggerAiTurn();
             return;
           }
+          const resetDummyTimerParameters = (function () {
+            if (difficulty === "dummy") {
+              recursionCount = 0;
+              aiTimer = 2000;
+            }
+          })();
 
           displayAttack(div, "X", "rgb(228, 73, 73)");
           setFeedback("ai", "missed");
@@ -487,9 +493,20 @@ const loopGame = (function () {
         }
         // IF hits a ship
         if (div.dataset.attacked === "No" && div.hasAttribute("data-ship")) {
-          const resetImpossibleParameters = (function () {
-            recursionCount = 0;
-            aiTimer = 2000;
+          // Recurse at faster timeout if difficulty is dummy
+          if (difficulty === "dummy") {
+            if (recursionCount > 0) {
+              aiTimer = 1;
+            }
+            recursionCount += 1;
+            triggerAiTurn();
+            return;
+          }
+          const resetImpossibleTimerParameters = (function () {
+            if (difficulty === "impossible") {
+              recursionCount = 0;
+              aiTimer = 2000;
+            }
           })();
 
           displayAttack(div, "💥", "black");
