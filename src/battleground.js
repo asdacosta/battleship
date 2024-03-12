@@ -568,23 +568,21 @@ const configuration = (function () {
       window.location.reload();
     });
   })();
-})();
 
-const setDifficulty = (function () {
-  getNodes.difficultyOptions.addEventListener("change", (event) => {
-    if (event.target.value === "impossible") {
-      localStorage.setItem("difficulty", "impossible");
-      window.location.reload();
-    }
-    if (event.target.value === "normal") {
-      localStorage.setItem("difficulty", "normal");
-      window.location.reload();
-    }
-    if (event.target.value === "dummy") {
-      localStorage.setItem("difficulty", "dummy");
-      window.location.reload();
-    }
-  });
+  const setDifficulty = (function () {
+    getNodes.difficultyOptions.addEventListener("change", (event) => {
+      if (event.target.value === "impossible") {
+        localStorage.setItem("difficulty", "impossible");
+        window.location.reload();
+      }
+      if (event.target.value === "normal") {
+        localStorage.setItem("difficulty", "normal");
+        window.location.reload();
+      }
+      if (event.target.value === "dummy") {
+        localStorage.setItem("difficulty", "dummy");
+        window.location.reload();
+      }
+    });
+  })();
 })();
-
-// TODO: Make logic end when user/AI wins
