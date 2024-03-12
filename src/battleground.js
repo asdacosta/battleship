@@ -420,10 +420,6 @@ const loopGame = (function () {
 
     getNodes.aiGroundsDivs.forEach((div) => {
       div.addEventListener("click", () => {
-        // IF already attacked
-        if (div.dataset.attacked === "Yes") {
-          game.userTurn(div.dataset.index);
-        }
         // IF empty
         if (div.dataset.attacked === "No" && !div.hasAttribute("data-ship")) {
           game.userTurn(div.dataset.index);
@@ -462,13 +458,6 @@ const loopGame = (function () {
       const difficulty = getDifficulty.difficulty;
 
       if (div.dataset.index === randomKey) {
-        // IF already attacked
-        // if (div.dataset.attacked === "Yes") {
-        //   recursionCount += 1;
-        //   triggerAiTurn();
-        //   return;
-        // }
-
         // IF empty
         if (div.dataset.attacked === "No" && !div.hasAttribute("data-ship")) {
           // Recurse at faster timeout if difficulty is Impossible
