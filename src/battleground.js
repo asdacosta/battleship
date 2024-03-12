@@ -456,7 +456,6 @@ const loopGame = (function () {
 
     for (const div of getNodes.admiralGroundsDivs) {
       const difficulty = getDifficulty.difficulty;
-
       if (div.dataset.index === randomKey) {
         // IF empty
         if (div.dataset.attacked === "No" && !div.hasAttribute("data-ship")) {
@@ -469,6 +468,7 @@ const loopGame = (function () {
             triggerAiTurn();
             return;
           }
+
           const resetDummyTimerParameters = (function () {
             if (difficulty === "dummy") {
               recursionCount = 0;
@@ -491,6 +491,7 @@ const loopGame = (function () {
             triggerAiTurn();
             return;
           }
+
           const resetImpossibleTimerParameters = (function () {
             if (difficulty === "impossible") {
               recursionCount = 0;
@@ -548,23 +549,14 @@ const setDifficulty = (function () {
     if (event.target.value === "impossible") {
       localStorage.setItem("difficulty", "impossible");
       window.location.reload();
-      // getNodes.difficultyOptions.options[0].removeAttribute("selected");
-      // getNodes.difficultyOptions.options[1].removeAttribute("selected");
-      // getNodes.difficultyOptions.options[2].setAttribute("selected", true);
     }
     if (event.target.value === "normal") {
       localStorage.setItem("difficulty", "normal");
       window.location.reload();
-      // getNodes.difficultyOptions.options[0].removeAttribute("selected");
-      // getNodes.difficultyOptions.options[1].setAttribute("selected", true);
-      // getNodes.difficultyOptions.options[2].removeAttribute("selected");
     }
     if (event.target.value === "dummy") {
       localStorage.setItem("difficulty", "dummy");
       window.location.reload();
-      // getNodes.difficultyOptions.options[0].setAttribute("selected", true);
-      // getNodes.difficultyOptions.options[1].removeAttribute("selected");
-      // getNodes.difficultyOptions.options[2].removeAttribute("selected");
     }
   });
 })();
