@@ -229,7 +229,17 @@ const populateBoards = (function () {
     });
   })();
 
-  return { game };
+  const populateAiBoardWhenGameOver = function () {
+    getNodes.aiGroundsDivs.forEach((div, divIndex) => {
+      computerBoard.forEach((entry, entryIndex) => {
+        if (divIndex === entryIndex) {
+          setRandomColors(div, entry);
+        }
+      });
+    });
+  };
+
+  return { game, populateAiBoardWhenGameOver };
 })();
 
 const displayTarget = (function () {
@@ -380,6 +390,7 @@ const loopGame = (function () {
         ) {
           feedbackMessage = "Destroyed all your ships. 😞";
           gameOver = true;
+          populateBoards.populateAiBoardWhenGameOver();
           getNodes.aiGrounds.style.pointerEvents = "none";
         }
       } else if (aiOrUser2 === "user") {
@@ -392,6 +403,7 @@ const loopGame = (function () {
         ) {
           feedbackMessage = "Sunk all ships! 🏆";
           gameOver = true;
+          populateBoards.populateAiBoardWhenGameOver();
           getNodes.aiGrounds.style.pointerEvents = "none";
         }
       }
