@@ -437,6 +437,8 @@ class Player {
 
     this.computer = new Gameboard();
     this.computer.displaceShips();
+    this.computerRandomPickCount = 0;
+    this.keysUpdate = null;
     // this.computerTurnCurrentRecursion = false;
   }
 
@@ -446,21 +448,38 @@ class Player {
 
   computerTurn() {
     // this.computerTurnCurrentRecursion = false;
-
-    const generateRandomKey = function () {
-      const alphabets = [];
-      const keys = [];
-      const randomKeyIndex = Math.floor(Math.random() * 100);
-
-      for (let n = 65; n <= 74; n++) {
-        alphabets.push(String.fromCharCode(n));
-      }
-      for (let m = 1; m <= 10; m++) {
-        for (const letter of alphabets) {
-          keys.push(`${m}` + letter);
+    const generateRandomKey = () => {
+      const getKeys = function () {
+        const alphabets = [];
+        const keys = [];
+        for (let n = 65; n <= 74; n++) {
+          alphabets.push(String.fromCharCode(n));
         }
-      }
-      const randomKey = keys[randomKeyIndex];
+        for (let m = 1; m <= 10; m++) {
+          for (const letter of alphabets) {
+            keys.push(`${m}` + letter);
+          }
+        }
+        return keys;
+      };
+
+      const assignGeneratedKeysOnce = (() => {
+        if (this.keysUpdate === null) {
+          this.keysUpdate = getKeys();
+        }
+      })();
+
+      let randomKey = null;
+      const updateKeys = (() => {
+        const randomKeyIndex = Math.floor(
+          Math.random() * (100 - this.computerRandomPickCount),
+        );
+        randomKey = this.keysUpdate[randomKeyIndex];
+        this.keysUpdate.splice(randomKeyIndex, 1);
+        // Increase count to enable next randomKeyIndex be a legal index
+        this.computerRandomPickCount += 1;
+      })();
+
       return randomKey;
     };
     const randomKey = generateRandomKey();
@@ -468,7 +487,7 @@ class Player {
     const pickLegalMove = (() => {
       const board = this.user.board;
       const response = this.user.receiveAttack(randomKey);
-      const isAllEntriesOccupied = board.flat().every((entry) => entry === "X");
+      // const isAllEntriesOccupied = board.flat().every((entry) => entry === "X");
       // if (response === "Occupied" && !isAllEntriesOccupied) {
       //   this.computerTurnCurrentRecursion = true;
       //   this.computerTurn();
