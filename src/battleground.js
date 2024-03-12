@@ -289,6 +289,7 @@ const setDefaultAttributesInCoordinates = (function () {
 
 const loopGame = (function () {
   const game = populateBoards.game;
+  let gameOver = false;
 
   const getDifficulty = (function () {
     let difficulty = localStorage.getItem("difficulty");
@@ -378,6 +379,8 @@ const loopGame = (function () {
           victim.ships["Patrol Boat"].isSunk()
         ) {
           feedbackMessage = "Destroyed all your ships. 😞";
+          gameOver = true;
+          getNodes.aiGrounds.style.pointerEvents = "none";
         }
       } else if (aiOrUser2 === "user") {
         if (
@@ -388,6 +391,8 @@ const loopGame = (function () {
           victim.ships["Patrol Boat"].isSunk()
         ) {
           feedbackMessage = "Sunk all ships! 🏆";
+          gameOver = true;
+          getNodes.aiGrounds.style.pointerEvents = "none";
         }
       }
 
@@ -416,8 +421,11 @@ const loopGame = (function () {
   };
 
   const triggerUserTurn = function () {
-    getNodes.aiGrounds.style.pointerEvents = "auto";
+    if (gameOver) {
+      return;
+    }
 
+    getNodes.aiGrounds.style.pointerEvents = "auto";
     getNodes.aiGroundsDivs.forEach((div) => {
       div.addEventListener("click", () => {
         // IF empty
@@ -443,6 +451,10 @@ const loopGame = (function () {
   let aiTimer = 2000;
   let recursionCount = 0;
   const triggerAiTurn = async function () {
+    if (gameOver) {
+      return;
+    }
+
     getNodes.aiGrounds.style.pointerEvents = "none";
     await new Promise((resolve) => {
       if (aiTimer !== 1) {
@@ -507,6 +519,8 @@ const loopGame = (function () {
       }
     }
   };
+
+  return { gameOver };
 })();
 
 const configuration = (function () {
@@ -560,3 +574,5 @@ const setDifficulty = (function () {
     }
   });
 })();
+
+// TODO: Make logic end when user/AI wins
