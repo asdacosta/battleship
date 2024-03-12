@@ -444,14 +444,16 @@ const loopGame = (function () {
   };
   triggerUserTurn();
 
-  let aiTimer = 3000;
-  let impossibleRecursionCount = 0;
+  let aiTimer = 2000;
+  let recursionCount = 0;
   const triggerAiTurn = async function () {
     getNodes.aiGrounds.style.pointerEvents = "none";
     await new Promise((resolve) => {
-      setTimeout(() => {
-        getNodes.feedback.textContent = `AI: Targeting...`;
-      }, 1500);
+      if (aiTimer !== 1) {
+        setTimeout(() => {
+          getNodes.feedback.textContent = `AI: Targeting...`;
+        }, 1500);
+      }
       setTimeout(resolve, aiTimer);
     });
     const randomKey = game.computerTurn();
@@ -461,18 +463,20 @@ const loopGame = (function () {
 
       if (div.dataset.index === randomKey) {
         // IF already attacked
-        if (div.dataset.attacked === "Yes") {
-          triggerAiTurn();
-          return;
-        }
+        // if (div.dataset.attacked === "Yes") {
+        //   recursionCount += 1;
+        //   triggerAiTurn();
+        //   return;
+        // }
+
         // IF empty
         if (div.dataset.attacked === "No" && !div.hasAttribute("data-ship")) {
           // Recurse at faster timeout if difficulty is Impossible
-          if (impossibleRecursionCount > 0) {
-            aiTimer = 1;
-          }
           if (difficulty === "impossible") {
-            impossibleRecursionCount += 1;
+            if (recursionCount > 0) {
+              aiTimer = 1;
+            }
+            recursionCount += 1;
             triggerAiTurn();
             return;
           }
@@ -484,10 +488,8 @@ const loopGame = (function () {
         // IF hits a ship
         if (div.dataset.attacked === "No" && div.hasAttribute("data-ship")) {
           const resetImpossibleParameters = (function () {
-            if (difficulty === "impossible") {
-              impossibleRecursionCount = 0;
-              aiTimer = 2000;
-            }
+            recursionCount = 0;
+            aiTimer = 2000;
           })();
 
           displayAttack(div, "💥", "black");
