@@ -34,6 +34,7 @@ const getNodes = (function () {
   const shuffleButton = document.querySelector(".shuffle");
   const peekButton = document.querySelector(".peek");
   const difficultyOptions = document.querySelector("#difficulty");
+  const dimensionOptions = document.querySelector("#dimension");
 
   return {
     admiralHeadDivs,
@@ -55,6 +56,7 @@ const getNodes = (function () {
     shuffleButton,
     peekButton,
     difficultyOptions,
+    dimensionOptions,
   };
 })();
 
@@ -156,32 +158,41 @@ const populateBoards = (function () {
     }
   };
 
-  const setClass = function (element, ship) {
-    switch (ship) {
-      case 5:
-        element.setAttribute("data-ship", "5");
-        break;
-      case 4:
-        element.setAttribute("data-ship", "4");
-        break;
-      case 3.5:
-        element.setAttribute("data-ship", "3.5");
-        break;
-      case 3:
-        element.setAttribute("data-ship", "3");
-        break;
-      case 2:
-        element.setAttribute("data-ship", "2");
-        break;
-    }
-  };
+  const setClasses = (function () {
+    const setClass = function (element, ship) {
+      switch (ship) {
+        case 5:
+          element.setAttribute("data-ship", "5");
+          break;
+        case 4:
+          element.setAttribute("data-ship", "4");
+          break;
+        case 3.5:
+          element.setAttribute("data-ship", "3.5");
+          break;
+        case 3:
+          element.setAttribute("data-ship", "3");
+          break;
+        case 2:
+          element.setAttribute("data-ship", "2");
+          break;
+      }
+    };
 
-  const populateUserBoard = (function () {
     getNodes.admiralGroundsDivs.forEach((div, divIndex) => {
       userBoard.forEach((entry, entryIndex) => {
         if (divIndex === entryIndex) {
           if (entry !== null && entry !== "O") {
-            setRandomColors(div, entry);
+            setClass(div, entry);
+          }
+        }
+      });
+    });
+
+    getNodes.aiGroundsDivs.forEach((div, divIndex) => {
+      computerBoard.forEach((entry, entryIndex) => {
+        if (divIndex === entryIndex) {
+          if (entry !== null && entry !== "O") {
             setClass(div, entry);
           }
         }
@@ -189,43 +200,181 @@ const populateBoards = (function () {
     });
   })();
 
-  const populateAiBoard = (function () {
-    getNodes.aiGroundsDivs.forEach((div, divIndex) => {
-      computerBoard.forEach((entry, entryIndex) => {
-        if (divIndex === entryIndex) {
-          if (entry !== null && entry !== "O") {
-            setClass(div, entry);
+  const populateWithSpatialShips = function () {
+    const setSpatialDimension = function (grounds) {
+      const appendShipImg = function (shipSrc, shipLength, shipType) {
+        for (const div of grounds) {
+          if (div.dataset.ship === shipType) {
+            div.style.position = "relative";
+            const shipImg = document.createElement("img");
+            shipImg.setAttribute("src", `${shipSrc}`);
 
-            const peekAiBoard = (function () {
-              getNodes.peekButton.addEventListener("click", () => {
-                const exitDialog = (async function () {
-                  getNodes.cover.style.zIndex = "0";
-                  getNodes.configDialog.style.opacity = "0";
-                  getNodes.configDialog.style.transition = "opacity 0.5s ease-in-out";
-                  await new Promise((resolve) => {
-                    setTimeout(() => {
-                      getNodes.configDialog.style.visibility = "hidden";
-                    }, 400);
-                  });
-                })();
+            const updateImgSize = function () {
+              const width = div.getBoundingClientRect().width * shipLength;
+              const height = div.getBoundingClientRect().height;
+              shipImg.style.width = `${width - 5}px`;
+              shipImg.style.height = `${height}px`;
+            };
+            updateImgSize();
+            window.addEventListener("resize", updateImgSize);
 
-                // Show colors
-                setRandomColors(div, entry);
-
-                const hideAiBoard = (async function () {
-                  await new Promise((resolve) => {
-                    setTimeout(() => {
-                      getNodes.aiGroundsDivs.forEach((div) => {
-                        div.style.backgroundColor = "initial";
-                      });
-                    }, 1000);
-                  });
-                })();
-              });
-            })();
+            div.appendChild(shipImg);
+            return;
           }
         }
+      };
+      appendShipImg("./assets/carrier.png", 5, "5");
+      appendShipImg("./assets/battleship.png", 4, "4");
+      appendShipImg("./assets/destroyer.png", 3, "3.5");
+      appendShipImg("./assets/submarine.png", 3, "3");
+      appendShipImg("./assets/patrol-boat.png", 2, "2");
+    };
+    setSpatialDimension(getNodes.admiralGroundsDivs);
+
+    const setSpatialDimensionForAiAndHide = (function () {
+      setSpatialDimension(getNodes.aiGroundsDivs);
+      getNodes.aiGroundsDivs.forEach((div) => {
+        if (div.querySelector("img")) {
+          div.querySelector("img").style.display = "none";
+        }
       });
+    })();
+
+    const peekAiBoard = (function () {
+      getNodes.peekButton.addEventListener("click", () => {
+        if (getNodes.dimensionOptions.value === "simple") {
+          return;
+        }
+
+        const exitDialog = (async function () {
+          getNodes.cover.style.zIndex = "0";
+          getNodes.configDialog.style.opacity = "0";
+          getNodes.configDialog.style.transition = "opacity 0.5s ease-in-out";
+          await new Promise((resolve) => {
+            setTimeout(() => {
+              getNodes.configDialog.style.visibility = "hidden";
+            }, 400);
+          });
+        })();
+
+        // Show ships
+        getNodes.aiGroundsDivs.forEach((div) => {
+          if (div.querySelector("img")) {
+            div.querySelector("img").style.display = "inline";
+          }
+        });
+
+        const hideAiBoard = (async function () {
+          await new Promise((resolve) => {
+            setTimeout(() => {
+              getNodes.aiGroundsDivs.forEach((div) => {
+                if (div.querySelector("img")) {
+                  div.querySelector("img").style.display = "none";
+                }
+              });
+            }, 1000);
+          });
+        })();
+      });
+    })();
+  };
+  populateWithSpatialShips();
+
+  const populateWithColor = function () {
+    const populateUserBoard = (function () {
+      getNodes.admiralGroundsDivs.forEach((div, divIndex) => {
+        userBoard.forEach((entry, entryIndex) => {
+          if (divIndex === entryIndex) {
+            if (entry !== null && entry !== "O") {
+              setRandomColors(div, entry);
+            }
+          }
+        });
+      });
+    })();
+
+    const populateAiBoard = (function () {
+      getNodes.aiGroundsDivs.forEach((div, divIndex) => {
+        computerBoard.forEach((entry, entryIndex) => {
+          if (divIndex === entryIndex) {
+            if (entry !== null && entry !== "O") {
+              const peekAiBoard = (function () {
+                getNodes.peekButton.addEventListener("click", () => {
+                  if (getNodes.dimensionOptions.value === "spatial") {
+                    return;
+                  }
+
+                  const exitDialog = (async function () {
+                    getNodes.cover.style.zIndex = "0";
+                    getNodes.configDialog.style.opacity = "0";
+                    getNodes.configDialog.style.transition = "opacity 0.5s ease-in-out";
+                    await new Promise((resolve) => {
+                      setTimeout(() => {
+                        getNodes.configDialog.style.visibility = "hidden";
+                      }, 400);
+                    });
+                  })();
+
+                  // Show colors
+                  setRandomColors(div, entry);
+
+                  const hideAiBoard = (async function () {
+                    await new Promise((resolve) => {
+                      setTimeout(() => {
+                        getNodes.aiGroundsDivs.forEach((div) => {
+                          div.style.backgroundColor = "initial";
+                        });
+                      }, 1000);
+                    });
+                  })();
+                });
+              })();
+            }
+          }
+        });
+      });
+    })();
+  };
+
+  const populateWithDimensionChange = (function () {
+    getNodes.dimensionOptions.addEventListener("change", (event) => {
+      if (event.target.value === "simple") {
+        const clearSpatialShips = (function () {
+          getNodes.admiralGroundsDivs.forEach((div) => {
+            if (div.querySelector("img")) {
+              div.querySelector("img").style.display = "none";
+            }
+          });
+
+          getNodes.aiGroundsDivs.forEach((div) => {
+            if (div.querySelector("img")) {
+              div.querySelector("img").style.display = "none";
+            }
+          });
+        })();
+
+        populateWithColor();
+      }
+
+      if (event.target.value === "spatial") {
+        const clearColors = (function () {
+          getNodes.admiralGroundsDivs.forEach((div) => {
+            div.style.backgroundColor = "initial";
+          });
+
+          getNodes.aiGroundsDivs.forEach((div) => {
+            div.style.backgroundColor = "initial";
+          });
+        })();
+
+        const bringBackSpatialShips = (function () {
+          getNodes.admiralGroundsDivs.forEach((div) => {
+            if (div.querySelector("img")) {
+              div.querySelector("img").style.display = "inline";
+            }
+          });
+        })();
+      }
     });
   })();
 
@@ -593,127 +742,4 @@ const configuration = (function () {
       }
     });
   })();
-
-  const setSpatialDimension = function (grounds) {
-    for (const div of getNodes.admiralGroundsDivs) {
-      div.style.backgroundColor = "transparent";
-    }
-
-    const __forCarrier = (function () {
-      for (const div of grounds) {
-        if (div.dataset.ship === "5") {
-          div.style.position = "relative";
-          const carrierImg = document.createElement("img");
-          carrierImg.classList.add("carrier");
-          carrierImg.setAttribute("src", "./assets/carrier.png");
-
-          const updateImgSize = function () {
-            const width = div.getBoundingClientRect().width * 5;
-            const height = div.getBoundingClientRect().height;
-            carrierImg.style.width = `${width - 5}px`;
-            carrierImg.style.height = `${height}px`;
-          };
-          updateImgSize();
-          window.addEventListener("resize", updateImgSize);
-
-          div.appendChild(carrierImg);
-          return;
-        }
-      }
-    })();
-
-    const __forBattleship = (function () {
-      for (const div of grounds) {
-        if (div.dataset.ship === "4") {
-          div.style.position = "relative";
-          const battleshipImg = document.createElement("img");
-          battleshipImg.classList.add("battleship");
-          battleshipImg.setAttribute("src", "./assets/battleship.png");
-
-          const updateImgSize = function () {
-            const width = div.getBoundingClientRect().width * 4;
-            const height = div.getBoundingClientRect().height;
-            battleshipImg.style.width = `${width}px`;
-            battleshipImg.style.height = `${height}px`;
-          };
-          updateImgSize();
-          window.addEventListener("resize", updateImgSize);
-
-          div.appendChild(battleshipImg);
-          return;
-        }
-      }
-    })();
-
-    const __forDestroyer = (function () {
-      for (const div of grounds) {
-        if (div.dataset.ship === "3.5") {
-          div.style.position = "relative";
-          const destroyerImg = document.createElement("img");
-          destroyerImg.classList.add("destroyer");
-          destroyerImg.setAttribute("src", "./assets/destroyer.png");
-
-          const updateImgSize = function () {
-            const width = div.getBoundingClientRect().width * 3;
-            const height = div.getBoundingClientRect().height;
-            destroyerImg.style.width = `${width - 5}px`;
-            destroyerImg.style.height = `${height}px`;
-          };
-          updateImgSize();
-          window.addEventListener("resize", updateImgSize);
-
-          div.appendChild(destroyerImg);
-          return;
-        }
-      }
-    })();
-
-    const __forSubmarine = (function () {
-      for (const div of grounds) {
-        if (div.dataset.ship === "3") {
-          div.style.position = "relative";
-          const submarineImg = document.createElement("img");
-          submarineImg.classList.add("submarine");
-          submarineImg.setAttribute("src", "./assets/submarine.png");
-
-          const updateImgSize = function () {
-            const width = div.getBoundingClientRect().width * 3;
-            const height = div.getBoundingClientRect().height;
-            submarineImg.style.width = `${width - 5}px`;
-            submarineImg.style.height = `${height}px`;
-          };
-          updateImgSize();
-          window.addEventListener("resize", updateImgSize);
-
-          div.appendChild(submarineImg);
-          return;
-        }
-      }
-    })();
-
-    const __forPatrolBoat = (function () {
-      for (const div of grounds) {
-        if (div.dataset.ship === "2") {
-          div.style.position = "relative";
-          const patrolBoatImg = document.createElement("img");
-          patrolBoatImg.classList.add("patrol-boat");
-          patrolBoatImg.setAttribute("src", "./assets/patrol-boat.png");
-
-          const updateImgSize = function () {
-            const width = div.getBoundingClientRect().width * 2;
-            const height = div.getBoundingClientRect().height;
-            patrolBoatImg.style.width = `${width - 5}px`;
-            patrolBoatImg.style.height = `${height}px`;
-          };
-          updateImgSize();
-          window.addEventListener("resize", updateImgSize);
-
-          div.appendChild(patrolBoatImg);
-          return;
-        }
-      }
-    })();
-  };
-  setSpatialDimension(getNodes.admiralGroundsDivs);
-  setSpatialDimension(getNodes.aiGroundsDivs);
 })();
