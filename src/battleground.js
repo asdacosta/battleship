@@ -607,12 +607,14 @@ const configuration = (function () {
           carrierImg.classList.add("carrier");
           carrierImg.setAttribute("src", "./assets/carrier.png");
 
-          const updateWidth = function () {
+          const updateImgSize = function () {
             const width = div.getBoundingClientRect().width * 5;
+            const height = div.getBoundingClientRect().height;
             carrierImg.style.width = `${width - 5}px`;
+            carrierImg.style.height = `${height}px`;
           };
-          updateWidth();
-          window.addEventListener("resize", updateWidth);
+          updateImgSize();
+          window.addEventListener("resize", updateImgSize);
 
           div.appendChild(carrierImg);
           return;
@@ -628,12 +630,14 @@ const configuration = (function () {
           battleshipImg.classList.add("battleship");
           battleshipImg.setAttribute("src", "./assets/battleship.png");
 
-          const updateWidth = function () {
+          const updateImgSize = function () {
             const width = div.getBoundingClientRect().width * 4;
+            const height = div.getBoundingClientRect().height;
             battleshipImg.style.width = `${width}px`;
+            battleshipImg.style.height = `${height}px`;
           };
-          updateWidth();
-          window.addEventListener("resize", updateWidth);
+          updateImgSize();
+          window.addEventListener("resize", updateImgSize);
 
           div.appendChild(battleshipImg);
           return;
@@ -649,12 +653,14 @@ const configuration = (function () {
           destroyerImg.classList.add("destroyer");
           destroyerImg.setAttribute("src", "./assets/destroyer.png");
 
-          const updateWidth = function () {
+          const updateImgSize = function () {
             const width = div.getBoundingClientRect().width * 3;
+            const height = div.getBoundingClientRect().height;
             destroyerImg.style.width = `${width - 5}px`;
+            destroyerImg.style.height = `${height}px`;
           };
-          updateWidth();
-          window.addEventListener("resize", updateWidth);
+          updateImgSize();
+          window.addEventListener("resize", updateImgSize);
 
           div.appendChild(destroyerImg);
           return;
@@ -670,12 +676,14 @@ const configuration = (function () {
           submarineImg.classList.add("submarine");
           submarineImg.setAttribute("src", "./assets/submarine.png");
 
-          const updateWidth = function () {
+          const updateImgSize = function () {
             const width = div.getBoundingClientRect().width * 3;
+            const height = div.getBoundingClientRect().height;
             submarineImg.style.width = `${width - 5}px`;
+            submarineImg.style.height = `${height}px`;
           };
-          updateWidth();
-          window.addEventListener("resize", updateWidth);
+          updateImgSize();
+          window.addEventListener("resize", updateImgSize);
 
           div.appendChild(submarineImg);
           return;
@@ -691,12 +699,14 @@ const configuration = (function () {
           patrolBoatImg.classList.add("patrol-boat");
           patrolBoatImg.setAttribute("src", "./assets/patrol-boat.png");
 
-          const updateWidth = function () {
+          const updateImgSize = function () {
             const width = div.getBoundingClientRect().width * 2;
+            const height = div.getBoundingClientRect().height;
             patrolBoatImg.style.width = `${width - 5}px`;
+            patrolBoatImg.style.height = `${height}px`;
           };
-          updateWidth();
-          window.addEventListener("resize", updateWidth);
+          updateImgSize();
+          window.addEventListener("resize", updateImgSize);
 
           div.appendChild(patrolBoatImg);
           return;
