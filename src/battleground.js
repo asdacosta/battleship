@@ -218,6 +218,10 @@ const populateBoards = (function () {
             updateImgSize();
             window.addEventListener("resize", updateImgSize);
 
+            const removeScaling = (function () {
+              div.style.transform = "scale(1)";
+            })();
+
             div.appendChild(shipImg);
             return;
           }
