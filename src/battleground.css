@@ -289,26 +289,6 @@ img {
   pointer-events: none;
 }
 
-img.carrier {
-  height: 3rem;
-}
-
-img.battleship {
-  height: 3rem;
-}
-
-img.destroyer {
-  height: 3rem;
-}
-
-img.submarine {
-  height: 3rem;
-}
-
-img.patrol-boat {
-  height: 3rem;
-}
-
 @media (max-width: 1570px) {
   body {
     gap: 6rem;
@@ -369,26 +349,6 @@ img.patrol-boat {
   body > div:last-child {
     width: 28rem;
     font-size: 1rem;
-  }
-
-  img.carrier {
-    height: 2rem;
-  }
-
-  img.battleship {
-    height: 2rem;
-  }
-
-  img.destroyer {
-    height: 2rem;
-  }
-
-  img.submarine {
-    height: 2rem;
-  }
-
-  img.patrol-boat {
-    height: 2rem;
   }
 }
 
