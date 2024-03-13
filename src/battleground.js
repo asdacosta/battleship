@@ -247,6 +247,7 @@ const displayTarget = (function () {
     grounds.forEach((div) => {
       const targetSpan = document.createElement("span");
       targetSpan.textContent = "💢";
+      targetSpan.style.zIndex = "1";
       targetSpan.style.display = "none";
       div.appendChild(targetSpan);
 
@@ -592,4 +593,117 @@ const configuration = (function () {
       }
     });
   })();
+
+  const setSpatialDimension = function (grounds) {
+    for (const div of getNodes.admiralGroundsDivs) {
+      div.style.backgroundColor = "transparent";
+    }
+
+    const __forCarrier = (function () {
+      for (const div of grounds) {
+        if (div.dataset.ship === "5") {
+          div.style.position = "relative";
+          const carrierImg = document.createElement("img");
+          carrierImg.classList.add("carrier");
+          carrierImg.setAttribute("src", "./assets/carrier.png");
+
+          const updateWidth = function () {
+            const width = div.getBoundingClientRect().width * 5;
+            carrierImg.style.width = `${width - 5}px`;
+          };
+          updateWidth();
+          window.addEventListener("resize", updateWidth);
+
+          div.appendChild(carrierImg);
+          return;
+        }
+      }
+    })();
+
+    const __forBattleship = (function () {
+      for (const div of grounds) {
+        if (div.dataset.ship === "4") {
+          div.style.position = "relative";
+          const battleshipImg = document.createElement("img");
+          battleshipImg.classList.add("battleship");
+          battleshipImg.setAttribute("src", "./assets/battleship.png");
+
+          const updateWidth = function () {
+            const width = div.getBoundingClientRect().width * 4;
+            battleshipImg.style.width = `${width}px`;
+          };
+          updateWidth();
+          window.addEventListener("resize", updateWidth);
+
+          div.appendChild(battleshipImg);
+          return;
+        }
+      }
+    })();
+
+    const __forDestroyer = (function () {
+      for (const div of grounds) {
+        if (div.dataset.ship === "3.5") {
+          div.style.position = "relative";
+          const destroyerImg = document.createElement("img");
+          destroyerImg.classList.add("destroyer");
+          destroyerImg.setAttribute("src", "./assets/destroyer.png");
+
+          const updateWidth = function () {
+            const width = div.getBoundingClientRect().width * 3;
+            destroyerImg.style.width = `${width - 5}px`;
+          };
+          updateWidth();
+          window.addEventListener("resize", updateWidth);
+
+          div.appendChild(destroyerImg);
+          return;
+        }
+      }
+    })();
+
+    const __forSubmarine = (function () {
+      for (const div of grounds) {
+        if (div.dataset.ship === "3") {
+          div.style.position = "relative";
+          const submarineImg = document.createElement("img");
+          submarineImg.classList.add("submarine");
+          submarineImg.setAttribute("src", "./assets/submarine.png");
+
+          const updateWidth = function () {
+            const width = div.getBoundingClientRect().width * 3;
+            submarineImg.style.width = `${width - 5}px`;
+          };
+          updateWidth();
+          window.addEventListener("resize", updateWidth);
+
+          div.appendChild(submarineImg);
+          return;
+        }
+      }
+    })();
+
+    const __forPatrolBoat = (function () {
+      for (const div of grounds) {
+        if (div.dataset.ship === "2") {
+          div.style.position = "relative";
+          const patrolBoatImg = document.createElement("img");
+          patrolBoatImg.classList.add("patrol-boat");
+          patrolBoatImg.setAttribute("src", "./assets/patrol-boat.png");
+
+          const updateWidth = function () {
+            const width = div.getBoundingClientRect().width * 2;
+            patrolBoatImg.style.width = `${width - 5}px`;
+          };
+          updateWidth();
+          window.addEventListener("resize", updateWidth);
+
+          div.appendChild(patrolBoatImg);
+          return;
+        }
+      }
+    })();
+  };
+  setSpatialDimension(getNodes.admiralGroundsDivs);
+  setSpatialDimension(getNodes.aiGroundsDivs);
 })();
