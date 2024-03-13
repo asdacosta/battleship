@@ -245,12 +245,19 @@ const populateBoards = (function () {
 const displayTarget = (function () {
   const __forEachGrounds = function (grounds) {
     grounds.forEach((div) => {
+      const targetSpan = document.createElement("span");
+      targetSpan.textContent = "💢";
+      targetSpan.style.display = "none";
+      div.appendChild(targetSpan);
+
       div.addEventListener("mouseover", () => {
-        div.textContent = "💢";
+        targetSpan.style.display = "inline";
+        // div.textContent = "💢";
       });
       div.addEventListener("mouseout", () => {
         if (div.textContent !== "X" && div.textContent !== "💥") {
-          div.textContent = "";
+          targetSpan.style.display = "none";
+          // div.textContent = "";
         }
       });
     });
