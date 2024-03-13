@@ -386,7 +386,14 @@ const populateBoards = (function () {
     getNodes.aiGroundsDivs.forEach((div, divIndex) => {
       computerBoard.forEach((entry, entryIndex) => {
         if (divIndex === entryIndex) {
-          setRandomColors(div, entry);
+          if (getNodes.dimensionOptions.value === "simple") {
+            setRandomColors(div, entry);
+          }
+          if (getNodes.dimensionOptions.value === "spatial") {
+            if (div.querySelector("img")) {
+              div.querySelector("img").style.display = "inline";
+            }
+          }
         }
       });
     });
