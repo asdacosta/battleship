@@ -491,9 +491,14 @@ const loopGame = (function () {
   })();
 
   const displayAttack = function (spot, inputValue, fontColor) {
+    const span = spot.querySelector("span");
+    span.style.display = "inline";
+    span.textContent = inputValue;
+    span.style.zIndex = "1";
+
     spot.style.color = fontColor;
-    spot.textContent = inputValue;
     spot.style.pointerEvents = "none";
+    spot.style.zIndex = "1";
     spot.setAttribute("data-attacked", "Yes");
   };
 
