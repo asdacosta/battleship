@@ -764,3 +764,25 @@ const configuration = (function () {
     });
   })();
 })();
+
+const setDragAndDrop = (function () {
+  const setAttributes = (function () {
+    const game = populateBoards.game;
+    const userBoard = game.user.board.flat();
+
+    getNodes.admiralGroundsDivs.forEach((div) => {
+      if (div.querySelector("img"))
+        div.querySelector("img").setAttribute("draggable", true);
+    });
+
+    getNodes.admiralGroundsDivs.forEach((div, divIndex) => {
+      userBoard.forEach((entry, entryIndex) => {
+        if (divIndex === entryIndex) {
+          if (entry === null) {
+            div.classList.add("droppable");
+          }
+        }
+      });
+    });
+  })();
+})();
