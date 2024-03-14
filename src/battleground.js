@@ -771,8 +771,9 @@ const setDragAndDrop = (function () {
     const userBoard = game.user.board.flat();
 
     getNodes.admiralGroundsDivs.forEach((div) => {
-      if (div.querySelector("img"))
-        div.querySelector("img").setAttribute("draggable", true);
+      if (div.dataset.ship) {
+        div.setAttribute("draggable", true);
+      }
     });
 
     getNodes.admiralGroundsDivs.forEach((div, divIndex) => {
