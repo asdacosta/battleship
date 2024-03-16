@@ -415,11 +415,13 @@ const displayTarget = (function () {
 
       div.addEventListener("mouseover", () => {
         targetSpan.style.display = "inline";
+        div.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
         // div.textContent = "💢";
       });
       div.addEventListener("mouseout", () => {
         if (div.textContent !== "X" && div.textContent !== "💥") {
           targetSpan.style.display = "none";
+          div.style.backgroundColor = "initial";
           // div.textContent = "";
         }
       });
@@ -792,18 +794,26 @@ const setDragAndDrop = (function () {
   const admiralDroppableSpots = document.querySelectorAll(".droppable");
 
   const dragStart = function (event) {
-    console.log(event.target.dataset.ship);
     event.dataTransfer.setData("text/plain", event.target.dataset.ship);
   };
 
   const dragOver = function (event) {
     event.preventDefault();
+    event.target.style.backgroundColor = "rgba(98, 253, 60, 0.5)";
+  };
+
+  const dragLeave = function (event) {
+    event.target.style.backgroundColor = "initial";
   };
 
   const drop = function (event) {
     event.preventDefault();
     const shipDataset = event.dataTransfer.getData("text/plain");
     const dropTarget = event.target;
+    event.target.style.backgroundColor = "initial";
+    const removeScaling = (function () {
+      dropTarget.style.transform = "scale(1)";
+    })();
     const draggedShip = document.querySelector(`[data-ship='${shipDataset}']`);
     const shipImg = draggedShip.querySelector("img");
     dropTarget.appendChild(shipImg);
@@ -815,6 +825,9 @@ const setDragAndDrop = (function () {
 
   admiralDroppableSpots.forEach((spot) => {
     spot.addEventListener("dragover", dragOver);
+    spot.addEventListener("dragleave", dragLeave);
     spot.addEventListener("drop", drop);
   });
 })();
+
+// TODO: Scaling, ShipDataSet
