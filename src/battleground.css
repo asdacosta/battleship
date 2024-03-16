@@ -214,6 +214,7 @@ h2:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
   font-weight: 800;
   border: 2px solid rgb(255, 255, 255);
   cursor: pointer;
@@ -222,7 +223,6 @@ h2:hover {
 
 .admiral-grounds > div:hover,
 .ai-grounds > div:hover {
-  background: rgba(255, 255, 255, 0.3);
   transform: scale(1.1);
 }
 
