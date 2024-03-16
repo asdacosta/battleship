@@ -813,7 +813,6 @@ const setDragAndDrop = (function () {
         currentTarget = currentTarget.nextElementSibling;
       }
     })();
-    // event.target.style.backgroundColor = "rgba(98, 253, 60, 0.6)";
   };
 
   const dragLeave = function (event) {
@@ -824,7 +823,6 @@ const setDragAndDrop = (function () {
         currentTarget = currentTarget.nextElementSibling;
       }
     })();
-    // event.target.style.backgroundColor = "initial";
   };
 
   const drop = function (event) {
@@ -839,7 +837,6 @@ const setDragAndDrop = (function () {
         currentTarget = currentTarget.nextElementSibling;
       }
     })();
-    // event.target.style.backgroundColor = "initial";
     const removeScaling = (function () {
       dropTarget.style.transform = "scale(1)";
     })();
@@ -862,11 +859,28 @@ const setDragAndDrop = (function () {
   // indicate undroppable spots with red background
   const undroppableDragOver = function (event) {
     event.preventDefault();
-    event.target.style.backgroundColor = "rgba(248, 73, 29, 0.6)";
+    const setHoveringColor = (function () {
+      let currentTarget = event.target;
+      for (let n = 0; n < parseInt(catchEventDataset); n++) {
+        currentTarget.style.backgroundColor = "rgba(248, 73, 29, 0.6)";
+        currentTarget = currentTarget.nextElementSibling;
+      }
+    })();
+  };
+  const undroppableDrop = function (event) {
+    event.preventDefault();
+    const removeHoveringColor = (function () {
+      let currentTarget = event.target;
+      for (let n = 0; n < parseInt(catchEventDataset); n++) {
+        currentTarget.style.backgroundColor = "initial";
+        currentTarget = currentTarget.nextElementSibling;
+      }
+    })();
   };
   admiralUndroppableSpots.forEach((spot) => {
     spot.addEventListener("dragover", undroppableDragOver);
     spot.addEventListener("dragleave", dragLeave);
+    spot.addEventListener("drop", undroppableDrop);
   });
 })();
 
