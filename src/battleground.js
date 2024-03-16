@@ -57,6 +57,8 @@ const getNodes = (function () {
     peekButton,
     difficultyOptions,
     dimensionOptions,
+    // admiralDraggableShips,
+    // admiralDroppableSpots,
   };
 })();
 
@@ -205,7 +207,7 @@ const populateBoards = (function () {
       const appendShipImg = function (shipSrc, shipLength, shipType) {
         for (const div of grounds) {
           if (div.dataset.ship === shipType) {
-            div.style.position = "relative";
+            // div.style.position = "relative";
             const shipImg = document.createElement("img");
             shipImg.setAttribute("src", `${shipSrc}`);
 
@@ -786,4 +788,33 @@ const setDragAndDrop = (function () {
       });
     });
   })();
+  const admiralDraggableShips = document.querySelectorAll("div[draggable='true']");
+  const admiralDroppableSpots = document.querySelectorAll(".droppable");
+
+  const dragStart = function (event) {
+    console.log(event.target.dataset.ship);
+    event.dataTransfer.setData("text/plain", event.target.dataset.ship);
+  };
+
+  const dragOver = function (event) {
+    event.preventDefault();
+  };
+
+  const drop = function (event) {
+    event.preventDefault();
+    const shipDataset = event.dataTransfer.getData("text/plain");
+    const dropTarget = event.target;
+    const draggedShip = document.querySelector(`[data-ship='${shipDataset}']`);
+    const shipImg = draggedShip.querySelector("img");
+    dropTarget.appendChild(shipImg);
+  };
+
+  admiralDraggableShips.forEach((ship) => {
+    ship.addEventListener("dragstart", dragStart);
+  });
+
+  admiralDroppableSpots.forEach((spot) => {
+    spot.addEventListener("dragover", dragOver);
+    spot.addEventListener("drop", drop);
+  });
 })();
