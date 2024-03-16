@@ -797,27 +797,53 @@ const setDragAndDrop = (function () {
   const admiralDroppableSpots = document.querySelectorAll(".droppable");
   const admiralUndroppableSpots = document.querySelectorAll(".undroppable");
 
+  let catchEventDataset = null;
   const dragStart = function (event) {
     event.dataTransfer.setData("text/plain", event.target.dataset.ship);
+    catchEventDataset = event.target.dataset.ship;
   };
 
   const dragOver = function (event) {
     event.preventDefault();
-    event.target.style.backgroundColor = "rgba(98, 253, 60, 0.6)";
+
+    const setHoveringColor = (function () {
+      let currentTarget = event.target;
+      for (let n = 0; n < parseInt(catchEventDataset); n++) {
+        currentTarget.style.backgroundColor = "rgba(98, 253, 60, 0.6)";
+        currentTarget = currentTarget.nextElementSibling;
+      }
+    })();
+    // event.target.style.backgroundColor = "rgba(98, 253, 60, 0.6)";
   };
 
   const dragLeave = function (event) {
-    event.target.style.backgroundColor = "initial";
+    const removeHoveringColor = (function () {
+      let currentTarget = event.target;
+      for (let n = 0; n < parseInt(catchEventDataset); n++) {
+        currentTarget.style.backgroundColor = "initial";
+        currentTarget = currentTarget.nextElementSibling;
+      }
+    })();
+    // event.target.style.backgroundColor = "initial";
   };
 
   const drop = function (event) {
     event.preventDefault();
     const shipDataset = event.dataTransfer.getData("text/plain");
     const dropTarget = event.target;
-    event.target.style.backgroundColor = "initial";
+
+    const removeHoveringColor = (function () {
+      let currentTarget = event.target;
+      for (let n = 0; n < parseInt(catchEventDataset); n++) {
+        currentTarget.style.backgroundColor = "initial";
+        currentTarget = currentTarget.nextElementSibling;
+      }
+    })();
+    // event.target.style.backgroundColor = "initial";
     const removeScaling = (function () {
       dropTarget.style.transform = "scale(1)";
     })();
+    // Append ship img of the first div(in the set of divs with same dataset) to the target div
     const draggedShip = document.querySelector(`[data-ship='${shipDataset}']`);
     const shipImg = draggedShip.querySelector("img");
     dropTarget.appendChild(shipImg);
@@ -833,11 +859,11 @@ const setDragAndDrop = (function () {
     spot.addEventListener("drop", drop);
   });
 
+  // indicate undroppable spots with red background
   const undroppableDragOver = function (event) {
     event.preventDefault();
     event.target.style.backgroundColor = "rgba(248, 73, 29, 0.6)";
   };
-
   admiralUndroppableSpots.forEach((spot) => {
     spot.addEventListener("dragover", undroppableDragOver);
     spot.addEventListener("dragleave", dragLeave);
