@@ -786,12 +786,16 @@ const setDragAndDrop = (function () {
           if (entry === null) {
             div.classList.add("droppable");
           }
+          if (entry === "O") {
+            div.classList.add("undroppable");
+          }
         }
       });
     });
   })();
   const admiralDraggableShips = document.querySelectorAll("div[draggable='true']");
   const admiralDroppableSpots = document.querySelectorAll(".droppable");
+  const admiralUndroppableSpots = document.querySelectorAll(".undroppable");
 
   const dragStart = function (event) {
     event.dataTransfer.setData("text/plain", event.target.dataset.ship);
@@ -799,7 +803,7 @@ const setDragAndDrop = (function () {
 
   const dragOver = function (event) {
     event.preventDefault();
-    event.target.style.backgroundColor = "rgba(98, 253, 60, 0.5)";
+    event.target.style.backgroundColor = "rgba(98, 253, 60, 0.6)";
   };
 
   const dragLeave = function (event) {
@@ -827,6 +831,16 @@ const setDragAndDrop = (function () {
     spot.addEventListener("dragover", dragOver);
     spot.addEventListener("dragleave", dragLeave);
     spot.addEventListener("drop", drop);
+  });
+
+  const undroppableDragOver = function (event) {
+    event.preventDefault();
+    event.target.style.backgroundColor = "rgba(248, 73, 29, 0.6)";
+  };
+
+  admiralUndroppableSpots.forEach((spot) => {
+    spot.addEventListener("dragover", undroppableDragOver);
+    spot.addEventListener("dragleave", dragLeave);
   });
 })();
 
