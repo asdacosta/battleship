@@ -773,6 +773,8 @@ const setDragAndDrop = (function () {
   const setAttributes = (function () {
     const game = populateBoards.game;
     const userBoard = game.user.board.flat();
+    const legalMoves = game.user.getLegalMoves();
+    const defaultUserBoard = game.user.board;
 
     getNodes.admiralGroundsDivs.forEach((div) => {
       if (div.dataset.ship) {
@@ -780,18 +782,89 @@ const setDragAndDrop = (function () {
       }
     });
 
-    getNodes.admiralGroundsDivs.forEach((div, divIndex) => {
-      userBoard.forEach((entry, entryIndex) => {
-        if (divIndex === entryIndex) {
-          if (entry === null) {
-            div.classList.add("droppable");
-          }
-          if (entry === "O") {
-            div.classList.add("undroppable");
-          }
+    // getNodes.admiralGroundsDivs.forEach((div, divIndex) => {
+    // userBoard.forEach((entry, entryIndex) => {
+    //   if (divIndex === entryIndex) {
+    //     if (entry === null) {
+    //       div.classList.add("droppable");
+    //     }
+    //     if (entry === "O") {
+    //       div.classList.add("undroppable");
+    //     }
+    //   }
+    // });
+    // });
+    const getMoves = function (shipIndex) {
+      const shipMoves = legalMoves[shipIndex];
+      const shipLegalMoves = [];
+      const shipIllegalMoves = [];
+      const defineMovesForEachShipRow = (function () {
+        for (let n = 0; n < 10; n++) {
+          shipLegalMoves.push([]);
+          shipIllegalMoves.push([]);
         }
+      })();
+
+      defaultUserBoard.forEach((shipRow, rowIndex) => {
+        shipMoves.forEach((moves, index) => {
+          const values = [];
+          for (let n = 0; n < moves.length; n++) {
+            const value = shipRow[moves[n]];
+            values.push(value);
+          }
+
+          const checkLegality = (function () {
+            const isAllNull = values.every((value) => value === null);
+            if (isAllNull) {
+              shipLegalMoves[rowIndex].push(moves[0]);
+            }
+            if (!isAllNull) {
+              shipIllegalMoves[rowIndex].push(moves[0]);
+            }
+          })();
+        });
       });
-    });
+      return { shipLegalMoves, shipIllegalMoves };
+    };
+
+    const setShipAttributes = function (shipIndex, shipLength) {
+      const shipMoves = getMoves(shipIndex);
+      const shipLegalMoves = shipMoves.shipLegalMoves;
+      const shipIllegalMoves = shipMoves.shipIllegalMoves;
+      // console.log("###");
+      // console.log(shipLength);
+      // console.log(shipLegalMoves);
+      // console.log(shipIllegalMoves);
+      getNodes.admiralGroundsDivs.forEach((div, divIndex) => {
+        shipLegalMoves.forEach((moves, movesIndex) => {
+          if (moves) {
+            if (movesIndex === parseInt(divIndex / 10)) {
+              moves.forEach((move) => {
+                if (move === divIndex % 10) {
+                  div.classList.add(`droppable${shipLength}`);
+                }
+              });
+            }
+          }
+        });
+        shipIllegalMoves.forEach((moves, movesIndex) => {
+          if (moves) {
+            if (movesIndex === parseInt(divIndex / 10)) {
+              moves.forEach((move) => {
+                if (move === divIndex % 10) {
+                  div.classList.add(`not-droppable${shipLength}`);
+                }
+              });
+            }
+          }
+        });
+      });
+    };
+    setShipAttributes(0, 5);
+    setShipAttributes(1, 4);
+    setShipAttributes(2, 3);
+    setShipAttributes(3, 3);
+    setShipAttributes(4, 2);
   })();
   const admiralDraggableShips = document.querySelectorAll("div[draggable='true']");
   const admiralDroppableSpots = document.querySelectorAll(".droppable");
@@ -837,13 +910,17 @@ const setDragAndDrop = (function () {
         currentTarget = currentTarget.nextElementSibling;
       }
     })();
+
     const removeScaling = (function () {
       dropTarget.style.transform = "scale(1)";
     })();
-    // Append ship img of the first div(in the set of divs with same dataset) to the target div
-    const draggedShip = document.querySelector(`[data-ship='${shipDataset}']`);
-    const shipImg = draggedShip.querySelector("img");
-    dropTarget.appendChild(shipImg);
+
+    const appendShipToTarget = (function () {
+      // Append ship img of the first div(in the set of divs with same dataset) to the target div
+      const draggedShip = document.querySelector(`[data-ship='${shipDataset}']`);
+      const shipImg = draggedShip.querySelector("img");
+      dropTarget.appendChild(shipImg);
+    })();
   };
 
   admiralDraggableShips.forEach((ship) => {
