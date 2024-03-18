@@ -768,10 +768,12 @@ const configuration = (function () {
 })();
 
 const setDragAndDrop = (function () {
+  const game = populateBoards.game;
+
   const setAttributes = (function () {
-    const game = populateBoards.game;
     const legalMoves = game.user.getLegalMoves();
     const defaultUserBoard = game.user.board;
+    // console.log(defaultUserBoard);
 
     getNodes.admiralGroundsDivs.forEach((div) => {
       if (div.dataset.ship) {
@@ -897,7 +899,7 @@ const setDragAndDrop = (function () {
         if (!currentTarget) {
           return;
         }
-        currentTarget.style.backgroundColor = "rgba(98, 253, 60, 0.6)";
+        currentTarget.style.backgroundColor = "rgba(98, 253, 60, 0.5)";
         currentTarget = currentTarget.nextElementSibling;
       }
     })();
@@ -932,13 +934,13 @@ const setDragAndDrop = (function () {
       }
     })();
 
+    const draggedShip = document.querySelector(`[data-ship='${shipDataset}']`);
     const removeScaling = (function () {
       dropTarget.style.transform = "scale(1)";
     })();
 
     const appendShipToTarget = (function () {
       // Append ship img of the first div(in the set of divs with same dataset) to the target div
-      const draggedShip = document.querySelector(`[data-ship='${shipDataset}']`);
       const shipImg = draggedShip.querySelector("img");
       dropTarget.appendChild(shipImg);
     })();
@@ -964,6 +966,27 @@ const setDragAndDrop = (function () {
         }
       })();
     })();
+
+    const updateBoard = (function () {
+      const generateKeys = (function () {
+        // Alphabets A-J
+        const alphabets = [];
+        for (let n = 65; n <= 74; n++) {
+          alphabets.push(String.fromCharCode(n));
+        }
+
+        const keys = [];
+        for (let m = 1; m <= 10; m++) {
+          const subKeys = [];
+          for (const letter of alphabets) {
+            subKeys.push(`${m}` + letter);
+          }
+          keys.push(subKeys);
+        }
+
+        return keys;
+      })();
+    })();
   };
 
   const notDroppableDragOver = function (event) {
@@ -974,7 +997,7 @@ const setDragAndDrop = (function () {
         if (!currentTarget) {
           return;
         }
-        currentTarget.style.backgroundColor = "rgba(248, 73, 29, 0.6)";
+        currentTarget.style.backgroundColor = "rgba(248, 73, 29, 0.5)";
         currentTarget = currentTarget.nextElementSibling;
       }
     })();
@@ -1091,4 +1114,4 @@ const setDragAndDrop = (function () {
   };
 })();
 
-// TODO: update board
+// TODO: update board, hover on ship should display name
