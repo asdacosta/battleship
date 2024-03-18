@@ -57,8 +57,6 @@ const getNodes = (function () {
     peekButton,
     difficultyOptions,
     dimensionOptions,
-    // admiralDraggableShips,
-    // admiralDroppableSpots,
   };
 })();
 
@@ -831,10 +829,7 @@ const setDragAndDrop = (function () {
       const shipMoves = getMoves(shipIndex);
       const shipLegalMoves = shipMoves.shipLegalMoves;
       const shipIllegalMoves = shipMoves.shipIllegalMoves;
-      // console.log("###");
-      // console.log(shipLength);
-      // console.log(shipLegalMoves);
-      // console.log(shipIllegalMoves);
+
       getNodes.admiralGroundsDivs.forEach((div, divIndex) => {
         shipLegalMoves.forEach((moves, movesIndex) => {
           if (moves) {
@@ -866,14 +861,46 @@ const setDragAndDrop = (function () {
     setShipAttributes(3, 3);
     setShipAttributes(4, 2);
   })();
-  const admiralDraggableShips = document.querySelectorAll("div[draggable='true']");
-  const admiralDroppableSpots = document.querySelectorAll(".droppable");
-  const admiralUndroppableSpots = document.querySelectorAll(".undroppable");
+  const draggableShips = document.querySelectorAll("div[draggable='true']");
+
+  const carrierDroppableSpots = document.querySelectorAll(".droppable5");
+  const carrierNotDroppableSpots = document.querySelectorAll(".not-droppable5");
+
+  const battleshipDroppableSpots = document.querySelectorAll(".droppable4");
+  const battleshipNotDroppableSpots = document.querySelectorAll(".not-droppable4");
+
+  const desAndSubDroppableSpots = document.querySelectorAll(".droppable3");
+  const desAndSubNotDroppableSpots = document.querySelectorAll(".not-droppable3");
+
+  const patrolBoatDroppableSpots = document.querySelectorAll(".droppable2");
+  const patrolBoatNotDroppableSpots = document.querySelectorAll(".not-droppable2");
+  // const admiralDroppableSpots = document.querySelectorAll(".droppable");
+  // const admiralUndroppableSpots = document.querySelectorAll(".undroppable");
 
   let catchEventDataset = null;
   const dragStart = function (event) {
     event.dataTransfer.setData("text/plain", event.target.dataset.ship);
     catchEventDataset = event.target.dataset.ship;
+
+    const triggerRightDragDropShip = (function () {
+      switch (catchEventDataset) {
+        case "5":
+          triggerCarrierDragDrop();
+          break;
+        case "4":
+          triggerBattleshipDragDrop();
+          break;
+        case "3.5":
+          triggerDesAndSubDragDrop();
+          break;
+        case "3":
+          triggerDesAndSubDragDrop();
+          break;
+        case "2":
+          triggerPatrolBoatDragDrop();
+          break;
+      }
+    })();
   };
 
   const dragOver = function (event) {
@@ -882,6 +909,9 @@ const setDragAndDrop = (function () {
     const setHoveringColor = (function () {
       let currentTarget = event.target;
       for (let n = 0; n < parseInt(catchEventDataset); n++) {
+        if (!currentTarget) {
+          return;
+        }
         currentTarget.style.backgroundColor = "rgba(98, 253, 60, 0.6)";
         currentTarget = currentTarget.nextElementSibling;
       }
@@ -892,6 +922,9 @@ const setDragAndDrop = (function () {
     const removeHoveringColor = (function () {
       let currentTarget = event.target;
       for (let n = 0; n < parseInt(catchEventDataset); n++) {
+        if (!currentTarget) {
+          return;
+        }
         currentTarget.style.backgroundColor = "initial";
         currentTarget = currentTarget.nextElementSibling;
       }
@@ -906,6 +939,9 @@ const setDragAndDrop = (function () {
     const removeHoveringColor = (function () {
       let currentTarget = event.target;
       for (let n = 0; n < parseInt(catchEventDataset); n++) {
+        if (!currentTarget) {
+          return;
+        }
         currentTarget.style.backgroundColor = "initial";
         currentTarget = currentTarget.nextElementSibling;
       }
@@ -923,42 +959,121 @@ const setDragAndDrop = (function () {
     })();
   };
 
-  admiralDraggableShips.forEach((ship) => {
-    ship.addEventListener("dragstart", dragStart);
-  });
-
-  admiralDroppableSpots.forEach((spot) => {
-    spot.addEventListener("dragover", dragOver);
-    spot.addEventListener("dragleave", dragLeave);
-    spot.addEventListener("drop", drop);
-  });
-
-  // indicate undroppable spots with red background
-  const undroppableDragOver = function (event) {
+  const notDroppableDragOver = function (event) {
     event.preventDefault();
     const setHoveringColor = (function () {
       let currentTarget = event.target;
       for (let n = 0; n < parseInt(catchEventDataset); n++) {
+        if (!currentTarget) {
+          return;
+        }
         currentTarget.style.backgroundColor = "rgba(248, 73, 29, 0.6)";
         currentTarget = currentTarget.nextElementSibling;
       }
     })();
   };
-  const undroppableDrop = function (event) {
+
+  const notDroppableDrop = function (event) {
     event.preventDefault();
     const removeHoveringColor = (function () {
       let currentTarget = event.target;
       for (let n = 0; n < parseInt(catchEventDataset); n++) {
+        if (!currentTarget) {
+          return;
+        }
         currentTarget.style.backgroundColor = "initial";
         currentTarget = currentTarget.nextElementSibling;
       }
     })();
   };
-  admiralUndroppableSpots.forEach((spot) => {
-    spot.addEventListener("dragover", undroppableDragOver);
-    spot.addEventListener("dragleave", dragLeave);
-    spot.addEventListener("drop", undroppableDrop);
+
+  draggableShips.forEach((ship) => {
+    ship.addEventListener("dragstart", dragStart);
   });
+
+  const triggerCarrierDragDrop = function () {
+    carrierDroppableSpots.forEach((spot) => {
+      spot.removeEventListener("dragover", dragOver);
+      spot.removeEventListener("dragleave", dragLeave);
+      spot.removeEventListener("drop", drop);
+
+      spot.addEventListener("dragover", dragOver);
+      spot.addEventListener("dragleave", dragLeave);
+      spot.addEventListener("drop", drop);
+    });
+    carrierNotDroppableSpots.forEach((spot) => {
+      spot.removeEventListener("dragover", notDroppableDragOver);
+      spot.removeEventListener("dragleave", dragLeave);
+      spot.removeEventListener("drop", notDroppableDrop);
+
+      spot.addEventListener("dragover", notDroppableDragOver);
+      spot.addEventListener("dragleave", dragLeave);
+      spot.addEventListener("drop", notDroppableDrop);
+    });
+  };
+
+  const triggerBattleshipDragDrop = function () {
+    battleshipDroppableSpots.forEach((spot) => {
+      spot.removeEventListener("dragover", dragOver);
+      spot.removeEventListener("dragleave", dragLeave);
+      spot.removeEventListener("drop", drop);
+
+      spot.addEventListener("dragover", dragOver);
+      spot.addEventListener("dragleave", dragLeave);
+      spot.addEventListener("drop", drop);
+    });
+    battleshipNotDroppableSpots.forEach((spot) => {
+      spot.removeEventListener("dragover", notDroppableDragOver);
+      spot.removeEventListener("dragleave", dragLeave);
+      spot.removeEventListener("drop", notDroppableDrop);
+
+      spot.addEventListener("dragover", notDroppableDragOver);
+      spot.addEventListener("dragleave", dragLeave);
+      spot.addEventListener("drop", notDroppableDrop);
+    });
+  };
+
+  const triggerDesAndSubDragDrop = function () {
+    desAndSubDroppableSpots.forEach((spot) => {
+      spot.removeEventListener("dragover", dragOver);
+      spot.removeEventListener("dragleave", dragLeave);
+      spot.removeEventListener("drop", drop);
+
+      spot.addEventListener("dragover", dragOver);
+      spot.addEventListener("dragleave", dragLeave);
+      spot.addEventListener("drop", drop);
+    });
+    desAndSubNotDroppableSpots.forEach((spot) => {
+      spot.removeEventListener("dragover", notDroppableDragOver);
+      spot.removeEventListener("dragleave", dragLeave);
+      spot.removeEventListener("drop", notDroppableDrop);
+
+      spot.addEventListener("dragover", notDroppableDragOver);
+      spot.addEventListener("dragleave", dragLeave);
+      spot.addEventListener("drop", notDroppableDrop);
+    });
+  };
+
+  const triggerPatrolBoatDragDrop = function () {
+    patrolBoatDroppableSpots.forEach((spot) => {
+      spot.removeEventListener("dragover", dragOver);
+      spot.removeEventListener("dragleave", dragLeave);
+      spot.removeEventListener("drop", drop);
+
+      spot.addEventListener("dragover", dragOver);
+      spot.addEventListener("dragleave", dragLeave);
+      spot.addEventListener("drop", drop);
+    });
+    patrolBoatNotDroppableSpots.forEach((spot) => {
+      spot.removeEventListener("dragover", notDroppableDragOver);
+      spot.removeEventListener("dragleave", dragLeave);
+      spot.removeEventListener("drop", notDroppableDrop);
+
+      spot.addEventListener("dragover", notDroppableDragOver);
+      spot.addEventListener("dragleave", dragLeave);
+      spot.addEventListener("drop", notDroppableDrop);
+    });
+  };
 })();
 
-// TODO: Scaling, ShipDataSet
+// TODO: Continuation to next row, updating previous and current occupied div
