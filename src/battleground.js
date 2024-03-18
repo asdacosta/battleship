@@ -770,7 +770,6 @@ const configuration = (function () {
 const setDragAndDrop = (function () {
   const setAttributes = (function () {
     const game = populateBoards.game;
-    const userBoard = game.user.board.flat();
     const legalMoves = game.user.getLegalMoves();
     const defaultUserBoard = game.user.board;
 
@@ -780,18 +779,6 @@ const setDragAndDrop = (function () {
       }
     });
 
-    // getNodes.admiralGroundsDivs.forEach((div, divIndex) => {
-    // userBoard.forEach((entry, entryIndex) => {
-    //   if (divIndex === entryIndex) {
-    //     if (entry === null) {
-    //       div.classList.add("droppable");
-    //     }
-    //     if (entry === "O") {
-    //       div.classList.add("undroppable");
-    //     }
-    //   }
-    // });
-    // });
     const getMoves = function (shipIndex) {
       const shipMoves = legalMoves[shipIndex];
       const shipLegalMoves = [];
@@ -874,8 +861,6 @@ const setDragAndDrop = (function () {
 
   const patrolBoatDroppableSpots = document.querySelectorAll(".droppable2");
   const patrolBoatNotDroppableSpots = document.querySelectorAll(".not-droppable2");
-  // const admiralDroppableSpots = document.querySelectorAll(".droppable");
-  // const admiralUndroppableSpots = document.querySelectorAll(".undroppable");
 
   let catchEventDataset = null;
   const dragStart = function (event) {
@@ -1110,4 +1095,4 @@ const setDragAndDrop = (function () {
   };
 })();
 
-// TODO: updating previous and current occupied div, update board
+// TODO: update board
