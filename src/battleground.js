@@ -998,6 +998,16 @@ const setDragAndDrop = (function () {
         }
         return KeysBox;
       })();
+
+      const clearShipsBoudaries = (function () {
+        game.user.board.forEach((row, rowIndex) => {
+          row.forEach((value, valueIndex) => {
+            if (value === "O") {
+              game.user.board[rowIndex][valueIndex] = null;
+            }
+          });
+        });
+      })();
     })();
   };
 
