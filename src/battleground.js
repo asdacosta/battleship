@@ -986,6 +986,18 @@ const setDragAndDrop = (function () {
 
         return keys;
       })();
+
+      const assignKeysToBoardIndices = (function () {
+        const KeysBox = {};
+        const keys = generateKeys;
+
+        for (let rowIndex = 0; rowIndex < 10; rowIndex++) {
+          for (let index = 0; index < 10; index++) {
+            KeysBox[`${keys[rowIndex][index]}`] = [index, rowIndex];
+          }
+        }
+        return KeysBox;
+      })();
     })();
   };
 
