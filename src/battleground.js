@@ -213,7 +213,7 @@ const populateBoards = (function () {
               const width = div.getBoundingClientRect().width * shipLength;
               const height = div.getBoundingClientRect().height;
               shipImg.style.width = `${width - 5}px`;
-              shipImg.style.height = `${height}px`;
+              shipImg.style.height = `${height - 2}px`;
             };
             updateImgSize();
             window.addEventListener("resize", updateImgSize);
@@ -1003,8 +1003,7 @@ const setDragAndDrop = (function () {
       div.removeEventListener("dragover", dragOver);
       div.removeEventListener("dragleave", dragLeave);
       div.removeEventListener("drop", drop);
-    });
-    getNodes.admiralGroundsDivs.forEach((div) => {
+
       div.removeEventListener("dragover", notDroppableDragOver);
       div.removeEventListener("dragleave", dragLeave);
       div.removeEventListener("drop", notDroppableDrop);
@@ -1027,8 +1026,7 @@ const setDragAndDrop = (function () {
       div.removeEventListener("dragover", dragOver);
       div.removeEventListener("dragleave", dragLeave);
       div.removeEventListener("drop", drop);
-    });
-    getNodes.admiralGroundsDivs.forEach((div) => {
+
       div.removeEventListener("dragover", notDroppableDragOver);
       div.removeEventListener("dragleave", dragLeave);
       div.removeEventListener("drop", notDroppableDrop);
@@ -1051,8 +1049,7 @@ const setDragAndDrop = (function () {
       div.removeEventListener("dragover", dragOver);
       div.removeEventListener("dragleave", dragLeave);
       div.removeEventListener("drop", drop);
-    });
-    getNodes.admiralGroundsDivs.forEach((div) => {
+
       div.removeEventListener("dragover", notDroppableDragOver);
       div.removeEventListener("dragleave", dragLeave);
       div.removeEventListener("drop", notDroppableDrop);
@@ -1075,8 +1072,7 @@ const setDragAndDrop = (function () {
       div.removeEventListener("dragover", dragOver);
       div.removeEventListener("dragleave", dragLeave);
       div.removeEventListener("drop", drop);
-    });
-    getNodes.admiralGroundsDivs.forEach((div) => {
+
       div.removeEventListener("dragover", notDroppableDragOver);
       div.removeEventListener("dragleave", dragLeave);
       div.removeEventListener("drop", notDroppableDrop);
