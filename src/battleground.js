@@ -992,20 +992,23 @@ const setDragAndDrop = (function () {
   });
 
   const triggerCarrierDragDrop = function () {
-    carrierDroppableSpots.forEach((spot) => {
-      spot.removeEventListener("dragover", dragOver);
-      spot.removeEventListener("dragleave", dragLeave);
-      spot.removeEventListener("drop", drop);
+    getNodes.admiralGroundsDivs.forEach((div) => {
+      div.removeEventListener("dragover", dragOver);
+      div.removeEventListener("dragleave", dragLeave);
+      div.removeEventListener("drop", drop);
+    });
+    getNodes.admiralGroundsDivs.forEach((div) => {
+      div.removeEventListener("dragover", notDroppableDragOver);
+      div.removeEventListener("dragleave", dragLeave);
+      div.removeEventListener("drop", notDroppableDrop);
+    });
 
+    carrierDroppableSpots.forEach((spot) => {
       spot.addEventListener("dragover", dragOver);
       spot.addEventListener("dragleave", dragLeave);
       spot.addEventListener("drop", drop);
     });
     carrierNotDroppableSpots.forEach((spot) => {
-      spot.removeEventListener("dragover", notDroppableDragOver);
-      spot.removeEventListener("dragleave", dragLeave);
-      spot.removeEventListener("drop", notDroppableDrop);
-
       spot.addEventListener("dragover", notDroppableDragOver);
       spot.addEventListener("dragleave", dragLeave);
       spot.addEventListener("drop", notDroppableDrop);
@@ -1013,20 +1016,23 @@ const setDragAndDrop = (function () {
   };
 
   const triggerBattleshipDragDrop = function () {
-    battleshipDroppableSpots.forEach((spot) => {
-      spot.removeEventListener("dragover", dragOver);
-      spot.removeEventListener("dragleave", dragLeave);
-      spot.removeEventListener("drop", drop);
+    getNodes.admiralGroundsDivs.forEach((div) => {
+      div.removeEventListener("dragover", dragOver);
+      div.removeEventListener("dragleave", dragLeave);
+      div.removeEventListener("drop", drop);
+    });
+    getNodes.admiralGroundsDivs.forEach((div) => {
+      div.removeEventListener("dragover", notDroppableDragOver);
+      div.removeEventListener("dragleave", dragLeave);
+      div.removeEventListener("drop", notDroppableDrop);
+    });
 
+    battleshipDroppableSpots.forEach((spot) => {
       spot.addEventListener("dragover", dragOver);
       spot.addEventListener("dragleave", dragLeave);
       spot.addEventListener("drop", drop);
     });
     battleshipNotDroppableSpots.forEach((spot) => {
-      spot.removeEventListener("dragover", notDroppableDragOver);
-      spot.removeEventListener("dragleave", dragLeave);
-      spot.removeEventListener("drop", notDroppableDrop);
-
       spot.addEventListener("dragover", notDroppableDragOver);
       spot.addEventListener("dragleave", dragLeave);
       spot.addEventListener("drop", notDroppableDrop);
@@ -1034,20 +1040,23 @@ const setDragAndDrop = (function () {
   };
 
   const triggerDesAndSubDragDrop = function () {
-    desAndSubDroppableSpots.forEach((spot) => {
-      spot.removeEventListener("dragover", dragOver);
-      spot.removeEventListener("dragleave", dragLeave);
-      spot.removeEventListener("drop", drop);
+    getNodes.admiralGroundsDivs.forEach((div) => {
+      div.removeEventListener("dragover", dragOver);
+      div.removeEventListener("dragleave", dragLeave);
+      div.removeEventListener("drop", drop);
+    });
+    getNodes.admiralGroundsDivs.forEach((div) => {
+      div.removeEventListener("dragover", notDroppableDragOver);
+      div.removeEventListener("dragleave", dragLeave);
+      div.removeEventListener("drop", notDroppableDrop);
+    });
 
+    desAndSubDroppableSpots.forEach((spot) => {
       spot.addEventListener("dragover", dragOver);
       spot.addEventListener("dragleave", dragLeave);
       spot.addEventListener("drop", drop);
     });
     desAndSubNotDroppableSpots.forEach((spot) => {
-      spot.removeEventListener("dragover", notDroppableDragOver);
-      spot.removeEventListener("dragleave", dragLeave);
-      spot.removeEventListener("drop", notDroppableDrop);
-
       spot.addEventListener("dragover", notDroppableDragOver);
       spot.addEventListener("dragleave", dragLeave);
       spot.addEventListener("drop", notDroppableDrop);
@@ -1055,20 +1064,23 @@ const setDragAndDrop = (function () {
   };
 
   const triggerPatrolBoatDragDrop = function () {
-    patrolBoatDroppableSpots.forEach((spot) => {
-      spot.removeEventListener("dragover", dragOver);
-      spot.removeEventListener("dragleave", dragLeave);
-      spot.removeEventListener("drop", drop);
+    getNodes.admiralGroundsDivs.forEach((div) => {
+      div.removeEventListener("dragover", dragOver);
+      div.removeEventListener("dragleave", dragLeave);
+      div.removeEventListener("drop", drop);
+    });
+    getNodes.admiralGroundsDivs.forEach((div) => {
+      div.removeEventListener("dragover", notDroppableDragOver);
+      div.removeEventListener("dragleave", dragLeave);
+      div.removeEventListener("drop", notDroppableDrop);
+    });
 
+    patrolBoatDroppableSpots.forEach((spot) => {
       spot.addEventListener("dragover", dragOver);
       spot.addEventListener("dragleave", dragLeave);
       spot.addEventListener("drop", drop);
     });
     patrolBoatNotDroppableSpots.forEach((spot) => {
-      spot.removeEventListener("dragover", notDroppableDragOver);
-      spot.removeEventListener("dragleave", dragLeave);
-      spot.removeEventListener("drop", notDroppableDrop);
-
       spot.addEventListener("dragover", notDroppableDragOver);
       spot.addEventListener("dragleave", dragLeave);
       spot.addEventListener("drop", notDroppableDrop);
@@ -1076,4 +1088,4 @@ const setDragAndDrop = (function () {
   };
 })();
 
-// TODO: Continuation to next row, updating previous and current occupied div
+// TODO: Continuation to next row, updating previous and current occupied div, update board
