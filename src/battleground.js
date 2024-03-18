@@ -957,6 +957,28 @@ const setDragAndDrop = (function () {
       const shipImg = draggedShip.querySelector("img");
       dropTarget.appendChild(shipImg);
     })();
+
+    const transferAttributesFromDraggedShipsToTargets = (function () {
+      const removeAttributes = (function () {
+        const draggedShips = document.querySelectorAll(`[data-ship='${shipDataset}']`);
+        draggedShips.forEach((ship) => {
+          ship.removeAttribute("data-ship");
+          ship.setAttribute("draggable", false);
+        });
+      })();
+
+      const addToTargets = (function () {
+        let currentTarget = event.target;
+        for (let n = 0; n < parseInt(catchEventDataset); n++) {
+          if (!currentTarget) {
+            return;
+          }
+          currentTarget.setAttribute("data-ship", `${catchEventDataset}`);
+          currentTarget.setAttribute("draggable", true);
+          currentTarget = currentTarget.nextElementSibling;
+        }
+      })();
+    })();
   };
 
   const notDroppableDragOver = function (event) {
@@ -1088,4 +1110,4 @@ const setDragAndDrop = (function () {
   };
 })();
 
-// TODO: Continuation to next row, updating previous and current occupied div, update board
+// TODO: updating previous and current occupied div, update board
