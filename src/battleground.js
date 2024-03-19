@@ -773,7 +773,6 @@ const setDragAndDrop = (function () {
   const setAttributes = (function () {
     const legalMoves = game.user.getLegalMoves();
     const defaultUserBoard = game.user.board;
-    // console.log(defaultUserBoard);
 
     getNodes.admiralGroundsDivs.forEach((div) => {
       if (div.dataset.ship) {
@@ -1008,6 +1007,141 @@ const setDragAndDrop = (function () {
           });
         });
       })();
+
+      const transferDroppedShip = (function () {
+        const newSpotsIndices = [];
+        const getDroppedShipSpotsIndices = (function () {
+          let currentTarget = event.target;
+          for (let n = 0; n < parseInt(catchEventDataset); n++) {
+            if (!currentTarget) {
+              return;
+            }
+            const index = currentTarget.dataset.index;
+            newSpotsIndices.push(index);
+            currentTarget = currentTarget.nextElementSibling;
+          }
+        })();
+
+        const clearShipFromOldSpots = (function () {
+          game.user.board.forEach((row, rowIndex) => {
+            row.forEach((value, valueIndex) => {
+              if (value === parseInt(catchEventDataset)) {
+                game.user.board[rowIndex][valueIndex] = null;
+              }
+            });
+          });
+        })();
+
+        const addShipToNewSpots = (function () {
+          const boardIndices = [];
+          const KeysBox = assignKeysToBoardIndices;
+          newSpotsIndices.forEach((index) => {
+            boardIndices.push(KeysBox[index]);
+          });
+          boardIndices.forEach((index) => {
+            game.user.board[index[1]][index[0]] = parseFloat(catchEventDataset);
+          });
+        })();
+
+        const board = game.user.board;
+        const addNewBoundaries = function (rowIndex, shipLength) {
+          const populatedRow = board[rowIndex];
+          const lastOccupied = populatedRow.lastIndexOf(shipLength);
+          let firstOccupied = null;
+
+          const occupy = function (
+            firstIndexEmpty,
+            lastIndexEmpty,
+            firstTopBottom,
+            lastTopBottom,
+          ) {
+            // Occupy first and last index of ship
+            firstOccupied = populatedRow.indexOf(shipLength);
+            if (firstIndexEmpty && !lastIndexEmpty) {
+              populatedRow[firstOccupied - 1] = "O";
+            } else if (!firstIndexEmpty && lastIndexEmpty) {
+              populatedRow[lastOccupied + 1] = "O";
+            } else if (firstIndexEmpty && lastIndexEmpty) {
+              populatedRow[firstOccupied - 1] = "O";
+              populatedRow[lastOccupied + 1] = "O";
+            }
+            // Occupy top and/or bottom
+            if (rowIndex === 0) {
+              const bottomAdjacentRow = board[1];
+              bottomAdjacentRow.fill(
+                "O",
+                firstOccupied - firstTopBottom,
+                lastOccupied + lastTopBottom,
+              );
+            } else if (rowIndex === 9) {
+              const topAdjacentRow = board[8];
+              topAdjacentRow.fill(
+                "O",
+                firstOccupied - firstTopBottom,
+                lastOccupied + lastTopBottom,
+              );
+            } else {
+              const topAdjacentRow = board[rowIndex - 1];
+              const bottomAdjacentRow = board[rowIndex + 1];
+              topAdjacentRow.fill(
+                "O",
+                firstOccupied - firstTopBottom,
+                lastOccupied + lastTopBottom,
+              );
+              bottomAdjacentRow.fill(
+                "O",
+                firstOccupied - firstTopBottom,
+                lastOccupied + lastTopBottom,
+              );
+            }
+          };
+
+          if (
+            populatedRow[populatedRow.indexOf(shipLength) - 1] === null &&
+            populatedRow[lastOccupied + 1] !== null
+          ) {
+            occupy(true, false, 1, 1);
+          } else if (
+            populatedRow[populatedRow.indexOf(shipLength) - 1] !== null &&
+            populatedRow[lastOccupied + 1] === null
+          ) {
+            occupy(false, true, 0, 2);
+          } else if (
+            populatedRow[populatedRow.indexOf(shipLength) - 1] === null &&
+            populatedRow[lastOccupied + 1] === null
+          ) {
+            occupy(true, true, 1, 2);
+          }
+        };
+
+        const setBoundaries = (function () {
+          for (const row of board) {
+            const isAllNull = row.every((entry) => entry === null);
+            if (isAllNull) {
+              continue;
+            }
+
+            const entries = [];
+            row.forEach((entry) => {
+              if (
+                entry === 5 ||
+                entry === 4 ||
+                entry === 3.5 ||
+                entry === 3 ||
+                entry === 2
+              ) {
+                // avoidMoreThanOneFunctionCallOnEntry
+                if (entries.includes(entry)) {
+                  return;
+                }
+                entries.push(entry);
+                addNewBoundaries(board.indexOf(row), entry);
+              }
+            });
+          }
+          console.log(game.user.board);
+        })();
+      })();
     })();
   };
 
@@ -1136,4 +1270,7 @@ const setDragAndDrop = (function () {
   };
 })();
 
-// TODO: update board, hover on ship should display name
+// TODO:
+// update board
+//before adding new attributes, remove defined ones
+// hover on ship should display name
