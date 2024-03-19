@@ -767,7 +767,7 @@ const configuration = (function () {
   })();
 })();
 
-const setDragAndDrop = (function () {
+const setDragAndDrop = function () {
   const game = populateBoards.game;
 
   const setAttributes = (function () {
@@ -1139,9 +1139,16 @@ const setDragAndDrop = (function () {
               }
             });
           }
-          console.log(game.user.board);
+          // console.log(game.user.board);
         })();
       })();
+    })();
+
+    const removeOldAttributesAndRestartDragDropToAddNewAttributes = (function () {
+      getNodes.admiralGroundsDivs.forEach((div) => {
+        div.classList = [];
+      });
+      setDragAndDrop();
     })();
   };
 
@@ -1268,9 +1275,8 @@ const setDragAndDrop = (function () {
       spot.addEventListener("drop", notDroppableDrop);
     });
   };
-})();
+};
+setDragAndDrop();
 
 // TODO:
-// update board
-//before adding new attributes, remove defined ones
 // hover on ship should display name
