@@ -1146,10 +1146,22 @@ const setDragAndDrop = function () {
       })();
     })();
 
-    const removeOldAttributesAndRestartDragDropToAddNewAttributes = (function () {
+    const removeOldAttributesAndEventListenersThenRestartForNew = (function () {
       getNodes.admiralGroundsDivs.forEach((div) => {
         div.classList = [];
       });
+      // Remove all event listeners
+      getNodes.admiralGroundsDivs.forEach((div) => {
+        div.removeEventListener("dragstart", dragStart);
+        div.removeEventListener("dragover", dragOver);
+        div.removeEventListener("dragleave", dragLeave);
+        div.removeEventListener("drop", drop);
+
+        div.removeEventListener("dragover", notDroppableDragOver);
+        div.removeEventListener("dragleave", dragLeave);
+        div.removeEventListener("drop", notDroppableDrop);
+      });
+
       setDragAndDrop();
     })();
   };
