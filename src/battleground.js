@@ -33,6 +33,7 @@ const getNodes = (function () {
   const kickStartButton = document.querySelector(".kick-start");
   const shuffleButton = document.querySelector(".shuffle");
   const peekButton = document.querySelector(".peek");
+  const realignButton = document.querySelector(".realign");
   const difficultyOptions = document.querySelector("#difficulty");
   const dimensionOptions = document.querySelector("#dimension");
 
@@ -57,6 +58,7 @@ const getNodes = (function () {
     peekButton,
     difficultyOptions,
     dimensionOptions,
+    realignButton,
   };
 })();
 
@@ -1025,7 +1027,7 @@ const setDragAndDrop = function () {
         const clearShipFromOldSpots = (function () {
           game.user.board.forEach((row, rowIndex) => {
             row.forEach((value, valueIndex) => {
-              if (value === parseInt(catchEventDataset)) {
+              if (value === parseFloat(catchEventDataset)) {
                 game.user.board[rowIndex][valueIndex] = null;
               }
             });
@@ -1277,6 +1279,3 @@ const setDragAndDrop = function () {
   };
 };
 setDragAndDrop();
-
-// TODO:
-// hover on ship should display name
