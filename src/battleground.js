@@ -1343,12 +1343,18 @@ const configuration = (function () {
   })();
 
   const triggerAlignment = (function () {
+    const currentFeedback = getNodes.feedback.textContent;
+
     const inactivateAlignedButton = (function () {
       getNodes.alignedButton.style.pointerEvents = "none";
       getNodes.alignedButton.style.color = "rgba(255, 255, 255, 0.6)";
     })();
 
     getNodes.realignButton.addEventListener("click", () => {
+      const updateFeedback = (function () {
+        getNodes.feedback.textContent = "Once done, click 'Aligned' to play.";
+      })();
+
       const activateAlignedButton = (function () {
         getNodes.alignedButton.style.pointerEvents = "auto";
         getNodes.alignedButton.style.color = "rgb(255, 255, 255)";
@@ -1375,6 +1381,10 @@ const configuration = (function () {
     });
 
     getNodes.alignedButton.addEventListener("click", () => {
+      const restoreFeedback = (function () {
+        getNodes.feedback.textContent = currentFeedback;
+      })();
+
       const inactivateAlignedButton = (function () {
         getNodes.alignedButton.style.pointerEvents = "none";
         getNodes.alignedButton.style.color = "rgba(255, 255, 255, 0.6)";
