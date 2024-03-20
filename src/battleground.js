@@ -1367,6 +1367,11 @@ const configuration = (function () {
     })();
 
     getNodes.realignButton.addEventListener("click", () => {
+      const inactivateDimensionSelection = (function () {
+        getNodes.dimensionOptions.style.pointerEvents = "none";
+        getNodes.dimensionOptions.style.color = "rgba(255, 255, 255, 0.6)";
+      })();
+
       const updateFeedback = (function () {
         getNodes.feedback.textContent = "Once done, click 'Aligned' to play.";
       })();
@@ -1397,6 +1402,11 @@ const configuration = (function () {
     });
 
     getNodes.alignedButton.addEventListener("click", () => {
+      const activateDimensionSelection = (function () {
+        getNodes.dimensionOptions.style.pointerEvents = "auto";
+        getNodes.dimensionOptions.style.color = "rgb(255, 255, 255)";
+      })();
+
       const restoreFeedback = (function () {
         getNodes.feedback.textContent = currentFeedback;
       })();
