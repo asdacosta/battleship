@@ -719,93 +719,7 @@ const loopGame = (function () {
   return { gameOver };
 })();
 
-const configuration = (function () {
-  const displayDialog = (function () {
-    getNodes.configButton.addEventListener("click", () => {
-      getNodes.cover.style.zIndex = "2";
-      getNodes.configDialog.style.visibility = "visible";
-      getNodes.configDialog.style.opacity = "1";
-    });
-  })();
-
-  const exitDialog = (function () {
-    getNodes.closeDialog.addEventListener("click", async () => {
-      getNodes.cover.style.zIndex = "0";
-      getNodes.configDialog.style.opacity = "0";
-      getNodes.configDialog.style.transition = "opacity 0.5s ease-in-out";
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          getNodes.configDialog.style.visibility = "hidden";
-        }, 400);
-      });
-    });
-  })();
-
-  const restartGame = (function () {
-    getNodes.kickStartButton.addEventListener("click", () => {
-      window.location.href = "./index.html";
-    });
-  })();
-
-  const shuffleGame = (function () {
-    getNodes.shuffleButton.addEventListener("click", () => {
-      window.location.reload();
-    });
-  })();
-
-  const setDifficulty = (function () {
-    getNodes.difficultyOptions.addEventListener("change", (event) => {
-      if (event.target.value === "impossible") {
-        localStorage.setItem("difficulty", "impossible");
-        window.location.reload();
-      }
-      if (event.target.value === "normal") {
-        localStorage.setItem("difficulty", "normal");
-        window.location.reload();
-      }
-      if (event.target.value === "dummy") {
-        localStorage.setItem("difficulty", "dummy");
-        window.location.reload();
-      }
-    });
-  })();
-
-  const triggerRealign = (function () {
-    const inactivateAlignedButton = (function () {
-      getNodes.alignedButton.style.pointerEvents = "none";
-      getNodes.alignedButton.style.color = "rgba(255, 255, 255, 0.6)";
-    })();
-
-    getNodes.realignButton.addEventListener("click", () => {
-      const activateAlignedButton = (function () {
-        getNodes.alignedButton.style.pointerEvents = "auto";
-        getNodes.alignedButton.style.color = "rgb(255, 255, 255)";
-      })();
-      const inactivateRealignButton = (function () {
-        getNodes.realignButton.style.pointerEvents = "none";
-        getNodes.realignButton.style.color = "rgba(255, 255, 255, 0.6)";
-      })();
-      // TODO:
-      // Make AI board inactive
-      // Turn text content to 'Done'
-      // When clicked 'Done'
-      // Remove all attributes and eventlisteners like in drop
-      // Make AI board active
-    });
-
-    getNodes.alignedButton.addEventListener("click", () => {
-      const inactivateAlignedButton = (function () {
-        getNodes.alignedButton.style.pointerEvents = "none";
-        getNodes.alignedButton.style.color = "rgba(255, 255, 255, 0.6)";
-      })();
-      const activateRealignButton = (function () {
-        getNodes.realignButton.style.pointerEvents = "auto";
-        getNodes.realignButton.style.color = "rgb(255, 255, 255)";
-      })();
-    });
-  })();
-})();
-
+let catchEventClearingLogic = null;
 const setDragAndDrop = function () {
   const game = populateBoards.game;
 
@@ -1207,7 +1121,7 @@ const setDragAndDrop = function () {
       })();
     })();
 
-    const removeOldAttributesAndEventListenersThenRestartForNew = (function () {
+    const removeOldAttributesAndEventListeners = (function () {
       getNodes.admiralGroundsDivs.forEach((div) => {
         div.classList = [];
       });
@@ -1222,9 +1136,9 @@ const setDragAndDrop = function () {
         div.removeEventListener("dragleave", dragLeave);
         div.removeEventListener("drop", notDroppableDrop);
       });
-      // Restart
-      setDragAndDrop();
     })();
+    // Restart to add new attributes and listeners
+    setDragAndDrop();
   };
 
   const notDroppableDragOver = function (event) {
@@ -1350,5 +1264,132 @@ const setDragAndDrop = function () {
       spot.addEventListener("drop", notDroppableDrop);
     });
   };
+
+  catchEventClearingLogic = function () {
+    getNodes.admiralGroundsDivs.forEach((div) => {
+      div.classList = [];
+    });
+    // Remove all event listeners
+    getNodes.admiralGroundsDivs.forEach((div) => {
+      div.removeEventListener("dragstart", dragStart);
+      div.removeEventListener("dragover", dragOver);
+      div.removeEventListener("dragleave", dragLeave);
+      div.removeEventListener("drop", drop);
+
+      div.removeEventListener("dragover", notDroppableDragOver);
+      div.removeEventListener("dragleave", dragLeave);
+      div.removeEventListener("drop", notDroppableDrop);
+    });
+  };
 };
-setDragAndDrop();
+
+const configuration = (function () {
+  const displayDialog = (function () {
+    getNodes.configButton.addEventListener("click", () => {
+      getNodes.cover.style.zIndex = "2";
+      getNodes.configDialog.style.visibility = "visible";
+      getNodes.configDialog.style.opacity = "1";
+    });
+  })();
+
+  const exitDialog = (function () {
+    getNodes.closeDialog.addEventListener("click", async () => {
+      getNodes.cover.style.zIndex = "0";
+      getNodes.configDialog.style.opacity = "0";
+      getNodes.configDialog.style.transition = "opacity 0.5s ease-in-out";
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          getNodes.configDialog.style.visibility = "hidden";
+        }, 400);
+      });
+    });
+  })();
+
+  const restartGame = (function () {
+    getNodes.kickStartButton.addEventListener("click", () => {
+      window.location.href = "./index.html";
+    });
+  })();
+
+  const shuffleGame = (function () {
+    getNodes.shuffleButton.addEventListener("click", () => {
+      window.location.reload();
+    });
+  })();
+
+  const setDifficulty = (function () {
+    getNodes.difficultyOptions.addEventListener("change", (event) => {
+      if (event.target.value === "impossible") {
+        localStorage.setItem("difficulty", "impossible");
+        window.location.reload();
+      }
+      if (event.target.value === "normal") {
+        localStorage.setItem("difficulty", "normal");
+        window.location.reload();
+      }
+      if (event.target.value === "dummy") {
+        localStorage.setItem("difficulty", "dummy");
+        window.location.reload();
+      }
+    });
+  })();
+
+  const triggerAlignment = (function () {
+    const inactivateAlignedButton = (function () {
+      getNodes.alignedButton.style.pointerEvents = "none";
+      getNodes.alignedButton.style.color = "rgba(255, 255, 255, 0.6)";
+    })();
+
+    getNodes.realignButton.addEventListener("click", () => {
+      const activateAlignedButton = (function () {
+        getNodes.alignedButton.style.pointerEvents = "auto";
+        getNodes.alignedButton.style.color = "rgb(255, 255, 255)";
+      })();
+      const inactivateRealignButton = (function () {
+        getNodes.realignButton.style.pointerEvents = "none";
+        getNodes.realignButton.style.color = "rgba(255, 255, 255, 0.6)";
+      })();
+
+      setDragAndDrop();
+      const inactivateAiGrounds = (function () {
+        getNodes.aiGrounds.style.pointerEvents = "none";
+      })();
+      const exitDialog = (async function () {
+        getNodes.cover.style.zIndex = "0";
+        getNodes.configDialog.style.opacity = "0";
+        getNodes.configDialog.style.transition = "opacity 0.5s ease-in-out";
+        await new Promise((resolve) => {
+          setTimeout(() => {
+            getNodes.configDialog.style.visibility = "hidden";
+          }, 400);
+        });
+      })();
+    });
+
+    getNodes.alignedButton.addEventListener("click", () => {
+      const inactivateAlignedButton = (function () {
+        getNodes.alignedButton.style.pointerEvents = "none";
+        getNodes.alignedButton.style.color = "rgba(255, 255, 255, 0.6)";
+      })();
+      const activateRealignButton = (function () {
+        getNodes.realignButton.style.pointerEvents = "auto";
+        getNodes.realignButton.style.color = "rgb(255, 255, 255)";
+      })();
+
+      catchEventClearingLogic();
+      const activateAiGrounds = (function () {
+        getNodes.aiGrounds.style.pointerEvents = "auto";
+      })();
+      const exitDialog = (async function () {
+        getNodes.cover.style.zIndex = "0";
+        getNodes.configDialog.style.opacity = "0";
+        getNodes.configDialog.style.transition = "opacity 0.5s ease-in-out";
+        await new Promise((resolve) => {
+          setTimeout(() => {
+            getNodes.configDialog.style.visibility = "hidden";
+          }, 400);
+        });
+      })();
+    });
+  })();
+})();
