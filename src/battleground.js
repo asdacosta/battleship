@@ -34,6 +34,7 @@ const getNodes = (function () {
   const shuffleButton = document.querySelector(".shuffle");
   const peekButton = document.querySelector(".peek");
   const realignButton = document.querySelector(".realign");
+  const alignedButton = document.querySelector(".aligned");
   const difficultyOptions = document.querySelector("#difficulty");
   const dimensionOptions = document.querySelector("#dimension");
 
@@ -59,6 +60,7 @@ const getNodes = (function () {
     difficultyOptions,
     dimensionOptions,
     realignButton,
+    alignedButton,
   };
 })();
 
@@ -769,13 +771,37 @@ const configuration = (function () {
   })();
 
   const triggerRealign = (function () {
+    const inactivateAlignedButton = (function () {
+      getNodes.alignedButton.style.pointerEvents = "none";
+      getNodes.alignedButton.style.color = "rgba(255, 255, 255, 0.6)";
+    })();
+
     getNodes.realignButton.addEventListener("click", () => {
+      const activateAlignedButton = (function () {
+        getNodes.alignedButton.style.pointerEvents = "auto";
+        getNodes.alignedButton.style.color = "rgb(255, 255, 255)";
+      })();
+      const inactivateRealignButton = (function () {
+        getNodes.realignButton.style.pointerEvents = "none";
+        getNodes.realignButton.style.color = "rgba(255, 255, 255, 0.6)";
+      })();
       // TODO:
       // Make AI board inactive
       // Turn text content to 'Done'
       // When clicked 'Done'
       // Remove all attributes and eventlisteners like in drop
       // Make AI board active
+    });
+
+    getNodes.alignedButton.addEventListener("click", () => {
+      const inactivateAlignedButton = (function () {
+        getNodes.alignedButton.style.pointerEvents = "none";
+        getNodes.alignedButton.style.color = "rgba(255, 255, 255, 0.6)";
+      })();
+      const activateRealignButton = (function () {
+        getNodes.realignButton.style.pointerEvents = "auto";
+        getNodes.realignButton.style.color = "rgb(255, 255, 255)";
+      })();
     });
   })();
 })();
