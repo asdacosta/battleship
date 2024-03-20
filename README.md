@@ -97,7 +97,8 @@ Developers, users, recruiters.
 <details>
 <summary>Invert</summary>
 
-- [ ] ###
+- [ ] Make feedback section animate text (writing).
+- [ ] Use svg images and allow coloring in Configuration.
 
 </details>
 
