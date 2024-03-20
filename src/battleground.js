@@ -624,6 +624,14 @@ const loopGame = (function () {
     getNodes.aiGrounds.style.pointerEvents = "auto";
     getNodes.aiGroundsDivs.forEach((div) => {
       div.addEventListener("click", () => {
+        const inactivateAlignedButton = (function () {
+          getNodes.alignedButton.style.pointerEvents = "none";
+          getNodes.alignedButton.style.color = "rgba(255, 255, 255, 0.6)";
+        })();
+        const inactivateRealignButton = (function () {
+          getNodes.realignButton.style.pointerEvents = "none";
+          getNodes.realignButton.style.color = "rgba(255, 255, 255, 0.6)";
+        })();
         // IF empty
         if (div.dataset.attacked === "No" && !div.hasAttribute("data-ship")) {
           game.userTurn(div.dataset.index);
@@ -1393,3 +1401,5 @@ const configuration = (function () {
     });
   })();
 })();
+
+// TODO: Do user targeting
