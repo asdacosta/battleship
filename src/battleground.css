@@ -306,7 +306,7 @@ body > div:first-child {
 
 .config-dialog img:hover {
   border: 0.1rem solid white;
-  background: rgba(255, 255, 0, 0.35);
+  background: linear-gradient(to bottom right, rgb(17, 50, 87), rgba(255, 255, 0, 0.4));
 }
 
 svg {
@@ -415,6 +415,14 @@ svg {
 
   .config-box > button:hover {
     background: rgb(185, 139, 74);
+  }
+
+  .config-dialog img {
+    background: rgba(95, 73, 43, 0.6);
+  }
+
+  .config-dialog img:hover {
+    background: linear-gradient(to bottom right, rgb(48, 37, 22), rgba(255, 255, 0, 0.5));
   }
 }
 
