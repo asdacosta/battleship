@@ -347,6 +347,15 @@ const populateBoards = (function () {
   const populateWithDimensionChange = (function () {
     getNodes.dimensionOptions.addEventListener("change", (event) => {
       if (event.target.value === "simple") {
+        const inactivateAlignedButton = (function () {
+          getNodes.alignedButton.style.pointerEvents = "none";
+          getNodes.alignedButton.style.color = "rgba(255, 255, 255, 0.6)";
+        })();
+        const inactivateRealignButton = (function () {
+          getNodes.realignButton.style.pointerEvents = "none";
+          getNodes.realignButton.style.color = "rgba(255, 255, 255, 0.6)";
+        })();
+
         const clearSpatialShips = (function () {
           getNodes.admiralGroundsDivs.forEach((div) => {
             if (div.querySelector("img")) {
@@ -365,6 +374,11 @@ const populateBoards = (function () {
       }
 
       if (event.target.value === "spatial") {
+        const activateRealignButton = (function () {
+          getNodes.realignButton.style.pointerEvents = "auto";
+          getNodes.realignButton.style.color = "rgb(255, 255, 255)";
+        })();
+
         const clearColors = (function () {
           getNodes.admiralGroundsDivs.forEach((div) => {
             div.style.backgroundColor = "initial";
