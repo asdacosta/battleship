@@ -306,7 +306,7 @@ body > div:first-child {
 
 .config-dialog img:hover {
   border: 0.1rem solid white;
-  opacity: 0.8;
+  background: rgba(255, 255, 0, 0.35);
 }
 
 svg {
