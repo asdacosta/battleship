@@ -742,6 +742,7 @@ const loopGame = (function () {
 })();
 
 let catchEventClearingLogic = null;
+let isShipPositionChanged = false;
 const setDragAndDrop = function () {
   const game = populateBoards.game;
 
@@ -963,6 +964,10 @@ const setDragAndDrop = function () {
           currentTarget = currentTarget.nextElementSibling;
         }
       })();
+    })();
+
+    const indicatePositionChange = (function () {
+      isShipPositionChanged = true;
     })();
 
     const updateBoard = (function () {
@@ -1403,6 +1408,9 @@ const configuration = (function () {
 
     getNodes.alignedButton.addEventListener("click", () => {
       const activateDimensionSelection = (function () {
+        if (isShipPositionChanged) {
+          return;
+        }
         getNodes.dimensionOptions.style.pointerEvents = "auto";
         getNodes.dimensionOptions.style.color = "rgb(255, 255, 255)";
       })();
