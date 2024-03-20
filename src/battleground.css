@@ -46,13 +46,18 @@ body > section {
   z-index: 2;
 }
 
+.config-dialog > div {
+  display: flex;
+  justify-content: space-between;
+}
+
 .config-dialog span {
-  align-self: flex-start;
+  align-self: center;
   font-weight: 800;
   color: white;
   background: rgba(248, 71, 47, 0.8);
   margin-left: 0.5rem;
-  padding: 0.1rem 0.3rem;
+  padding: 0.2rem 0.3rem 0.1rem 0.3rem;
   border-radius: 10rem;
   cursor: pointer;
 }
@@ -282,11 +287,26 @@ body > div:first-child {
   background: rgba(0, 0, 0, 0.6);
 }
 
-img {
+.admiral-grounds img {
   position: absolute;
   left: 1%;
   bottom: 0.5%;
   pointer-events: none;
+}
+
+.config-dialog img {
+  align-self: flex-end;
+  background: rgba(17, 50, 87, 0.8);
+  width: 2rem;
+  height: 2rem;
+  padding: 0.2rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.config-dialog img:hover {
+  border: 0.1rem solid white;
+  opacity: 0.8;
 }
 
 svg {
