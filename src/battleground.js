@@ -431,13 +431,13 @@ const displayTarget = (function () {
 
       div.addEventListener("mouseover", () => {
         targetSpan.style.display = "inline";
-        div.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
+        targetSpan.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
         // div.textContent = "💢";
       });
       div.addEventListener("mouseout", () => {
         if (div.textContent !== "X" && div.textContent !== "💥") {
           targetSpan.style.display = "none";
-          div.style.backgroundColor = "initial";
+          targetSpan.style.backgroundColor = "initial";
           // div.textContent = "";
         }
       });
