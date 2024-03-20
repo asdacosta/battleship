@@ -287,7 +287,8 @@ body > div:first-child {
   background: rgba(0, 0, 0, 0.6);
 }
 
-.admiral-grounds img {
+.admiral-grounds img,
+.ai-grounds img {
   position: absolute;
   left: 1%;
   bottom: 0.5%;
