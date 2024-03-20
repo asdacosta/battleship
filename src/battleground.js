@@ -1096,6 +1096,8 @@ const setDragAndDrop = function () {
             populatedRow[lastOccupied + 1] === null
           ) {
             occupy(true, true, 1, 2);
+          } else {
+            occupy(false, false, 0, 1);
           }
         };
 
