@@ -767,6 +767,17 @@ const configuration = (function () {
       }
     });
   })();
+
+  const triggerRealign = (function () {
+    getNodes.realignButton.addEventListener("click", () => {
+      // TODO:
+      // Make AI board inactive
+      // Turn text content to 'Done'
+      // When clicked 'Done'
+      // Remove all attributes and eventlisteners like in drop
+      // Make AI board active
+    });
+  })();
 })();
 
 const setDragAndDrop = function () {
@@ -869,6 +880,30 @@ const setDragAndDrop = function () {
   const dragStart = function (event) {
     event.dataTransfer.setData("text/plain", event.target.dataset.ship);
     catchEventDataset = event.target.dataset.ship;
+
+    // Select first ship
+    const draggedShip = document.querySelector(`[data-ship='${catchEventDataset}']`);
+    const shipImg = draggedShip.querySelector("img");
+    let xOffset = 0;
+    // const createXOffset = (function () {
+    //   const targetsIndices = [];
+    //   const getTargetsIndices = (function () {
+    //     let currentTarget = draggedShip;
+    //     for (let n = 0; n < parseInt(catchEventDataset); n++) {
+    //       if (!currentTarget) {
+    //         return;
+    //       }
+    //       targetsIndices.push(currentTarget.dataset.index);
+    //       currentTarget = currentTarget.nextElementSibling;
+    //     }
+    //   })();
+    //   targetsIndices.forEach((index, count) => {
+    //     if (index === event.target.dataset.index) {
+    //       xOffset = count * 30;
+    //     }
+    //   });
+    // })();
+    event.dataTransfer.setDragImage(shipImg, xOffset, 20);
 
     const triggerRightDragDropShip = (function () {
       switch (catchEventDataset) {
@@ -1161,7 +1196,7 @@ const setDragAndDrop = function () {
         div.removeEventListener("dragleave", dragLeave);
         div.removeEventListener("drop", notDroppableDrop);
       });
-
+      // Restart
       setDragAndDrop();
     })();
   };
