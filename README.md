@@ -61,7 +61,7 @@ Builds interactive Battleship game.
 </details>
 
 ## 🎯 Relevance
-To solidify concepts of `Testing Using Jest` and `all other concepts throughout course` in JavaScript. 
+To solidify concepts of `Testing using Jest` and `all other concepts throughout course` in JavaScript. 
 
 ## 👥 Intended Audience
 Developers, users, recruiters.
