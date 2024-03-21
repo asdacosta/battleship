@@ -22,8 +22,7 @@
 
 **Demo:**
 
-<img src="./readme-assets/folder.png" alt="folder">
-<!-- ![Live Demo](./readme-assets/) -->
+![Live Demo](./readme-assets/battleship.gif)
 
 <details>
 
@@ -31,7 +30,7 @@
 
 **Desktop View:**
 
-<!-- <img src="./readme-assets/desktop.png" alt="desktop view"> -->
+<img src="./readme-assets/desktop.png" alt="desktop view">
 <br>
 
 **Mobile View:**
