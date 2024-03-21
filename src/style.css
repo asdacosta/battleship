@@ -52,7 +52,7 @@ section:hover {
   transform: scale(1.02);
 }
 
-input[type="text"] {
+input {
   background: none;
   border: none;
   border-bottom: 0.2rem solid white;
@@ -75,7 +75,7 @@ input[type="text"] {
   }
 }
 
-input[type="text"]:hover {
+input:hover {
   background: rgba(255, 255, 255, 0.9);
   border-radius: 0.5rem;
   color: black;
