@@ -42,10 +42,10 @@
 </details>
 
 ## 🌐 Origin
-<!-- [The Odin Project](https://www.theodinproject.com/) -->
+[The Odin Project](https://www.theodinproject.com/)
 
 ## 📝 Description
-Store all template files.
+Builds interactive Battleship game.
 
 <details>
 <summary>Features</summary>
