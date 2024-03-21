@@ -227,6 +227,11 @@ h2:hover {
   transition: transform 0.2s ease-in-out;
 }
 
+.admiral-grounds span,
+.ai-grounds span {
+  font-size: 1.7rem;
+}
+
 .admiral-grounds > div:hover,
 .ai-grounds > div:hover {
   transform: scale(1.1);
@@ -355,6 +360,11 @@ svg {
 
   body > section {
     padding: 0.5rem 5rem 0.5rem 0.5rem;
+  }
+
+  .admiral-grounds span,
+  .ai-grounds span {
+    font-size: 1.2rem;
   }
 }
 
