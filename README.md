@@ -55,7 +55,7 @@ Store all template files.
 </details>
 
 ## 🎯 Relevance
-To solidify concepts of `###` in ###. 
+To solidify concepts of `Testing Using Jest` and `all other concepts throughout course` in JavaScript. 
 
 ## 👥 Intended Audience
 Developers, users, recruiters.
