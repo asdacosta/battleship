@@ -50,7 +50,14 @@ Store all template files.
 <details>
 <summary>Features</summary>
 
-* ###
+* Player and AI take turns attacking each others grounds.
+* Interactive UX
+* Real-time feedback section.
+* Bulb icon to display Info to understand game.
+* Spatial(3d) ⛴️ or Simple 🎨 dimension.
+* Random placement and Alignment option.
+* Three difficulty levels. From Smart AI to dump AI.
+* Peek AI board for half a second. 🔎
 
 </details>
 
