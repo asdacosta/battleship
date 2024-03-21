@@ -105,6 +105,11 @@ Developers, users, recruiters.
 <summary>Invert</summary>
 
 - [ ] Make feedback section animate text (writing).
+- [ ] Display current ship lives in Configuration.
+- [ ] Implement button hover effect in https://lovrozagar.github.io/BattleShip/ 
+- [ ] Implement a 2-player option such that players don't see each others boards.
+- [ ] Add sound for attacks and feedback message voice.
+- [ ] Include vertical ships.
 - [ ] Use svg images and allow coloring in Configuration.
 
 </details>
