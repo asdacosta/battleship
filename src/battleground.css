@@ -427,6 +427,7 @@ svg {
   }
 
   .config-box > button {
+    padding: 0.1rem;
     background: linear-gradient(to right, rgba(5, 6, 8, 0.8), rgba(221, 166, 88, 0.8));
   }
 
