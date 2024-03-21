@@ -330,6 +330,7 @@ class Gameboard {
     const occupyChosenSpot = (() => {
       const board = this.board;
       const KeysBox = assignKeysToBoardIndices;
+
       const keyIndex = KeysBox[XY][0];
       const rowIndex = KeysBox[XY][1];
       let hitEntry = board[rowIndex][keyIndex];
@@ -418,11 +419,9 @@ class Gameboard {
         allShipsSunk();
         hitStatus = "Success";
         return "Success";
-        // TODO: User to choose again
       } else if (hitEntry === "X") {
         hitStatus = "Occupied";
         return "Occupied";
-        // TODO: Enable user to choose new spot
       }
     })();
 
@@ -439,7 +438,6 @@ class Player {
     this.computer.displaceShips();
     this.computerRandomPickCount = 0;
     this.keysUpdate = null;
-    // this.computerTurnCurrentRecursion = false;
   }
 
   userTurn(XY) {
@@ -447,7 +445,6 @@ class Player {
   }
 
   computerTurn() {
-    // this.computerTurnCurrentRecursion = false;
     const generateRandomKey = () => {
       const getKeys = function () {
         const alphabets = [];
@@ -487,17 +484,9 @@ class Player {
     const pickLegalMove = (() => {
       const board = this.user.board;
       const response = this.user.receiveAttack(randomKey);
-      // const isAllEntriesOccupied = board.flat().every((entry) => entry === "X");
-      // if (response === "Occupied" && !isAllEntriesOccupied) {
-      //   this.computerTurnCurrentRecursion = true;
-      //   this.computerTurn();
-      //   return;
-      // }
     })();
 
-    // if (this.computerTurnCurrentRecursion === false) {
     return randomKey;
-    // }
   }
 }
 
