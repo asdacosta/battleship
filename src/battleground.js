@@ -209,7 +209,6 @@ const populateBoards = (function () {
       const appendShipImg = function (shipSrc, shipLength, shipType) {
         for (const div of grounds) {
           if (div.dataset.ship === shipType) {
-            // div.style.position = "relative";
             const shipImg = document.createElement("img");
             shipImg.setAttribute("src", `${shipSrc}`);
 
@@ -432,13 +431,11 @@ const displayTarget = (function () {
       div.addEventListener("mouseover", () => {
         targetSpan.style.display = "inline";
         targetSpan.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
-        // div.textContent = "💢";
       });
       div.addEventListener("mouseout", () => {
         if (div.textContent !== "X" && div.textContent !== "💥") {
           targetSpan.style.display = "none";
           targetSpan.style.backgroundColor = "initial";
-          // div.textContent = "";
         }
       });
     });
@@ -1445,5 +1442,3 @@ const configuration = (function () {
     });
   })();
 })();
-
-// TODO: Do user targeting
