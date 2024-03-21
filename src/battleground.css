@@ -57,7 +57,7 @@ body > section {
   color: white;
   background: rgba(248, 71, 47, 0.8);
   margin-left: 0.5rem;
-  padding: 0.2rem 0.3rem 0.1rem 0.3rem;
+  padding: 0.1rem 0.3rem;
   border-radius: 10rem;
   cursor: pointer;
 }
@@ -72,7 +72,7 @@ body > section {
   font-size: 1.05rem;
   text-align: center;
   color: white;
-  width: 7rem;
+  width: 7.5rem;
   border-radius: 0.5rem;
   cursor: pointer;
   background: rgb(17, 50, 87);
