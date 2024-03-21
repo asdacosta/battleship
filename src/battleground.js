@@ -28,6 +28,7 @@ const getNodes = (function () {
   const feedback = document.querySelector("body > div:last-child");
   const configButton = document.querySelector(".config-box > button");
   const configDialog = document.querySelector(".config-dialog");
+  const configButtonIcon = document.querySelector(".config-box svg");
   const cover = document.querySelector("body > div:first-child");
   const closeDialog = document.querySelector(".config-dialog span");
   const kickStartButton = document.querySelector(".kick-start");
@@ -61,6 +62,7 @@ const getNodes = (function () {
     dimensionOptions,
     realignButton,
     alignedButton,
+    configButtonIcon,
   };
 })();
 
@@ -1439,6 +1441,15 @@ const configuration = (function () {
           }, 400);
         });
       })();
+    });
+  })();
+
+  const triggerHoveringEffectOverSvg = (function () {
+    getNodes.configButton.addEventListener("mouseover", () => {
+      getNodes.configButtonIcon.style.fill = "black";
+    });
+    getNodes.configButton.addEventListener("mouseout", () => {
+      getNodes.configButtonIcon.style.fill = "white";
     });
   })();
 })();
