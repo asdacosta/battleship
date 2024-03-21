@@ -29,7 +29,7 @@ const getNodes = (function () {
   const configButton = document.querySelector(".config-box > button");
   const configDialog = document.querySelector(".config-dialog");
   const cover = document.querySelector("body > div:first-child");
-  const closeDialog = document.querySelector("span");
+  const closeDialog = document.querySelector(".config-dialog span");
   const kickStartButton = document.querySelector(".kick-start");
   const shuffleButton = document.querySelector(".shuffle");
   const peekButton = document.querySelector(".peek");
@@ -435,8 +435,8 @@ const displayTarget = (function () {
       div.addEventListener("mouseout", () => {
         if (div.textContent !== "X" && div.textContent !== "💥") {
           targetSpan.style.display = "none";
-          targetSpan.style.backgroundColor = "initial";
         }
+        targetSpan.style.backgroundColor = "initial";
       });
     });
   };
