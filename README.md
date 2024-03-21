@@ -1,6 +1,6 @@
 <div align='center'>
 
-# Template
+# Battleship Game
 </div>
 <div align='center'>
     <h3>💻 Languages</h3>
