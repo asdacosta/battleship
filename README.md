@@ -17,7 +17,7 @@
     <img src="https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white" alt="ESLint badge">
     <img src="https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=black" alt="Prettier badge">
 <img src="https://img.shields.io/badge/Babel-F7B93E?style=for-the-badge&logo=babel&logoColor=black" alt="Babel badge">
-    <!-- <h4><a href="https://asdacosta.github.io/###/">Live Preview</a></h4> -->
+    <h4><a href="https://asdacosta.github.io/battleship/">Live Preview</a></h4>
 </div>
 
 **Demo:**
