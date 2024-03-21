@@ -106,12 +106,14 @@ legend {
   cursor: context-menu;
 }
 
+.config-box {
+  width: fit-content;
+}
+
 .config-box > button {
   font-size: 1.1rem;
-  font-weight: 700;
   letter-spacing: 0.05rem;
-  color: white;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   height: 2rem;
   background: linear-gradient(to right, rgba(5, 6, 8, 0.8), rgba(39, 114, 199, 0.8));
   opacity: 0.8;
@@ -123,10 +125,13 @@ legend {
 }
 
 .config-box > button:hover {
-  color: black;
   background: rgb(34, 100, 175);
-  border: 0.15rem solid white;
+  border: 0.1rem solid white;
   transform: scale(1.05);
+}
+
+.config-box svg {
+  width: 1.8rem;
 }
 
 .config-box > button:active {
