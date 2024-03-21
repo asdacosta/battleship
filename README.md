@@ -88,7 +88,14 @@ Developers, users, recruiters.
 
 | File | Description |
 | - | - |
-|`src/assets/###`| Photo created by ### on [###]().|
+|`src/assets/verticalship.jpg`| Photo created by Niklas Jeromin on [Pexels](https://www.pexels.com/).|
+|`src/assets/ship-edit.jpg`| Photo created by Joseph Fuller on [Pexels](https://www.pexels.com/).|
+|`src/assets/lamp.png`| Photo created by InfoBrother on [Flaticon](https://www.flaticon.com/).|
+|`src/assets/battleship.png`| Photo created by Leremy on [Flaticon](https://www.flaticon.com/).|
+|`src/assets/carrier*`| Photo created by Leremy on [Flaticon](https://www.flaticon.com/).|
+|`src/assets/destroyer.png`| Photo created by Leremy on [Flaticon](https://www.flaticon.com/).|
+|`src/assets/patrol-boat.png`| Photo created by Leremy on [Flaticon](https://www.flaticon.com/).|
+|`src/assets/submarine.png`| Photo created by Leremy on [Flaticon](https://www.flaticon.com/).|
 
 
 </details>
