@@ -73,7 +73,15 @@ Developers, users, recruiters.
 | File | Description |
 | - | - |
 |`src/*`| Source files that are bundled into the output directory `dist/`.|
-|`src/index.js`| The main JavaScript entry point that bundling begins.|
+|`src/assets/*`| All assets(imgs, icons, vids) used in website.|
+|`src/index.js`| JavaScript entry point for `src/index.html` that bundling begins.|
+|`src/reset.css`| Stylesheet for `src/index.html`.|
+|`src/battleground.js`| JavaScript entry point for `src/battleground.html` that bundling begins.|
+|`src/battleground.css`| Stylesheet for `src/battleground.html`.|
+|`src/logic.js`| Holds main logic(classes) for game.|
+|`src/index.test.js`| Test file for `src/logic.js`.|
+|`src/babel.config.js`| Babel configuration file.|
+|`src/reset.css`| Stylesheet for resetting all styles to default.|
 |`dist/*`| Output files from bundling of files in directory `src/`.|
 |`dist/main.js`| Main JavaScript output file that contains the bundled JavaScript code. Code is minified and optimized for deployment (Due to mode set to production in webpack config). |
 |`package*`| Contains details of project and dependencies versions.|
