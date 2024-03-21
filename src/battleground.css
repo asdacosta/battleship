@@ -459,18 +459,42 @@ svg {
 
 @media (max-width: 420px) {
   .config-dialog {
-    left: 53%;
+    left: 50%;
   }
 }
 
 @media (max-width: 390px) {
   .config-dialog {
+    left: 53%;
+  }
+}
+
+@media (max-width: 360px) {
+  .config-dialog {
     left: 57%;
   }
 }
 
-@media (max-width: 290px) {
+@media (max-width: 340px) {
   .config-dialog {
-    left: 78%;
+    left: 60%;
+  }
+}
+
+@media (max-width: 320px) {
+  .config-dialog {
+    left: 64%;
+  }
+}
+
+@media (max-width: 300px) {
+  .config-dialog {
+    left: 68%;
+  }
+}
+
+@media (max-width: 280px) {
+  .config-dialog {
+    left: 72%;
   }
 }
