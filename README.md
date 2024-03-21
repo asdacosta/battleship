@@ -110,6 +110,8 @@ Developers, users, recruiters.
 |`src/assets/destroyer.png`| Photo created by Leremy on [Flaticon](https://www.flaticon.com/).|
 |`src/assets/patrol-boat.png`| Photo created by Leremy on [Flaticon](https://www.flaticon.com/).|
 |`src/assets/submarine.png`| Photo created by Leremy on [Flaticon](https://www.flaticon.com/).|
+|All svg in `battleground.html`| Icons from [Material Design Icons](https://pictogrammers.com/library/mdi/).|
+
 
 
 </details>
