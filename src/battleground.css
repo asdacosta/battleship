@@ -108,6 +108,8 @@ legend {
 
 .config-box {
   width: fit-content;
+  align-self: flex-end;
+  justify-self: flex-end;
 }
 
 .config-box > button {
