@@ -121,6 +121,7 @@ Developers, users, recruiters.
 <summary>Invert</summary>
 
 - [ ] Make .config-box be aligned exactly in the middle across all mobile screens.
+- [ ] Fix animation of placeholder in mobile screens.
 - [ ] Make feedback section animate text (writing).
 - [ ] Display current ship lives in Configuration.
 - [ ] Implement button hover effect in https://lovrozagar.github.io/BattleShip/ 
