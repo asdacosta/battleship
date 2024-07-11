@@ -932,7 +932,9 @@ const setDragAndDrop = function () {
       }
     })();
 
-    const draggedShip = document.querySelector(`[data-ship='${shipDataset}']`);
+    const draggedShip = document.querySelector(
+      `.admiral-grounds [data-ship='${shipDataset}']`,
+    );
     const removeScaling = (function () {
       dropTarget.style.transform = "scale(1)";
     })();
@@ -945,7 +947,9 @@ const setDragAndDrop = function () {
 
     const transferAttributesFromDraggedShipsToTargets = (function () {
       const removeAttributes = (function () {
-        const draggedShips = document.querySelectorAll(`[data-ship='${shipDataset}']`);
+        const draggedShips = document.querySelectorAll(
+          `.admiral-grounds [data-ship='${shipDataset}']`,
+        );
         draggedShips.forEach((ship) => {
           ship.removeAttribute("data-ship");
           ship.setAttribute("draggable", false);
