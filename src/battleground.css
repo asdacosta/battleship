@@ -1,69 +1,96 @@
-/* body * {
-  border: 2px solid burlywood;
-} */
+:root {
+  --navy: rgb(17, 50, 87);
+  --ocean: rgba(34, 100, 175, 0.8);
+  --panel: rgba(255, 255, 255, 0.4);
+  --hit: rgb(228, 73, 73);
+  --feedback-bg: rgba(0, 0, 0, 0.55);
+  --cell-min: 2rem;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 body {
   display: grid;
   grid-template: 4fr 1fr / 1fr 1fr;
-  gap: 8rem;
-  padding: 4rem 8rem;
+  gap: clamp(0.5rem, 4vw, 8rem);
+  padding: clamp(1rem, 4vw, 4rem) clamp(0.5rem, 4vw, 8rem);
   margin: 0;
   position: relative;
-
   font-family: "Raleway", sans-serif;
   font-size: 1.3rem;
   letter-spacing: 0.1rem;
-  height: 100vh;
+  min-height: 100vh;
   background-image: url(./assets/ship-edit.jpg);
   background-size: cover;
   background-position: center center;
 }
 
-body > section {
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 0;
+}
+
+.board-panel {
   display: grid;
-  grid-template: 1fr 1fr 10fr/ 2fr 8fr;
+  grid-template: 1fr 1fr 10fr / 2fr 8fr;
   gap: 0.3rem;
-  padding: 0.5rem 7rem 0.5rem 1rem;
+  padding: 0.5rem clamp(0.5rem, 4vw, 7rem) 0.5rem 1rem;
   z-index: 1;
 }
 
 .config-dialog {
   display: flex;
   flex-direction: column;
-  width: 20rem;
+  width: min(20rem, 90vw);
   padding: 1rem;
   gap: 1rem;
-  background: rgba(34, 100, 175, 0.8);
-  border: 0.2rem solid rgb(17, 50, 87);
+  background: var(--ocean);
+  border: 0.2rem solid var(--navy);
   border-radius: 2rem;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
-  z-index: 2;
+  z-index: 3;
 }
 
-.config-dialog > div {
+.config-dialog-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-.config-dialog span {
+.close-dialog {
   align-self: center;
   font-weight: 800;
   color: white;
   background: rgba(248, 71, 47, 0.8);
   margin-left: 0.5rem;
-  padding: 0.1rem 0.3rem;
+  padding: 0.1rem 0.5rem;
   border-radius: 10rem;
   cursor: pointer;
 }
 
-.config-dialog span:hover {
+.close-dialog:hover,
+.close-dialog:focus-visible {
   background: rgb(248, 71, 47);
+  outline: 2px solid white;
+  outline-offset: 2px;
 }
 
 .config-dialog button,
@@ -75,7 +102,13 @@ body > section {
   width: 7.5rem;
   border-radius: 0.5rem;
   cursor: pointer;
-  background: rgb(17, 50, 87);
+  background: var(--navy);
+}
+
+.config-dialog button:focus-visible,
+.config-dialog select:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
 }
 
 .config-dialog button:hover,
@@ -86,16 +119,17 @@ body > section {
 .config-dialog fieldset {
   display: flex;
   justify-content: center;
-  gap: 0.2rem;
-  padding: 0.2rem;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0.4rem;
   border-radius: 0.5rem;
-  border-left: 0.2rem solid rgb(17, 50, 87);
-  border-right: 0.2rem solid rgb(17, 50, 87);
+  border-left: 0.2rem solid var(--navy);
+  border-right: 0.2rem solid var(--navy);
   background: rgba(17, 50, 87, 0.4);
 }
 
 fieldset > button {
-  height: 1.5rem;
+  min-height: 1.5rem;
 }
 
 legend {
@@ -103,7 +137,6 @@ legend {
   color: white;
   font-weight: 800;
   padding-left: 0.2rem;
-  cursor: context-menu;
 }
 
 .config-box {
@@ -116,13 +149,12 @@ legend {
   font-size: 1.1rem;
   letter-spacing: 0.05rem;
   border-radius: 0.5rem;
-  height: 2rem;
+  min-height: 2rem;
   background: linear-gradient(to right, rgba(5, 6, 8, 0.8), rgba(39, 114, 199, 0.8));
-  opacity: 0.8;
+  opacity: 0.9;
   cursor: pointer;
   transition:
     background 0.5s ease-out,
-    color 0.5s ease-out,
     transform 0.3s ease-in-out;
 }
 
@@ -132,40 +164,43 @@ legend {
   transform: scale(1.05);
 }
 
+.config-box > button:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
 .config-box svg {
   width: 1.8rem;
 }
 
 .config-box > button:active {
-  background: rgb(17, 50, 87);
+  background: var(--navy);
 }
 
 h2 {
   grid-row: span 1;
   grid-column: 2 / -1;
   text-align: center;
-  font-size: 2rem;
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
   font-weight: 600;
   padding: 0.25rem 1rem 0 1rem;
   justify-self: center;
-  background: rgba(255, 255, 255, 0.4);
+  background: var(--panel);
   border-top: 0.3rem solid rgb(0, 0, 0);
   border-bottom: 0.3rem solid rgb(0, 0, 0);
-  cursor: context-menu;
   transition: transform 0.3s ease-in-out;
 }
 
 h2:hover {
   background: rgba(255, 255, 255, 0.6);
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .head,
 .tail {
   display: flex;
-  background: rgba(255, 255, 255, 0.4);
+  background: var(--panel);
   border-radius: 1rem;
-  cursor: context-menu;
 }
 
 .head {
@@ -186,15 +221,15 @@ h2:hover {
   padding-top: 0.5rem;
   text-align: center;
   font-weight: 600;
-  min-width: 2rem;
-  min-height: 2rem;
+  min-width: var(--cell-min);
+  min-height: var(--cell-min);
   transition: transform 0.1s ease-in;
 }
 
 .head > div:hover,
 .tail > div:hover {
   font-weight: 800;
-  transform: scale(1.2);
+  transform: scale(1.15);
 }
 
 .admiral-grounds,
@@ -221,9 +256,8 @@ h2:hover {
 .ai-grounds > div {
   grid-column: span 1;
   grid-row: span 1;
-  min-width: 2rem;
-  min-height: 2rem;
-
+  min-width: var(--cell-min);
+  min-height: var(--cell-min);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -236,12 +270,19 @@ h2:hover {
 
 .admiral-grounds span,
 .ai-grounds span {
-  font-size: 1.7rem;
+  font-size: clamp(1rem, 2vw, 1.7rem);
 }
 
 .admiral-grounds > div:hover,
 .ai-grounds > div:hover {
-  transform: scale(1.1);
+  transform: scale(1.08);
+}
+
+.admiral-grounds > div:focus-visible,
+.ai-grounds > div:focus-visible {
+  outline: 2px solid rgba(152, 199, 230, 0.9);
+  outline-offset: -2px;
+  z-index: 2;
 }
 
 .admiral-grounds > div:first-child,
@@ -264,7 +305,7 @@ h2:hover {
   border-bottom-right-radius: 1rem;
 }
 
-body > div:last-child {
+.feedback-bar {
   grid-column: 1 / -1;
   align-self: flex-start;
   justify-self: center;
@@ -272,32 +313,24 @@ body > div:last-child {
   align-items: center;
   justify-content: center;
   text-align: center;
-
   font-weight: 600;
   border: 0.2rem solid rgba(255, 255, 255, 0.8);
   border-radius: 1rem;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--feedback-bg);
   color: white;
-  height: 3rem;
-  width: 40rem;
-  cursor: context-menu;
+  min-height: 3rem;
+  width: min(40rem, 94vw);
+  padding: 0.5rem 1rem;
   z-index: 1;
-  transition: transform 0.3s ease-in-out;
+  transition:
+    transform 0.3s ease-in-out,
+    background 0.3s ease-in-out;
 }
 
-body > div:last-child:hover {
-  transform: scale(1.05);
-  border: 0.2rem solid rgb(255, 255, 255);
+.feedback-bar:hover {
+  transform: scale(1.02);
+  border-color: rgb(255, 255, 255);
   background: rgba(0, 0, 0, 0.7);
-}
-
-body > div:first-child {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
 }
 
 .admiral-grounds img,
@@ -320,7 +353,7 @@ body > div:first-child {
 
 .config-dialog img:hover {
   border: 0.1rem solid white;
-  background: linear-gradient(to bottom right, rgb(17, 50, 87), rgba(255, 255, 0, 0.4));
+  background: linear-gradient(to bottom right, var(--navy), rgba(255, 255, 0, 0.4));
 }
 
 svg {
@@ -328,93 +361,33 @@ svg {
   width: 1.7rem;
 }
 
-@media (max-width: 1570px) {
+@media (max-width: 765px) {
   body {
-    gap: 6rem;
-    padding: 6rem 6rem;
+    grid-template: repeat(2, 4fr) 1fr / 1fr;
+    padding: 0.5rem;
+    gap: 0.75rem;
   }
 
-  body > div:last-child {
-    width: 35rem;
-  }
-  .admiral-grounds,
-  .ai-grounds {
-    align-self: flex-start;
-  }
-  .tail,
-  .head {
-    font-size: 1.1rem;
-  }
-  .tail {
-    align-self: flex-start;
-  }
-  .head > div,
-  .tail > div {
-    padding-top: 0.2rem;
-  }
-}
-
-@media (max-width: 1270px) {
-  body {
-    gap: 3rem;
-    padding: 8rem 4rem;
+  .board-panel {
+    grid-template: 1fr 1fr 10fr / 1fr 8fr;
+    padding-right: 1.5rem;
+    min-height: 22rem;
   }
 
-  body > div:last-child {
-    width: 30rem;
+  .config-box {
+    justify-self: center;
     align-self: center;
-  }
-
-  body > section {
-    padding: 0.5rem 5rem 0.5rem 0.5rem;
-  }
-
-  .admiral-grounds span,
-  .ai-grounds span {
-    font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 1110px) {
-  body {
-    gap: 1rem;
-    padding: 8rem 1rem;
-    height: 100%;
-  }
-
-  body > section {
-    padding: 0.5rem 3rem 0.5rem 0.5rem;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
-
-  body > div:last-child {
-    width: 28rem;
-    font-size: 1rem;
   }
 }
 
 @media (max-width: 900px) {
   body {
-    gap: 0.3rem;
-    padding: 8rem 0.2rem;
     background-image: url(./assets/verticalship.jpg);
   }
 
-  body > section {
-    padding: 0.5rem;
-  }
-
-  body > div:last-child {
-    width: 25rem;
-    align-self: flex-start;
-  }
-
   .config-dialog {
-    background: rgba(46, 46, 46, 0.8);
-    border: 0.2rem solid rgb(143, 109, 61);
+    background: rgba(46, 46, 46, 0.9);
+    border-color: rgb(143, 109, 61);
   }
 
   .config-dialog button,
@@ -424,79 +397,14 @@ svg {
 
   .config-dialog fieldset {
     background: rgba(95, 73, 43, 0.4);
-    border-left: 0.2rem solid rgb(143, 109, 61);
-    border-right: 0.2rem solid rgb(143, 109, 61);
+    border-color: rgb(143, 109, 61);
   }
 
   .config-box > button {
-    padding: 0.1rem;
     background: linear-gradient(to right, rgba(5, 6, 8, 0.8), rgba(221, 166, 88, 0.8));
   }
 
   .config-box > button:hover {
     background: rgb(185, 139, 74);
-  }
-
-  .config-dialog img {
-    background: rgba(95, 73, 43, 0.6);
-  }
-
-  .config-dialog img:hover {
-    background: linear-gradient(to bottom right, rgb(48, 37, 22), rgba(255, 255, 0, 0.5));
-  }
-}
-
-@media (max-width: 765px) {
-  body {
-    grid-template: repeat(2, 4fr) 1fr / 1fr;
-    padding: 0;
-  }
-
-  body > section {
-    grid-template: 1fr 1fr 10fr/ 1fr 8fr;
-    padding-right: 1.5rem;
-    height: 27rem;
-  }
-}
-
-@media (max-width: 420px) {
-  .config-dialog {
-    left: 50%;
-  }
-}
-
-@media (max-width: 390px) {
-  .config-dialog {
-    left: 53%;
-  }
-}
-
-@media (max-width: 360px) {
-  .config-dialog {
-    left: 57%;
-  }
-}
-
-@media (max-width: 340px) {
-  .config-dialog {
-    left: 60%;
-  }
-}
-
-@media (max-width: 320px) {
-  .config-dialog {
-    left: 64%;
-  }
-}
-
-@media (max-width: 300px) {
-  .config-dialog {
-    left: 68%;
-  }
-}
-
-@media (max-width: 280px) {
-  .config-dialog {
-    left: 72%;
   }
 }
