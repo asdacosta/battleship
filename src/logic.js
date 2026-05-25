@@ -490,10 +490,4 @@ class Player {
   }
 }
 
-// module.exports = {
-//   Ship,
-//   Gameboard,
-//   Player,
-// };
-
-export { Player };
+export { Ship, Gameboard, Player };
