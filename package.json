@@ -27,5 +27,8 @@
     "webpack": "^5.90.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
+  },
+  "dependencies": {
+    "typed.js": "^3.0.0"
   }
 }
