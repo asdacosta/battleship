@@ -9,17 +9,33 @@
     />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Battleship</title>
+    <meta
+      name="description"
+      content="Battleship game board — place ships, attack the AI, and sink every vessel to win."
+    />
+    <title>Battleship — Battleground</title>
   </head>
   <body>
-    <div></div>
-    <div class="config-dialog">
-      <div>
-        <span>X</span>
-        <a href="https://en.wikipedia.org/wiki/Battleship_(game)" target="_blank"
-          ><img src="./assets/lamp.png" alt="Info"
+    <div class="backdrop" aria-hidden="true"></div>
+    <div
+      class="config-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="config-dialog-title"
+    >
+      <div class="config-dialog-header">
+        <span class="close-dialog" role="button" tabindex="0" aria-label="Close settings"
+          >X</span
+        >
+        <a
+          href="https://en.wikipedia.org/wiki/Battleship_(game)"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Battleship rules on Wikipedia"
+          ><img src="./assets/lamp.png" alt=""
         /></a>
       </div>
+      <p id="config-dialog-title" class="visually-hidden">Game settings</p>
       <button class="kick-start">Restart 🔃</button>
       <fieldset>
         <legend>Dimension</legend>
@@ -45,10 +61,10 @@
       </fieldset>
     </div>
 
-    <section>
+    <section class="board-panel" aria-label="Your fleet">
       <div class="config-box">
-        <button>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <button type="button" aria-label="Open game settings" aria-haspopup="dialog">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
             <title>Configuration</title>
             <path
               d="M3,17V19H9V17H3M3,5V7H13V5H3M13,21V19H21V17H13V15H11V21H13M7,9V11H3V13H7V15H9V9H7M21,13V11H11V13H21M15,9H17V7H21V5H17V3H15V9Z"
@@ -184,7 +200,7 @@
         <div>10</div>
       </section>
     </section>
-    <section>
+    <section class="board-panel" aria-label="Enemy waters">
       <h2>AI</h2>
       <section class="head">
         <div>A</div>
@@ -313,6 +329,8 @@
         <div>10</div>
       </section>
     </section>
-    <div>Initiate attack!</div>
+    <div id="feedback" class="feedback-bar" role="status" aria-live="polite">
+      Initiate attack!
+    </div>
   </body>
 </html>
