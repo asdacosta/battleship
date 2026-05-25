@@ -1296,23 +1296,44 @@ const setDragAndDrop = function () {
 
 const configuration = (function () {
   const displayDialog = (function () {
+    getNodes.configButton.setAttribute("aria-expanded", "false");
     getNodes.configButton.addEventListener("click", () => {
       getNodes.cover.style.zIndex = "2";
       getNodes.configDialog.style.visibility = "visible";
       getNodes.configDialog.style.opacity = "1";
+      getNodes.configButton.setAttribute("aria-expanded", "true");
+      getNodes.closeDialog.focus();
     });
   })();
 
+  const hideConfigDialog = async function () {
+    getNodes.cover.style.zIndex = "0";
+    getNodes.configDialog.style.opacity = "0";
+    getNodes.configDialog.style.transition = "opacity 0.5s ease-in-out";
+    getNodes.configButton.setAttribute("aria-expanded", "false");
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        getNodes.configDialog.style.visibility = "hidden";
+        resolve();
+      }, 400);
+    });
+  };
+
   const exitDialog = (function () {
-    getNodes.closeDialog.addEventListener("click", async () => {
-      getNodes.cover.style.zIndex = "0";
-      getNodes.configDialog.style.opacity = "0";
-      getNodes.configDialog.style.transition = "opacity 0.5s ease-in-out";
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          getNodes.configDialog.style.visibility = "hidden";
-        }, 400);
-      });
+    getNodes.closeDialog.addEventListener("click", hideConfigDialog);
+    getNodes.closeDialog.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        hideConfigDialog();
+      }
+    });
+    document.addEventListener("keydown", (event) => {
+      if (
+        event.key === "Escape" &&
+        getNodes.configDialog.style.visibility === "visible"
+      ) {
+        hideConfigDialog();
+      }
     });
   })();
 
