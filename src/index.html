@@ -13,14 +13,33 @@
     />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Play Battleship against an AI opponent. Enter your admiral name to begin."
+    />
     <title>Battleship</title>
   </head>
   <body>
-    <div></div>
-    <h1>BATTLESHIP</h1>
-    <section>
-      <input type="text" name="admiral" id="admiral" maxlength="12" />
-      <button><a href="./battleground.html">BATTLE</a></button>
-    </section>
+    <div class="backdrop" aria-hidden="true"></div>
+    <header>
+      <h1>BATTLESHIP</h1>
+    </header>
+    <main>
+      <form id="admiral-form" action="./battleground.html" method="get">
+        <label for="admiral">Admiral name</label>
+        <input
+          type="text"
+          name="admiral"
+          id="admiral"
+          maxlength="12"
+          autocomplete="nickname"
+          placeholder="Admiral Name"
+          required
+        />
+        <button type="submit" id="battle-btn" disabled>
+          <span>BATTLE</span>
+        </button>
+      </form>
+    </main>
   </body>
 </html>
