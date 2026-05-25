@@ -1,9 +1,4 @@
-/*
- To run the tests, comment out all the ES module import syntax and 
- uncomment all Node.js module import syntax in ./logic.js
-*/
-
-const { Ship, Gameboard, Player } = require("./logic");
+import { Ship, Gameboard, Player } from "./logic";
 
 // beforeAll(async () => {
 //   await new Promise((resolve) => {
@@ -209,7 +204,6 @@ describe("Check Player class methods", () => {
     const computerBoard = game.computer.board;
     const containsChosenSpot = computerBoard.flat().includes("X");
 
-    console.log(computerBoard);
     expect(containsChosenSpot).toBe(true);
   });
 
