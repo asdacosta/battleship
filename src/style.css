@@ -1,3 +1,10 @@
+:root {
+  --surface: rgba(0, 0, 0, 0.75);
+  --accent: rgba(152, 199, 230, 0.6);
+  --text: #fff;
+  --text-muted: rgba(255, 255, 255, 0.6);
+}
+
 * {
   letter-spacing: 0.1rem;
 }
@@ -11,45 +18,73 @@ body {
   font-size: 1.2rem;
   padding: 2rem;
   gap: 2rem;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
-
   background-image: url(./assets/admiral-edit.jpg);
   background-size: cover;
   background-position: center center;
-  position: relative;
 }
 
-section {
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 0;
+}
+
+header,
+main {
+  position: relative;
+  z-index: 1;
+}
+
+main form {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   height: 20rem;
-  width: 35rem;
-  gap: 3rem;
+  width: min(35rem, 92vw);
+  gap: 2rem;
+  padding: 2rem;
   border: 0.3rem solid white;
   border-radius: 1rem;
-  background-color: rgba(0, 0, 0, 0.75);
-  z-index: 1;
+  background-color: var(--surface);
   transition: transform 0.3s ease-in-out;
-  animation: borderTransition 7s infinite alternate;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  main form {
+    animation: borderTransition 7s infinite alternate;
+  }
 }
 
 @keyframes borderTransition {
   0% {
-    border-color: rgba(152, 199, 230, 0.6);
+    border-color: var(--accent);
   }
   50% {
     border-color: rgba(152, 199, 230, 0.15);
   }
   100% {
-    border-color: rgba(152, 199, 230, 0.6);
+    border-color: var(--accent);
   }
 }
 
-section:hover {
+main form:focus-within {
   transform: scale(1.02);
+}
+
+label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 input {
@@ -57,22 +92,15 @@ input {
   border: none;
   border-bottom: 0.2rem solid white;
   font-size: 1.3rem;
-  color: white;
+  color: var(--text);
   text-align: center;
   width: 12rem;
-  animation: borderBottomTransition 7s infinite alternate;
 }
 
-@keyframes borderBottomTransition {
-  0% {
-    border-color: rgba(152, 199, 230, 0.8);
-  }
-  50% {
-    border-color: rgba(255, 255, 255, 0.4);
-  }
-  100% {
-    border-color: rgba(152, 199, 230, 0.8);
-  }
+input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 0.25rem;
 }
 
 input:hover {
@@ -85,23 +113,28 @@ h1 {
   font-family: "Sixtyfour", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
-  font-size: 8rem;
+  font-size: clamp(1.7rem, 12vw, 8rem);
   border-radius: 5rem;
   padding: 1rem 1rem 0 1rem;
-  cursor: context-menu;
-  z-index: 1;
-  animation: colorTransition 7s infinite alternate;
+  margin: 0;
+  cursor: default;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  h1 {
+    animation: colorTransition 7s infinite alternate;
+  }
 }
 
 @keyframes colorTransition {
   0% {
-    background: rgba(152, 199, 230, 0.6);
+    background: var(--accent);
   }
   50% {
     background: rgba(152, 199, 230, 0.15);
   }
   100% {
-    background: rgba(152, 199, 230, 0.6);
+    background: var(--accent);
   }
 }
 
@@ -111,120 +144,38 @@ button {
   font-weight: 600;
   padding: 0.5rem 1.2rem;
   border-radius: 5rem;
-  border-color: white;
-  border-width: 0.2rem;
-  color: white;
+  border: 0.2rem solid white;
+  color: var(--text);
   transition: transform 0.2s ease-in;
 }
 
-button:hover {
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  color: var(--text-muted);
+}
+
+button:not(:disabled):hover {
   transform: scale(1.03);
   cursor: pointer;
 }
 
-body > div:first-child {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-}
-
-a {
-  color: white;
-}
-
-@media (max-width: 1500px) {
-  h1 {
-    font-size: 7rem;
-  }
-}
-
-@media (max-width: 1200px) {
-  h1 {
-    font-size: 6rem;
-  }
-  section {
-    height: 20rem;
-    width: 30rem;
-  }
-}
-
-@media (max-width: 1050px) {
-  body {
-    gap: 4rem;
-    padding: 4rem;
-  }
-  h1 {
-    font-size: 5rem;
-  }
-  section {
-    height: 18rem;
-    width: 28rem;
-  }
-  button {
-    font-size: 1.5rem;
-  }
-}
-
-@media (max-width: 850px) {
-  h1 {
-    font-size: 4rem;
-  }
-  button {
-    font-size: 1.2rem;
-  }
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 @media (max-width: 750px) {
-  h1 {
-    font-size: 3rem;
-  }
-  section {
+  main form {
     height: 15rem;
-    width: 25rem;
+    gap: 1.5rem;
   }
-}
 
-@media (max-width: 550px) {
-  h1 {
-    font-size: 1.7rem;
-  }
-  section {
-    height: 12rem;
-    width: 20rem;
-  }
   button {
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
-}
 
-@media (max-width: 340px) {
-  h1 {
-    font-size: 1.3rem;
-  }
-  section {
-    height: 10rem;
-    width: 16.5rem;
-  }
-  button {
-    font-size: 0.9rem;
-  }
   input {
-    width: 9rem;
-  }
-}
-
-@media (max-width: 270px) {
-  h1 {
-    font-size: 1.05rem;
-  }
-  section {
-    height: 8rem;
-    width: 12rem;
-  }
-  button {
-    font-size: 0.8rem;
+    width: 10rem;
   }
 }
