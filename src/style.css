@@ -91,25 +91,38 @@ label {
   position: relative;
   width: 12rem;
   min-height: 2.75rem;
-  border-bottom: 0.2rem solid white;
-  padding-bottom: 0.45rem;
   box-sizing: border-box;
+  border-bottom: 0.2rem solid white;
+  border-radius: 0.25rem;
+  background: transparent;
+  transition: background 0.2s ease;
+}
+
+.admiral-field:hover,
+.admiral-field:focus-within {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.admiral-field:focus-within {
+  box-shadow: inset 0 0 0 2px var(--accent);
 }
 
 .admiral-typehint {
   position: absolute;
-  left: 0;
-  right: 0;
   top: 0;
-  bottom: 0.45rem;
+  right: 0;
+  left: 0;
+  bottom: 0.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 0.5rem;
   font-size: 1.3rem;
-  line-height: 1.2;
+  line-height: 1.3;
   color: rgba(255, 255, 255, 0.65);
   pointer-events: none;
   text-align: center;
+  z-index: 0;
 }
 
 .admiral-typehint.is-hidden {
@@ -121,47 +134,37 @@ label {
   font-weight: 300;
 }
 
-.admiral-field input {
-  background: none;
+.admiral-field:hover .admiral-typehint,
+.admiral-field:focus-within .admiral-typehint {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.admiral-field:hover .admiral-typehint .typed-cursor,
+.admiral-field:focus-within .admiral-typehint .typed-cursor {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+input {
+  display: block;
+  width: 100%;
+  min-height: 2.55rem;
+  padding: 0.45rem 0.5rem;
+  box-sizing: border-box;
   border: none;
+  border-radius: inherit;
+  background: transparent;
   font-size: 1.3rem;
-  line-height: 1.2;
+  line-height: 1.3;
   color: var(--text);
   text-align: center;
-  width: 100%;
-  min-height: 2.3rem;
-  padding: 0.35rem 0 0;
+  outline: none;
   position: relative;
   z-index: 1;
 }
 
-.admiral-field input:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 4px;
-  border-radius: 0.25rem;
-}
-
-.admiral-field:hover,
-.admiral-field:has(input:hover),
-.admiral-field:has(input:focus) {
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 0.5rem;
-}
-
 .admiral-field:hover input,
-.admiral-field:has(input:hover) input,
-.admiral-field:has(input:focus) input {
-  color: black;
-}
-
-.admiral-field:has(input:hover) .admiral-typehint,
-.admiral-field:hover .admiral-typehint {
-  color: rgba(0, 0, 0, 0.45);
-}
-
-.admiral-field:has(input:hover) .admiral-typehint .typed-cursor,
-.admiral-field:hover .admiral-typehint .typed-cursor {
-  color: rgba(0, 0, 0, 0.7);
+.admiral-field:focus-within input {
+  color: #111;
 }
 
 h1 {
