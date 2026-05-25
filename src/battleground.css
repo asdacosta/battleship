@@ -285,6 +285,16 @@ h2:hover {
   z-index: 2;
 }
 
+.cell-miss {
+  color: var(--hit);
+  background: rgba(228, 73, 73, 0.15);
+}
+
+.cell-hit {
+  color: #111;
+  background: rgba(255, 220, 80, 0.35);
+}
+
 .admiral-grounds > div:first-child,
 .ai-grounds > div:first-child {
   border-top-left-radius: 1rem;
