@@ -636,6 +636,9 @@ const loopGame = (function () {
     getNodes.aiGrounds.style.pointerEvents = "auto";
     getNodes.aiGroundsDivs.forEach((div) => {
       div.addEventListener("click", () => {
+        if (div.dataset.attacked === "Yes") {
+          return;
+        }
         const inactivateAlignedButton = (function () {
           getNodes.alignedButton.style.pointerEvents = "none";
           getNodes.alignedButton.style.color = "rgba(255, 255, 255, 0.6)";
@@ -685,6 +688,10 @@ const loopGame = (function () {
     for (const div of getNodes.admiralGroundsDivs) {
       const difficulty = getDifficulty.difficulty;
       if (div.dataset.index === randomKey) {
+        if (div.dataset.attacked === "Yes") {
+          triggerAiTurn();
+          return;
+        }
         // IF empty
         if (div.dataset.attacked === "No" && !div.hasAttribute("data-ship")) {
           // Recurse at faster timeout if difficulty is Impossible
