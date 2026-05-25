@@ -1,135 +1,152 @@
-<div align='center'>
+# Battleship
 
-# Battleship Game
-</div>
-<div align='center'>
-    <h3>💻 Technologies</h3>
-    <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Linux badge">
-    <img src="https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white" alt="VS Code badge">
-    <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git badge">
-    <img src="https://img.shields.io/badge/Webpack-8DD6F9?style=for-the-badge&logo=webpack&logoColor=black" alt="Webpack badge">
-    <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js badge">
-    <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white" alt="npm badge">
-    <img src="https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white" alt="ESLint badge">
-    <img src="https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=black" alt="Prettier badge">
-<img src="https://img.shields.io/badge/Babel-F7B93E?style=for-the-badge&logo=babel&logoColor=black" alt="Babel badge">
-<img src="https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white" alt="Jest badge">
-    <h4><a href="https://asdacosta.github.io/battleship/">Live Preview</a></h4>
-</div>
+A browser-based Battleship game built with vanilla JavaScript, Webpack, and Jest. Play against an AI opponent on a dual-board battleground with ship placement, difficulty levels, and real-time battle feedback.
 
-**Demo:**
+**[Live preview](https://asdacosta.github.io/battleship/)**
 
-![Live Demo](./readme-assets/battleship.gif)
+## Demo
 
-<details>
+![Gameplay demo](./readme-assets/battleship-demo.gif)
 
-**<summary>Screen views</summary>**
+### Screenshots
 
-**Desktop View:**
+| Desktop | Mobile |
+| --- | --- |
+| ![Desktop view](./readme-assets/battleship-desktop.png) | ![Mobile view](./readme-assets/battleship-mobile.png) |
 
-<img src="./readme-assets/desktop.png" alt="desktop view">
-<br>
+## Features
 
-**Mobile View:**
+- **Turn-based combat** — You and the AI alternate attacks on a 10×10 grid until one fleet is destroyed.
+- **Live feedback** — A status bar reports hits, misses, sunk ships, and victory or defeat.
+- **Fleet visualization** — Choose **Spatial** (ship images) or **Simple** (color blocks) display modes.
+- **Ship placement** — Random shuffle, manual drag-and-drop realignment (spatial mode), and alignment controls.
+- **AI difficulty** — **Dummy** (favors misses), **Normal** (balanced), and **Impossible** (smarter targeting).
+- **Peek** — Briefly reveal the AI board (about one second) to learn ship positions.
+- **Settings panel** — Restart, shuffle, difficulty, dimension, and alignment without leaving the game.
+- **Accessible UI** — Semantic markup, keyboard-friendly settings, focus styles, and reduced-motion support on the landing page.
 
-<img src="./readme-assets/mobile.png" alt="desktop view">
+## Quick start
 
+### Prerequisites
 
-</details>
+- [Node.js](https://nodejs.org/) 18+ and npm
 
-## 🌐 Origin
-[The Odin Project](https://www.theodinproject.com/)
+### Install
 
-## 📝 Description
-Builds interactive Battleship game.
+```bash
+git clone https://github.com/asdacosta/battleship.git
+cd battleship
+npm install
+```
 
-<details>
-<summary>Features</summary>
+### Development
 
-* Player and AI take turns attacking each others grounds.
-* Interactive UX
-* Real-time feedback section.
-* Bulb icon to display Info to understand game.
-* Spatial(3d) ⛴️ or Simple 🎨 dimension.
-* Random placement and Alignment option.
-* Three difficulty levels. From Smart AI to dump AI.
-* Peek AI board for half a second. 🔎
+Start the dev server with hot reload (opens the landing page):
 
-</details>
+```bash
+npm start
+```
 
-## 🎯 Relevance
-To solidify concepts of `Testing using Jest` and `all other concepts throughout course` in JavaScript. 
+Watch mode for rebuilding bundles:
 
-## 👥 Intended Audience
-Developers, users, and non-developers.
+```bash
+npm run watch
+```
 
-> [!NOTE]
-> Users can install all dependencies using `package.json` file via:
-> ```bash
-> npm install
-> ```
+### Production build
 
-## 📂 Files
-<details>
-<summary>Invert</summary>
+```bash
+npm run build
+```
 
-| File | Description |
-| - | - |
-|`src/*`| Source files that are bundled into the output directory `dist/`.|
-|`src/assets/*`| All assets(imgs, icons, vids) used in website.|
-|`src/index.js`| JavaScript entry point for `src/index.html` that bundling begins.|
-|`src/reset.css`| Stylesheet for `src/index.html`.|
-|`src/battleground.js`| JavaScript entry point for `src/battleground.html` that bundling begins.|
-|`src/battleground.css`| Stylesheet for `src/battleground.html`.|
-|`src/logic.js`| Holds main logic(classes) for game.|
-|`src/index.test.js`| Test file for `src/logic.js`.|
-|`src/babel.config.js`| Babel configuration file.|
-|`src/reset.css`| Stylesheet for resetting all styles to default.|
-|`dist/*`| Output files from bundling of files in directory `src/`.|
-|`dist/main.js`| Main JavaScript output file that contains the bundled JavaScript code. Code is minified and optimized for deployment (Due to mode set to production in webpack config). |
-|`package*`| Contains details of project and dependencies versions.|
-| `algorithm.txt` | Algorithm for `JavaScript`. |
-|`readme-assets/*`| Live demo and different screen views used in `README.md`.|
+Output is written to `dist/` (minified bundles and copied assets).
 
-</details>
+### Tests
 
-## ©️ Credit
-<details>
-<summary>Invert</summary>
+```bash
+npm test
+```
 
-| File | Description |
-| - | - |
-|`src/assets/verticalship.jpg`| Photo created by Niklas Jeromin on [Pexels](https://www.pexels.com/).|
-|`src/assets/ship-edit.jpg`| Photo created by Joseph Fuller on [Pexels](https://www.pexels.com/).|
-|`src/assets/lamp.png`| Photo created by InfoBrother on [Flaticon](https://www.flaticon.com/).|
-|`src/assets/battleship.png`| Photo created by Leremy on [Flaticon](https://www.flaticon.com/).|
-|`src/assets/carrier*`| Photo created by Leremy on [Flaticon](https://www.flaticon.com/).|
-|`src/assets/destroyer.png`| Photo created by Leremy on [Flaticon](https://www.flaticon.com/).|
-|`src/assets/patrol-boat.png`| Photo created by Leremy on [Flaticon](https://www.flaticon.com/).|
-|`src/assets/submarine.png`| Photo created by Leremy on [Flaticon](https://www.flaticon.com/).|
-|All svg in `battleground.html`| Icons from [Material Design Icons](https://pictogrammers.com/library/mdi/).|
+Watch mode:
 
+```bash
+npm run "watch tests"
+```
 
+### Deploy to GitHub Pages
 
-</details>
+After building, push the `dist/` subtree:
 
-## 🔄 Improvements
-<details>
-<summary>Invert</summary>
+```bash
+npm run deploy
+```
 
-- [ ] Make .config-box be aligned exactly in the middle across all mobile screens.
-- [ ] Fix animation of placeholder in mobile screens.
-- [ ] Make feedback section animate text (writing).
-- [ ] Display current ship lives in Configuration.
-- [ ] Implement button hover effect in https://lovrozagar.github.io/BattleShip/ 
-- [ ] Implement a 2-player option such that players don't see each others boards.
-- [ ] Add sound for attacks and feedback message voice.
-- [ ] Include vertical ships.
-- [ ] Use svg images and allow coloring in Configuration.
+## How to play
 
-</details>
+1. Enter your **admiral name** on the landing page and click **BATTLE**.
+2. Your fleet appears on the left board; the AI fleet is hidden on the right.
+3. Click a cell on the **AI board** to attack. Misses (✗) end your turn; hits (💥) let you attack again.
+4. Open **settings** (tune icon) to shuffle ships, change difficulty, switch display mode, peek at the AI board, or restart.
+5. In **Spatial** mode, use **Realign** to drag ships, then **Aligned** when finished.
+6. Sink all enemy ships to win; lose if the AI sinks yours.
 
-## 👤 Curator
-1. [Abraham Da Costa Silvanus](https://github.com/asdacosta) 
+## AI behavior
 
-**[🞁 Top](#battleship-game)**
+| Difficulty | Behavior |
+| --- | --- |
+| **Dummy** | Retries quickly after hitting your ships, making it easier for you. |
+| **Normal** | Standard random targeting with a short delay between turns. |
+| **Impossible** | Retries quickly after missing, hunting cells more aggressively. |
+
+Difficulty is stored in `localStorage` and applied after a page reload.
+
+## Project structure
+
+| Path | Purpose |
+| --- | --- |
+| `src/index.html` | Landing page template |
+| `src/index.js` | Landing page logic (name entry, navigation) |
+| `src/style.css` | Landing page styles |
+| `src/battleground.html` | Game board template |
+| `src/battleground.js` | Game UI, turns, drag-and-drop, settings |
+| `src/battleground.css` | Battleground layout and visuals |
+| `src/logic.js` | Core classes: `Ship`, `Gameboard`, `Player` |
+| `src/index.test.js` | Jest unit tests for game logic |
+| `src/reset.css` | CSS reset shared by both pages |
+| `src/assets/` | Images and icons (ships, backgrounds, lamp) |
+| `src/babel.config.js` | Babel config used by the test toolchain |
+| `dist/` | Webpack production output (deploy target) |
+| `readme-assets/` | README screenshots and demo recording |
+| `webpack.config.cjs` | Webpack entry, loaders, and HTML plugins |
+| `babel.config.js` | Root Babel preset for Jest |
+| `algorithm.txt` | Notes on game logic and algorithms |
+| `package.json` | Scripts and dependencies |
+
+## Tech stack
+
+- **JavaScript (ES modules)** — Game logic and UI
+- **Webpack 5** — Bundling, asset pipeline, dev server
+- **Jest + Babel** — Unit tests
+- **CSS** — Layout, responsive grids, theming
+
+## Credits
+
+| Asset | Source |
+| --- | --- |
+| `src/assets/admiral-edit.jpg` | [Pexels](https://www.pexels.com/) |
+| `src/assets/ship-edit.jpg`, `src/assets/verticalship.jpg` | [Pexels](https://www.pexels.com/) |
+| `src/assets/lamp.png` | [Flaticon](https://www.flaticon.com/) — InfoBrother |
+| Ship icons (`battleship.png`, `carrier.png`, `destroyer.png`, `submarine.png`, `patrol-boat.png`) | [Flaticon](https://www.flaticon.com/) — Leremy |
+| Configuration SVG | [Material Design Icons](https://pictogrammers.com/library/mdi/) |
+
+## Origin
+
+Built as part of [The Odin Project](https://www.theodinproject.com/) JavaScript curriculum, extended with UI polish, accessibility improvements, and documentation.
+
+## Author
+
+[Abraham Da Costa Silvanus](https://github.com/asdacosta)
+
+## License
+
+ISC
