@@ -128,9 +128,10 @@ const populateBoards = (function () {
   const computerBoard = game.computer.board.flat();
 
   const getRandomColor = function () {
-    const red = Math.floor(Math.random() * (257 - 100) + 50);
-    const green = Math.floor(Math.random() * (257 - 100) + 50);
-    const blue = Math.floor(Math.random() * (257 - 100) + 50);
+    const channel = () => Math.floor(Math.random() * 157) + 50;
+    const red = channel();
+    const green = channel();
+    const blue = channel();
     const color = `rgb(${red}, ${green}, ${blue})`;
 
     return color;
