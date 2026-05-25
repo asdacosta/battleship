@@ -27,15 +27,18 @@
     <main>
       <form id="admiral-form" action="./battleground.html" method="get">
         <label for="admiral">Admiral name</label>
-        <input
-          type="text"
-          name="admiral"
-          id="admiral"
-          maxlength="12"
-          autocomplete="nickname"
-          placeholder="Admiral Name"
-          required
-        />
+        <div class="admiral-field">
+          <input
+            type="text"
+            name="admiral"
+            id="admiral"
+            maxlength="12"
+            autocomplete="nickname"
+            placeholder="Admiral Name"
+            required
+          />
+          <span id="admiral-typehint" class="admiral-typehint" aria-hidden="true"></span>
+        </div>
         <button type="submit" id="battle-btn" disabled>
           <span>BATTLE</span>
         </button>

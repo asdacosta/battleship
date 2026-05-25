@@ -87,6 +87,32 @@ label {
   border: 0;
 }
 
+.admiral-field {
+  position: relative;
+  width: 12rem;
+}
+
+.admiral-typehint {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.65);
+  pointer-events: none;
+  text-align: center;
+}
+
+.admiral-typehint.is-hidden {
+  visibility: hidden;
+}
+
+.admiral-typehint .typed-cursor {
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 300;
+}
+
 input {
   background: none;
   border: none;
@@ -94,7 +120,9 @@ input {
   font-size: 1.3rem;
   color: var(--text);
   text-align: center;
-  width: 12rem;
+  width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
 input:focus-visible {
@@ -107,6 +135,14 @@ input:hover {
   background: rgba(255, 255, 255, 0.9);
   border-radius: 0.5rem;
   color: black;
+}
+
+.admiral-field:has(input:hover) .admiral-typehint {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.admiral-field:has(input:hover) .admiral-typehint .typed-cursor {
+  color: rgba(0, 0, 0, 0.7);
 }
 
 h1 {
@@ -175,7 +211,7 @@ button:focus-visible {
     font-size: 1.2rem;
   }
 
-  input {
+  .admiral-field {
     width: 10rem;
   }
 }
