@@ -90,15 +90,23 @@ label {
 .admiral-field {
   position: relative;
   width: 12rem;
+  min-height: 2.75rem;
+  border-bottom: 0.2rem solid white;
+  padding-bottom: 0.45rem;
+  box-sizing: border-box;
 }
 
 .admiral-typehint {
   position: absolute;
-  inset: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0.45rem;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.3rem;
+  line-height: 1.2;
   color: rgba(255, 255, 255, 0.65);
   pointer-events: none;
   text-align: center;
@@ -113,35 +121,46 @@ label {
   font-weight: 300;
 }
 
-input {
+.admiral-field input {
   background: none;
   border: none;
-  border-bottom: 0.2rem solid white;
   font-size: 1.3rem;
+  line-height: 1.2;
   color: var(--text);
   text-align: center;
   width: 100%;
+  min-height: 2.3rem;
+  padding: 0.35rem 0 0;
   position: relative;
   z-index: 1;
 }
 
-input:focus-visible {
+.admiral-field input:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 4px;
   border-radius: 0.25rem;
 }
 
-input:hover {
+.admiral-field:hover,
+.admiral-field:has(input:hover),
+.admiral-field:has(input:focus) {
   background: rgba(255, 255, 255, 0.9);
   border-radius: 0.5rem;
+}
+
+.admiral-field:hover input,
+.admiral-field:has(input:hover) input,
+.admiral-field:has(input:focus) input {
   color: black;
 }
 
-.admiral-field:has(input:hover) .admiral-typehint {
+.admiral-field:has(input:hover) .admiral-typehint,
+.admiral-field:hover .admiral-typehint {
   color: rgba(0, 0, 0, 0.45);
 }
 
-.admiral-field:has(input:hover) .admiral-typehint .typed-cursor {
+.admiral-field:has(input:hover) .admiral-typehint .typed-cursor,
+.admiral-field:hover .admiral-typehint .typed-cursor {
   color: rgba(0, 0, 0, 0.7);
 }
 
