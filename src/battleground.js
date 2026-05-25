@@ -116,11 +116,10 @@ const displayHeadAndTailHoveringEffect = (function () {
 })();
 
 const retrieveAdmiralNameFromStorageAndSet = (function () {
-  const admiralName = localStorage.getItem("admiralName");
-  if (admiralName) {
-    getNodes.admiralName.textContent = "⚓ " + admiralName;
-    return { admiralName };
-  }
+  const storedName = localStorage.getItem("admiralName");
+  const admiralName = storedName?.trim() || "Admiral";
+  getNodes.admiralName.textContent = "⚓ " + admiralName;
+  return { admiralName };
 })();
 
 const populateBoards = (function () {
