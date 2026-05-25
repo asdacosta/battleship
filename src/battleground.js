@@ -434,7 +434,7 @@ const displayTarget = (function () {
         targetSpan.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
       });
       div.addEventListener("mouseout", () => {
-        if (div.textContent !== "X" && div.textContent !== "💥") {
+        if (div.dataset.attacked === "No") {
           targetSpan.style.display = "none";
         }
         targetSpan.style.backgroundColor = "initial";
