@@ -248,43 +248,6 @@ const populateBoards = (function () {
       });
     })();
 
-    const peekAiBoard = (function () {
-      getNodes.peekButton.addEventListener("click", () => {
-        if (getNodes.dimensionOptions.value === "simple") {
-          return;
-        }
-
-        const exitDialog = (async function () {
-          getNodes.cover.style.zIndex = "0";
-          getNodes.configDialog.style.opacity = "0";
-          getNodes.configDialog.style.transition = "opacity 0.5s ease-in-out";
-          await new Promise((resolve) => {
-            setTimeout(() => {
-              getNodes.configDialog.style.visibility = "hidden";
-            }, 400);
-          });
-        })();
-
-        // Show ships
-        getNodes.aiGroundsDivs.forEach((div) => {
-          if (div.querySelector("img")) {
-            div.querySelector("img").style.display = "inline";
-          }
-        });
-
-        const hideAiBoard = (async function () {
-          await new Promise((resolve) => {
-            setTimeout(() => {
-              getNodes.aiGroundsDivs.forEach((div) => {
-                if (div.querySelector("img")) {
-                  div.querySelector("img").style.display = "none";
-                }
-              });
-            }, 1000);
-          });
-        })();
-      });
-    })();
   };
   populateWithSpatialShips();
 
@@ -301,48 +264,58 @@ const populateBoards = (function () {
       });
     })();
 
-    const populateAiBoard = (function () {
-      getNodes.aiGroundsDivs.forEach((div, divIndex) => {
-        computerBoard.forEach((entry, entryIndex) => {
-          if (divIndex === entryIndex) {
-            if (entry !== null && entry !== "O") {
-              const peekAiBoard = (function () {
-                getNodes.peekButton.addEventListener("click", () => {
-                  if (getNodes.dimensionOptions.value === "spatial") {
-                    return;
-                  }
-
-                  const exitDialog = (async function () {
-                    getNodes.cover.style.zIndex = "0";
-                    getNodes.configDialog.style.opacity = "0";
-                    getNodes.configDialog.style.transition = "opacity 0.5s ease-in-out";
-                    await new Promise((resolve) => {
-                      setTimeout(() => {
-                        getNodes.configDialog.style.visibility = "hidden";
-                      }, 400);
-                    });
-                  })();
-
-                  // Show colors
-                  setRandomColors(div, entry);
-
-                  const hideAiBoard = (async function () {
-                    await new Promise((resolve) => {
-                      setTimeout(() => {
-                        getNodes.aiGroundsDivs.forEach((div) => {
-                          div.style.backgroundColor = "initial";
-                        });
-                      }, 1000);
-                    });
-                  })();
-                });
-              })();
-            }
-          }
-        });
-      });
-    })();
   };
+
+  const closeConfigDialog = async function () {
+    getNodes.cover.style.zIndex = "0";
+    getNodes.configDialog.style.opacity = "0";
+    getNodes.configDialog.style.transition = "opacity 0.5s ease-in-out";
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        getNodes.configDialog.style.visibility = "hidden";
+        resolve();
+      }, 400);
+    });
+  };
+
+  const peekAiBoardSpatial = async function () {
+    await closeConfigDialog();
+    getNodes.aiGroundsDivs.forEach((div) => {
+      if (div.querySelector("img")) {
+        div.querySelector("img").style.display = "inline";
+      }
+    });
+    setTimeout(() => {
+      getNodes.aiGroundsDivs.forEach((div) => {
+        if (div.querySelector("img")) {
+          div.querySelector("img").style.display = "none";
+        }
+      });
+    }, 1000);
+  };
+
+  const peekAiBoardSimple = async function () {
+    await closeConfigDialog();
+    getNodes.aiGroundsDivs.forEach((div, divIndex) => {
+      const entry = computerBoard[divIndex];
+      if (entry !== null && entry !== "O") {
+        setRandomColors(div, entry);
+      }
+    });
+    setTimeout(() => {
+      getNodes.aiGroundsDivs.forEach((div) => {
+        div.style.backgroundColor = "initial";
+      });
+    }, 1000);
+  };
+
+  getNodes.peekButton.addEventListener("click", () => {
+    if (getNodes.dimensionOptions.value === "spatial") {
+      peekAiBoardSpatial();
+    } else {
+      peekAiBoardSimple();
+    }
+  });
 
   const populateWithDimensionChange = (function () {
     getNodes.dimensionOptions.addEventListener("change", (event) => {
