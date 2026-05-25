@@ -488,16 +488,16 @@ const loopGame = (function () {
     return { difficulty };
   })();
 
-  const displayAttack = function (spot, inputValue, fontColor) {
+  const displayAttack = function (spot, inputValue) {
     const span = spot.querySelector("span");
     span.style.display = "inline";
     span.textContent = inputValue;
     span.style.zIndex = "1";
 
-    spot.style.color = fontColor;
+    spot.classList.add(inputValue === "💥" ? "cell-hit" : "cell-miss");
     spot.style.pointerEvents = "none";
-    spot.style.zIndex = "1";
     spot.setAttribute("data-attacked", "Yes");
+    spot.setAttribute("aria-label", inputValue === "💥" ? "Hit" : "Miss");
   };
 
   const setFeedback = function (aiOrUser, missedOrHit, shipDataset) {
@@ -623,7 +623,7 @@ const loopGame = (function () {
         // IF empty
         if (div.dataset.attacked === "No" && !div.hasAttribute("data-ship")) {
           game.userTurn(div.dataset.index);
-          displayAttack(div, "X", "rgb(228, 73, 73)");
+          displayAttack(div, "X");
           setFeedback("user", "missed");
           triggerAiTurn();
           return;
@@ -631,7 +631,7 @@ const loopGame = (function () {
         // IF hits a ship
         if (div.dataset.attacked === "No" && div.hasAttribute("data-ship")) {
           game.userTurn(div.dataset.index);
-          displayAttack(div, "💥", "black");
+          displayAttack(div, "💥");
           setFeedback("user", "hit", div.dataset.ship);
           return;
         }
@@ -684,7 +684,7 @@ const loopGame = (function () {
             }
           })();
 
-          displayAttack(div, "X", "rgb(228, 73, 73)");
+          displayAttack(div, "X");
           setFeedback("ai", "missed");
           getNodes.aiGrounds.style.pointerEvents = "auto";
         }
@@ -707,7 +707,7 @@ const loopGame = (function () {
             }
           })();
 
-          displayAttack(div, "💥", "black");
+          displayAttack(div, "💥");
           setFeedback("ai", "hit", div.dataset.ship);
           triggerAiTurn();
           return;
