@@ -8,7 +8,7 @@
     "start": "webpack serve --open"
   },
   "name": "battleship",
-  "description": "<div align='center'>",
+  "description": "Browser-based Battleship game with AI opponent",
   "version": "1.0.0",
   "main": "index.js",
   "author": "Ever Da Costa Silvanus",
